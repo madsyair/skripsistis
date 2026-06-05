@@ -1,0 +1,17 @@
+# KESIMPULAN DAN SARAN
+
+## Kesimpulan
+
+Bagian ini memuat kesimpulan utama penelitian yang dirumuskan berdasarkan hasil dan
+pembahasan pada bab sebelumnya. Kesimpulan disusun secara ringkas dan menjawab tujuan
+penelitian pada Bab 1, tanpa memuat data, tabel, atau gambar baru.
+
+1. Poin kesimpulan pertama.
+2. Poin kesimpulan kedua.
+
+## Saran
+
+Bagian ini memuat saran yang disusun berdasarkan hasil penelitian dan keterbatasannya.
+
+1. Rekomendasi pengembangan metode atau model.
+2. Usulan penelitian lanjutan yang relevan.

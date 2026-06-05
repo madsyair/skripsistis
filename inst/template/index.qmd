@@ -1,0 +1,100 @@
+---
+---
+
+```{r}
+#| label: setup-global
+#| include: false
+# Pengaturan global untuk seluruh bab (knitr berbagi state antar-include).
+knitr::opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE, fig.align = "center"
+)
+
+# Samakan font grafik R dengan teks dokumen (Times New Roman / TeX Gyre Termes)
+# dan dukung simbol LaTeX pada label grafik. Hanya untuk output PDF (xelatex).
+if (knitr::is_latex_output()) {
+  library(tikzDevice)
+  options(
+    tikzDefaultEngine = "xetex",
+    tikzXelatexPackages = c(
+      getOption("tikzXelatexPackages"),
+      "\\setmainfont{TeX Gyre Termes}\n",
+      "\\usepackage{amssymb,amsmath}\n"
+    ),
+    tikzUnicodeMetricPackages = c(
+      getOption("tikzUnicodeMetricPackages"),
+      "\\setmainfont{TeX Gyre Termes}\n"
+    )
+  )
+  knitr::opts_chunk$set(dev = "tikz")
+}
+```
+
+```{=latex}
+\pagestyle{plain}
+```
+
+# PRAKATA {.unnumbered}
+
+Puji syukur penulis ucapkan kepada Allah SWT, karena atas izin-Nya penulis dapat
+menyelesaikan skripsi yang berjudul "{{JUDUL}}". Penulis juga mengucapkan terima
+kasih kepada:
+
+1. Bapak/Ibu \<\<Nama Direktur disertai gelar\>\>, selaku Direktur Politeknik Statistika STIS;
+2. Bapak {{KETUA_PRODI}}, selaku Ketua Program Studi D-IV Komputasi Statistik Politeknik Statistika STIS;
+3. Bapak/Ibu {{PEMBIMBING}}, selaku dosen pembimbing yang telah bersedia meluangkan waktu dalam membimbing penyusunan skripsi ini;
+4. Bapak/Ibu Dosen Penguji, selaku dosen penguji atas koreksi dan saran yang disampaikan;
+5. Ibu, Ayah, serta keluarga besar penulis yang telah memberikan banyak dukungan secara moril; serta
+6. semua pihak yang telah memberikan dukungan dalam penulisan skripsi ini.
+
+Penulis menyadari bahwa skripsi ini masih mempunyai kekurangan, baik isi maupun
+susunannya. Oleh karena itu, saran dan kritik yang membangun sangat penulis harapkan
+demi perbaikan penulisan skripsi ini. Akhirnya, semoga skripsi ini bermanfaat bagi
+banyak pihak.
+
+\begin{flushright}
+\begin{tabular}{c}
+Jakarta, tanggal bulan {{TAHUN}} \\[1.4cm]
+\textbf{{{NAMA}}} \\
+\end{tabular}
+\end{flushright}
+
+# ABSTRAK {.unnumbered}
+
+```{=latex}
+\vspace{2\baselineskip}
+```
+
+**{{NAMA_KAPITAL}}**, "{{JUDUL}}".
+
+vii+xx halaman
+
+Abstrak berisi ringkasan skripsi yang dideskripsikan secara jelas, padat, dan singkat,
+dengan maksimum terdiri atas 200 kata. Isi abstrak terdiri atas permasalahan penelitian,
+deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan saran.
+
+**Kata Kunci:** kata, kunci, tiga, sampai, enam, kata
+
+```{=latex}
+\clearpage
+\renewcommand{\contentsname}{DAFTAR ISI}
+\tableofcontents
+\clearpage
+\listoftables
+\clearpage
+\listoffigures
+\clearpage
+\listoflampiran
+\clearpage
+\aktifkanNomorIsi
+\pagenumbering{arabic}
+\setcounter{page}{1}
+```
+
+{{INCLUDE_BAB}}
+
+# DAFTAR PUSTAKA {.unnumbered}
+
+::: {#refs}
+:::
+
+{{< include bab/lampiran.qmd >}}

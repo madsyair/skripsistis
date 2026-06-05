@@ -1,0 +1,62 @@
+# TINJAUAN PUSTAKA
+
+## Landasan Teori
+
+### Pengukuran Kesejahteraan
+
+Secara praktis, @deaton1997 menjelaskan adanya landasan faktual yang kuat untuk
+menggunakan pengeluaran konsumsi dibandingkan pendapatan sebagai ukuran kesejahteraan.
+Pengeluaran dianggap lebih representatif karena pendapatan pada sektor informal sangat
+berfluktuasi akibat faktor musiman.
+
+### Proxy Means Test
+
+*Proxy Means Test* (PMT) merupakan metode prediksi kesejahteraan rumah tangga melalui
+pendekatan regresi terhadap karakteristik rumah tangga yang dapat diamati [@etang2022].
+Metode ini efektif diterapkan ketika *means testing* langsung tidak memungkinkan, misalnya
+karena tingginya tingkat informalitas ekonomi.
+
+Konsep formal yang digunakan dirumuskan pada @def-pmt, sedangkan sifat penduga yang
+dipakai dinyatakan pada @thm-takbias.
+
+::: {#def-pmt}
+**(Proxy Means Test).** Misalkan $y_i$ menyatakan log pengeluaran per kapita rumah tangga
+ke-$i$ dan $\mathbf{x}_i$ vektor karakteristik teramati. *Proxy Means Test* adalah fungsi
+prediksi $\hat{f}:\mathbf{x}_i \mapsto \hat{y}_i$ yang diperoleh dengan meminimumkan suatu
+fungsi galat $\sum_i L(y_i, \hat{f}(\mathbf{x}_i))$.
+:::
+
+::: {#thm-takbias}
+Pada model linear $y = \mathbf{X}\boldsymbol{\beta} + \varepsilon$ dengan
+$\mathrm{E}(\varepsilon\mid\mathbf{X}) = \mathbf{0}$, penduga kuadrat terkecil
+$\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top y$ bersifat
+takbias, yaitu $\mathrm{E}(\hat{\boldsymbol{\beta}}\mid\mathbf{X}) = \boldsymbol{\beta}$.
+:::
+
+::: {.proof}
+Substitusi $y = \mathbf{X}\boldsymbol{\beta} + \varepsilon$ memberikan
+$\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\varepsilon$.
+Karena $\mathrm{E}(\varepsilon\mid\mathbf{X}) = \mathbf{0}$, maka
+$\mathrm{E}(\hat{\boldsymbol{\beta}}\mid\mathbf{X}) = \boldsymbol{\beta}$. $\qed$
+:::
+
+## Penelitian Terkait
+
+Beberapa penelitian terdahulu mengembangkan PMT dengan pendekatan *machine learning*.
+@pratama2025 membandingkan beberapa algoritma di Jawa Tengah, sedangkan @martinez2025
+menyoroti pentingnya mempertimbangkan heterogenitas spasial. Ringkasan beberapa metode
+yang umum digunakan disajikan pada penelitian-penelitian tersebut.
+
+## Terkait Penulisan Kutipan
+
+Penulisan kutipan dan daftar pustaka pada templat ini mengikuti gaya **APA edisi ke-7
+dengan modifikasi bahasa Indonesia**, yaitu penghubung antarpenulis menggunakan kata
+"dan", singkatan tiga penulis atau lebih menggunakan "dkk.", keterangan tanpa tahun
+menggunakan "t.t.", serta istilah seperti "ed. ke-2" dan "Penerj." Pengelolaan referensi
+cukup dilakukan pada berkas `referensi.bib`; daftar pustaka akan tersusun otomatis dan
+terurut secara alfabetis saat dokumen dirender.
+
+Sebagai contoh pengutipan buku dengan edisi dan buku terjemahan, perhatikan rujukan
+berikut: analisis data kategorik dibahas secara mendalam oleh @agresti2000, sedangkan
+teknik penarikan sampel klasik dapat dilihat pada @cochran1991. Kedua entri tersebut akan
+muncul di Daftar Pustaka dengan format "ed. ke-2" dan "(... , Penerj.)".

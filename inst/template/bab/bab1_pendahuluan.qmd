@@ -1,0 +1,48 @@
+# PENDAHULUAN
+
+## Latar Belakang
+
+Kemiskinan merupakan fakta sosial global yang selalu menjadi perhatian serius dari
+tahun ke tahun [@megawati2021]. Di Indonesia, pengentasan kemiskinan menjadi prioritas
+pembangunan yang mengintegrasikan komitmen global *Sustainable Development Goals* (SDGs)
+dalam kerangka visi Indonesia Emas [@taufiq2021].
+
+Salah satu metode standar untuk mengidentifikasi penerima program bantuan sosial adalah
+*Proxy Means Test* (PMT) [@martinez2025]. PMT merupakan pendekatan regresi untuk
+mengestimasi kesejahteraan rumah tangga berdasarkan karakteristik yang dapat diamati dan
+diverifikasi [@etang2022]. Sebagai pembanding, @pratama2025 menunjukkan bahwa algoritma
+*eXtreme Gradient Boosting* (XGBoost) memiliki kinerja yang baik dibandingkan dengan
+regresi linear standar.
+
+> **Cara menulis kutipan (gaya APA 7 modifikasi Indonesia).** Kutipan dalam tanda
+> kurung ditulis `[@kunci]` sehingga menghasilkan (Nama dkk., tahun). Kutipan naratif
+> ditulis `@kunci` sehingga menghasilkan Nama dkk. (tahun). Untuk dua penulis,
+> penghubungnya adalah "dan"; tiga penulis atau lebih disingkat menjadi "dkk."
+> Hapus catatan ini pada naskah final.
+
+## Identifikasi dan Batasan Masalah
+
+Berdasarkan uraian latar belakang, rumusan masalah penelitian ini adalah:
+
+1. Bagaimana kinerja prediksi algoritma GPBoost dalam menangani struktur data hierarki
+   untuk memodelkan pengeluaran per kapita dibandingkan dengan metode ML standar?
+2. Seberapa baik model GPBoost dapat menurunkan kesalahan inklusi dan eksklusi dalam
+   klasifikasi kemiskinan dibandingkan model ML standar?
+
+## Tujuan Penelitian
+
+1. Mengembangkan model PMT berbasis algoritma GPBoost dan membandingkan kinerja
+   prediksinya dengan metode ML standar.
+2. Mengevaluasi hasil klasifikasi kesejahteraan keluarga berdasarkan indikator akurasi
+   dan kesalahan penargetan.
+
+## Manfaat Penelitian
+
+Penelitian ini diharapkan memberikan kontribusi akademis bagi pengembangan *data science*
+dan *machine learning*, serta manfaat praktis bagi BPS dan instansi terkait dalam
+penyusunan data kemiskinan yang lebih akurat.
+
+## Sistematika Penulisan
+
+Penulisan skripsi ini terdiri atas lima bab: Pendahuluan, Tinjauan Pustaka, Metode
+Penelitian, Hasil dan Pembahasan, serta Kesimpulan dan Saran.

@@ -1,0 +1,41 @@
+Binding: buat_skripsi_rstudio
+Title: Skripsi Komputasi Statistik (Politeknik Statistika STIS)
+OpenFiles: index.qmd
+Icon: skripsi.png
+
+Parameter: judul
+Widget: TextInput
+Label: Judul Skripsi
+Default: TULISKAN JUDUL SKRIPSI ANDA DI SINI
+Position: left
+
+Parameter: subjudul
+Widget: TextInput
+Label: Subjudul (opsional)
+Default:
+Position: right
+
+Parameter: nama
+Widget: TextInput
+Label: Nama Mahasiswa
+Default: NAMA MAHASISWA
+Position: left
+
+Parameter: nim
+Widget: TextInput
+Label: NIM
+Default: NIM
+Position: right
+
+Parameter: peminatan
+Widget: SelectInput
+Label: Peminatan
+Fields: Sains Data, Sistem Informasi Statistik
+Default: Sains Data
+Position: left
+
+Parameter: pembimbing
+Widget: TextInput
+Label: Dosen Pembimbing
+Default: Nama Dosen Pembimbing
+Position: right

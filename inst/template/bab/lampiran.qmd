@@ -1,0 +1,32 @@
+```{=latex}
+\appendix
+\renewcommand{\chaptername}{LAMPIRAN}
+```
+
+# LAMPIRAN {.unnumbered}
+
+```{=latex}
+\lampiran{Judul Lampiran 1}
+```
+
+**Lampiran 1.** Judul Lampiran 1
+
+Isi lampiran 1.
+
+```{=latex}
+\lampiran{Judul Lampiran 2}
+```
+
+**Lampiran 2.** Judul Lampiran 2
+
+Isi lampiran 2.
+
+# RIWAYAT HIDUP {.unnumbered}
+
+Penulis dilahirkan di xxxxxxxx pada tanggal xx bulan 20xx dari pasangan xxxxxxxx dan
+xxxxxxxx, dan merupakan anak ke-x dari x bersaudara.
+
+Penulis menyelesaikan pendidikan dasar pada tahun 20xx, pendidikan menengah pertama pada
+tahun 20xx, dan pendidikan menengah atas pada tahun 20xx. Pada tahun yang sama penulis
+mendapat kesempatan menempuh pendidikan di Politeknik Statistika STIS dan
+menyelesaikannya pada tahun 20xx.

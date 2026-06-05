@@ -1,0 +1,150 @@
+% ============================================================
+%  Halaman muka Skripsi STIS (Sampul, Judul, Pernyataan,
+%  Pengesahan, Lembar Hak Cipta)
+%  Token {{...}} diganti otomatis oleh buat_skripsi().
+% ============================================================
+\begin{titlepage}
+\pagenumbering{gobble}
+
+% ---------- HALAMAN SAMPUL ----------
+\begin{center}
+  \vspace*{1cm}
+  {\bfseries\fontsize{14}{17}\selectfont \MakeUppercase{{{JUDUL}}}\par}
+  {{SUBJUDUL_BLOCK}}
+  \vspace{2.5cm}
+
+  {\bfseries\fontsize{12}{15}\selectfont {{NAMA}}\par}
+  {\bfseries\fontsize{12}{15}\selectfont {{NIM}}\par}
+  \vspace{2cm}
+
+  \begin{flushleft}
+  \begin{tabular}{@{}lcl@{}}
+  \textbf{PROGRAM STUDI} & : & \textbf{KOMPUTASI STATISTIK PROGRAM DIPLOMA IV} \\
+  \textbf{PEMINATAN}     & : & \textbf{{{PEMINATAN}}} \\
+  \end{tabular}
+  \end{flushleft}
+
+  \vfill
+  \IfFileExists{img/logo_stis.png}{\includegraphics[width=5cm,height=5cm,keepaspectratio]{img/logo_stis.png}\par}{\rule{0pt}{5cm}\par}
+  \vspace{0.8cm}
+
+  {\bfseries\fontsize{14}{17}\selectfont POLITEKNIK STATISTIKA STIS\par}
+  {\bfseries\fontsize{14}{17}\selectfont JAKARTA\par}
+  {\bfseries\fontsize{14}{17}\selectfont {{TAHUN}}\par}
+\end{center}
+\clearpage
+
+% ---------- HALAMAN JUDUL ----------
+\pagenumbering{roman}
+\setcounter{page}{1}
+\thispagestyle{empty}
+\begin{center}
+  \vspace*{1cm}
+  {\bfseries\fontsize{14}{17}\selectfont \MakeUppercase{{{JUDUL}}}\par}
+  {{SUBJUDUL_BLOCK}}
+  \vspace{1.5cm}
+
+  {\bfseries SKRIPSI\par}
+  \vspace{0.5cm}
+  {\bfseries Diajukan sebagai Salah Satu Syarat untuk Memperoleh Sebutan\\
+  Sarjana Terapan Statistika pada Politeknik Statistika STIS\par}
+  \vspace{1.5cm}
+
+  {\bfseries Oleh:\par}
+  {{NAMA}}\par
+  {\bfseries {{NIM}}\par}
+
+  \vfill
+  \IfFileExists{img/logo_stis.png}{\includegraphics[width=5cm,height=5cm,keepaspectratio]{img/logo_stis.png}\par}{\rule{0pt}{5cm}\par}
+  \vspace{0.8cm}
+
+  {\bfseries\fontsize{14}{17}\selectfont POLITEKNIK STATISTIKA STIS\par}
+  {\bfseries\fontsize{14}{17}\selectfont JAKARTA\par}
+  {\bfseries\fontsize{14}{17}\selectfont {{TAHUN}}\par}
+\end{center}
+\clearpage
+
+% ---------- HALAMAN PERNYATAAN ----------
+%  Catatan: tanggal pada halaman ini = TANGGAL SIDANG/UJIAN AKHIR.
+\thispagestyle{plain}
+\begin{center}{\bfseries\large PERNYATAAN}\end{center}
+\vspace{0.8cm}
+\begin{center}
+{\bfseries Skripsi dengan Judul\par}
+\vspace{0.4cm}
+{\bfseries \MakeUppercase{{{JUDUL}}}\par}
+{{SUBJUDUL_PERNYATAAN}}
+\end{center}
+\vspace{0.4cm}
+\noindent Oleh:\par
+\begin{tabular}{@{}ll@{}}
+{{NAMA}} & \\
+{{NIM}}  & \\
+\end{tabular}
+\vspace{0.4cm}
+
+\noindent adalah benar-benar hasil penelitian sendiri dan bukan hasil plagiat atau hasil
+karya orang lain. Jika di kemudian hari diketahui ternyata skripsi ini hasil plagiat
+atau hasil karya orang lain, penulis bersedia skripsi ini dinyatakan tidak sah dan
+sebutan Sarjana Terapan Statistika dicabut atau dibatalkan.
+\vspace{1.5cm}
+
+\begin{flushright}
+\begin{tabular}{c}
+Jakarta, [tanggal sidang] {{TAHUN}} \\[2.2cm]
+Meterai Rp10.000 \\[0.2cm]
+\textbf{{{NAMA}}} \\
+\end{tabular}
+\end{flushright}
+\clearpage
+
+% ---------- HALAMAN PENGESAHAN ----------
+\thispagestyle{plain}
+\begin{center}{\bfseries\large \MakeUppercase{{{JUDUL}}}}\end{center}
+{{SUBJUDUL_PENGESAHAN}}
+\vspace{0.6cm}
+\begin{center}Oleh:\\[0.2cm]{{NAMA}}\\ \textbf{{{NIM}}}\end{center}
+\vspace{0.8cm}
+
+\begin{center}\textbf{Tim Penguji}\end{center}
+\vspace{0.2cm}
+\noindent
+\begin{tabular}{p{0.46\textwidth}p{0.46\textwidth}}
+\centering Penguji I & \centering Penguji II \tabularnewline[2cm]
+\centering \textbf{{{PENGUJI1}}}\newline NIP {{NIP_PENGUJI1}} &
+\centering \textbf{{{PENGUJI2}}}\newline NIP {{NIP_PENGUJI2}} \tabularnewline
+\end{tabular}
+\vspace{1cm}
+
+\begin{center}Mengetahui/Menyetujui\end{center}
+\vspace{0.2cm}
+\noindent
+\begin{tabular}{p{0.46\textwidth}p{0.46\textwidth}}
+\centering Ketua Program Studi\newline Komputasi Statistik Program Diploma IV & \centering Pembimbing \tabularnewline[2cm]
+\centering \textbf{{{KETUA_PRODI}}}\newline NIP {{NIP_KETUA_PRODI}} &
+\centering \textbf{{{PEMBIMBING}}}\newline NIP {{NIP_PEMBIMBING}} \tabularnewline
+\end{tabular}
+\clearpage
+
+% ---------- LEMBAR HAK CIPTA ----------
+\thispagestyle{plain}
+\begin{center}{\bfseries\large LEMBAR HAK CIPTA}\end{center}
+\vspace{1cm}
+\begin{center}\itshape
+\textcopyright\ Hak Cipta milik Politeknik Statistika STIS, Tahun {{TAHUN}}\\
+Hak Cipta dilindungi undang-undang
+\end{center}
+\vspace{0.6cm}
+\begin{itemize}\itshape
+  \item Dilarang mengutip sebagian atau seluruh karya tulis, hasil analisis, perancangan,
+        basis data, program, dan artefak hasil skripsi ini tanpa mencantumkan atau
+        menyebutkan sumbernya.
+  \item Pengutipan hanya untuk kepentingan pendidikan, penelitian, penulisan karya ilmiah,
+        penyusunan laporan, penulisan kritik atau tinjauan suatu masalah.
+  \item Pengutipan tidak merugikan kepentingan yang wajar Politeknik Statistika STIS.
+  \item Dilarang mengumumkan dan memperbanyak sebagian atau seluruh karya tulis, hasil
+        analisis, perancangan, basis data, program, dan artefak hasil skripsi ini dalam
+        bentuk apa pun tanpa seizin Politeknik Statistika STIS.
+\end{itemize}
+\clearpage
+\end{titlepage}

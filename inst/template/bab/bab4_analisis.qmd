@@ -1,0 +1,53 @@
+# ANALISIS DAN PERANCANGAN
+
+Bab ini membahas hasil analisis terhadap sistem yang berjalan serta perancangan sistem
+yang diusulkan sebagai solusi atas permasalahan yang telah diidentifikasi pada Bab I.
+Analisis dan perancangan dilakukan berdasarkan metode penelitian pada Bab III.
+
+## Analisis Sistem Berjalan
+
+Bagian ini membahas kondisi sistem yang saat ini berjalan, termasuk proses bisnis,
+aktor yang terlibat, serta permasalahan yang dihadapi.
+
+### Proses Bisnis Sistem Berjalan
+
+Alur proses bisnis sistem yang berjalan saat ini disajikan dalam bentuk diagram
+(*Business Process Model and Notation*/BPMN, *flowchart*, atau alat pemodelan lain yang
+relevan) disertai penjelasan naratif mengenai aktor, alur utama, dan keterkaitan
+antaraktivitas.
+
+### Permasalahan Sistem Berjalan
+
+Permasalahan pada sistem berjalan diuraikan secara sistematis dan dikaitkan dengan
+proses bisnis pada subbab sebelumnya, mencakup aspek fungsional, kinerja, keamanan,
+integrasi data, maupun kemudahan penggunaan.
+
+### Analisis Kebutuhan Sistem
+
+Hasil analisis kebutuhan dikelompokkan menjadi kebutuhan **fungsional** dan
+**nonfungsional**, disajikan secara jelas dan terstruktur sebagai dasar perancangan.
+
+## Perancangan Sistem
+
+Perancangan menggambarkan bagaimana sistem akan dibangun dan dioperasikan.
+
+### Proses Bisnis Sistem Usulan
+
+Proses bisnis sistem usulan disajikan dalam bentuk diagram BPMN/*flowchart*.
+Perbandingan implisit dengan sistem berjalan dapat disampaikan untuk menekankan
+perbaikan yang dihasilkan.
+
+### Use Case Diagram
+
+*Use case diagram* menggambarkan interaksi antara aktor dan sistem, mencakup aktor,
+fungsi utama, serta ruang lingkup sistem.
+
+### Rancangan Basis Data
+
+Rancangan basis data disajikan dalam bentuk *Entity Relationship Diagram* (ERD) atau
+diagram sejenis.
+
+### Rancangan Antarmuka
+
+Rancangan antarmuka berupa *mockup* atau *wireframe* yang menggambarkan tampilan dan
+alur interaksi pengguna dengan sistem.

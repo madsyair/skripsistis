@@ -1,0 +1,50 @@
+# METODE PENELITIAN
+
+Bab ini menjelaskan pendekatan dan tahapan penelitian yang digunakan untuk mencapai
+tujuan penelitian. Untuk topik **sistem informasi**, metode penelitian berupa metode
+rekayasa perangkat lunak yang bertujuan menghasilkan suatu *artifact* (sistem/aplikasi).
+
+## Tinjauan Umum
+
+Penelitian ini menggunakan metode pengembangan perangkat lunak *Modified Waterfall*
+(alternatif: *Prototyping* atau *Agile*), yang dipilih karena kebutuhan sistem relatif
+stabil dan tahapannya terstruktur. Penjelasan mencakup alasan pemilihan metode serta
+gambaran umum tahapan pengembangan.
+
+Sesuai pedoman, subbab Tinjauan Umum **wajib memuat kerangka pikir penelitian** yang
+menggambarkan keterkaitan antara Permasalahan, Tujuan Penelitian, Solusi yang Diajukan,
+dan Kriteria Evaluasi. Ganti placeholder pada @fig-kerangka-si dengan diagram kerangka
+pikir penelitian Anda (dibuat ulang sendiri untuk menghindari plagiasi).
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][4.5cm][c]{0.85\textwidth}{\centering
+  \textbf{PERMASALAHAN} $\rightarrow$ \textbf{TUJUAN PENELITIAN} $\rightarrow$
+  \textbf{SOLUSI YANG DIAJUKAN} $\rightarrow$ \textbf{KRITERIA EVALUASI}\\[0.4cm]
+  \itshape (Contoh topik SI: proses penjadwalan manual $\rightarrow$ mengembangkan
+  sistem informasi penjadwalan $\rightarrow$ sistem berbasis web dengan Modified
+  Waterfall $\rightarrow$ Blackbox Testing, Usability Testing (CSUQ), Performance
+  \& Security Testing. Ganti kotak ini dengan diagram kerangka pikir Anda.)}}
+\caption{Kerangka pikir penelitian}
+\label{fig-kerangka-si}
+\end{figure}
+```
+
+Metode penelitian digambarkan dalam bentuk diagram alur (*flowchart*) yang menunjukkan
+hubungan antar tahapan pengembangan. Diagram dibuat ulang berdasarkan referensi yang
+digunakan, bukan menyalin langsung dari sumber pustaka.
+
+## Tahapan Penelitian
+
+Setiap tahapan penelitian sekurang-kurangnya memuat tujuan tahapan, aktivitas/proses,
+data/alat/teknik yang digunakan, serta luaran (*output*) yang dihasilkan. Untuk metode
+*Modified Waterfall*, tahapan umum meliputi:
+
+1. **Analisis kebutuhan** — mengidentifikasi kebutuhan fungsional dan nonfungsional.
+2. **Perancangan** — merancang proses bisnis usulan, basis data (ERD), dan antarmuka.
+3. **Implementasi** — membangun sistem sesuai rancangan.
+4. **Pengujian** — *Blackbox Testing*, *Usability Testing*, *Performance/Security Testing*.
+
+Uraian pada bagian ini harus cukup rinci sehingga pembaca dapat memahami dan
+mereplikasi proses penelitian yang dilakukan.

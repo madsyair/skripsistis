@@ -1,0 +1,58 @@
+# IMPLEMENTASI DAN EVALUASI
+
+Bab ini membahas hasil implementasi sistem berdasarkan rancangan pada Bab IV serta
+evaluasi terhadap sistem yang dikembangkan.
+
+## Implementasi
+
+Bagian ini membahas proses dan hasil implementasi sistem.
+
+### Arsitektur Sistem
+
+Arsitektur sistem yang diimplementasikan dijelaskan beserta komponen utama dan hubungan
+antarkomponen (disajikan dalam bentuk diagram). Dijelaskan pula spesifikasi perangkat
+keras dan perangkat lunak yang digunakan dalam pengembangan dan implementasi.
+
+### Implementasi Antarmuka
+
+Hasil implementasi antarmuka sistem ditampilkan berdasarkan rancangan pada Bab IV,
+dengan penjelasan difokuskan pada fungsi utama antarmuka dan alur penggunaan oleh
+pengguna.
+
+## Evaluasi
+
+Evaluasi dilakukan untuk menilai apakah sistem telah memenuhi kebutuhan dan tujuan
+penelitian. Evaluasi dapat mencakup pengujian fungsional (*Blackbox Testing*), pengujian
+kinerja (*Performance Testing*), uji kegunaan (*Usability Testing*, mis. CSUQ), serta
+pengujian keamanan (*Security Testing*).
+
+Contoh penyajian ringkasan hasil pengujian fungsional (angka dihitung di dokumen,
+baris nomor kolom dan sumber data mengikuti pedoman).
+
+```{r}
+#| label: tbl-blackbox
+#| tbl-cap: "Ringkasan hasil pengujian Blackbox"
+hasil <- data.frame(
+  Modul  = c("Login", "Penjadwalan", "Laporan"),
+  Skenario = c(8L, 15L, 6L),
+  Berhasil = c(8L, 14L, 6L)
+)
+hasil$Persentase <- formatC(100 * hasil$Berhasil / hasil$Skenario,
+                            format = "f", digits = 1, decimal.mark = ",")
+tampil <- data.frame(
+  Modul = hasil$Modul,
+  Skenario = hasil$Skenario,
+  Berhasil = hasil$Berhasil,
+  Persentase = hasil$Persentase
+)
+tampil <- rbind(c("(1)", "(2)", "(3)", "(4)"), tampil)
+knitr::kable(
+  tampil,
+  col.names = c("Modul", "Jumlah Skenario", "Berhasil", "Keberhasilan (%)"),
+  align = "lrrr",
+  booktabs = TRUE
+)
+```
+
+Hasil evaluasi dianalisis untuk menunjukkan kelebihan, keterbatasan, serta potensi
+pengembangan sistem di masa mendatang.

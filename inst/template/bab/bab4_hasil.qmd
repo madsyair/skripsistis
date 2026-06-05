@@ -1,0 +1,144 @@
+# HASIL DAN PEMBAHASAN
+
+## Gambaran Umum Data
+
+Bagian ini menyajikan contoh penyajian tabel dan gambar yang dihitung **langsung dari
+kode R** sehingga angka pada naskah selalu konsisten dengan hasil komputasi. Seluruh
+gambar dirender dengan font yang sama dengan teks dokumen (Times New Roman) dan mendukung
+simbol LaTeX.
+
+## Contoh Penyajian Tabel
+
+@tbl-miskin menyajikan jumlah dan persentase penduduk miskin menurut daerah. Seluruh
+angka dihitung di dalam dokumen. Sesuai pedoman, judul tabel diletakkan **di atas**
+tabel, setiap kolom diberi **nomor kolom** pada baris di bawah kepala tabel, dan
+**sumber data dicantumkan bila data bersifat sekunder** (untuk data primer atau hasil
+olahan sendiri, baris sumber dihapus).
+
+```{r}
+#| label: tbl-miskin
+#| tbl-cap: "Jumlah dan persentase penduduk miskin menurut daerah"
+dat <- data.frame(
+  Daerah     = c("Perkotaan", "Perdesaan", "Total"),
+  Jumlah     = c(1641.18, 2234.70, 3875.88),
+  Persentase = c(7.00, 12.86, 9.50)
+)
+
+# Format angka mengikuti kaidah Indonesia (desimal ",", ribuan ".").
+tampil <- data.frame(
+  Daerah     = dat$Daerah,
+  Jumlah     = formatC(dat$Jumlah, format = "f", digits = 2,
+                       big.mark = ".", decimal.mark = ","),
+  Persentase = formatC(dat$Persentase, format = "f", digits = 2,
+                       decimal.mark = ",")
+)
+
+# Sisipkan baris NOMOR KOLOM (1), (2), (3) tepat di bawah kepala tabel
+# sebagaimana dicontohkan pada pedoman (hlm. 39).
+tampil <- rbind(c("(1)", "(2)", "(3)"), tampil)
+
+knitr::kable(
+  tampil,
+  col.names = c("Daerah", "Jumlah (ribu orang)", "Persentase (%)"),
+  align = "lrr",
+  booktabs = TRUE
+)
+```
+
+::: {.content-visible when-format="pdf"}
+```{=latex}
+\vspace{-0.5\baselineskip}
+\noindent{\footnotesize Sumber: Badan Pusat Statistik Provinsi Jawa Timur (data ilustrasi)}
+```
+:::
+
+Catatan penyajian tabel:
+
+- **Ukuran huruf** di dalam tabel tidak boleh kurang dari 8 pt. Untuk tabel rapat,
+  bungkus dengan `kableExtra::kable_styling(font_size = 8)` (jangan lebih kecil).
+- **Tabel lebar** yang melampaui lebar halaman ditempatkan dalam orientasi
+  *landscape* menggunakan lingkungan `landscape` (paket `pdflscape` telah dimuat),
+  atau diperkecil dengan ukuran huruf minimal 8 pt.
+- **Tabel lintas-halaman** memakai `longtable` (telah dimuat) agar judul kolom
+  terulang di tiap halaman; tambahkan keterangan "Tabel X (lanjutan)" pada lanjutannya.
+
+## Contoh Penyajian Gambar
+
+@fig-bar menampilkan persentase penduduk miskin per daerah; perhatikan label sumbu yang
+memuat simbol LaTeX dan ber-font Times serasi dengan teks.
+
+```{r}
+#| label: fig-bar
+#| fig-cap: "Persentase penduduk miskin menurut daerah"
+#| fig-width: 5
+#| fig-height: 3.2
+op <- par(mar = c(4, 4, 1, 1))
+barplot(
+  height = dat$Persentase,
+  names.arg = dat$Daerah,
+  ylab = "Persentase $(\\%)$",
+  col = "grey70", border = NA, ylim = c(0, 15)
+)
+par(op)
+```
+
+::: {.content-visible when-format="pdf"}
+```{=latex}
+\vspace{-0.5\baselineskip}
+\begin{center}{\footnotesize Sumber: diolah dari Tabel di atas (data ilustrasi)}\end{center}
+```
+:::
+
+Berdasarkan @fig-bar, persentase kemiskinan di perdesaan hampir dua kali lipat
+dibandingkan perkotaan. Pembahasan dapat dikaitkan kembali dengan @eq-f1 pada Bab 3.
+
+## Contoh Kode sebagai Gambar
+
+Potongan kode diperlakukan sebagai **gambar**: diberi judul "Gambar" dan dapat dirujuk
+silang seperti gambar biasa. Lihat @fig-kode-regresi.
+
+::: {#fig-kode-regresi}
+```{.r .numberLines}
+# Estimasi model regresi linear untuk PMT
+model <- lm(pengeluaran ~ aset + pendidikan + jumlah_art, data = rt)
+summary(model)
+```
+
+Kode penghitungan regresi linear
+:::
+
+Pola yang sama dapat dipakai untuk menyajikan potongan kode lain (mis. praproses data
+atau penyetelan hiperparameter) sebagai gambar bernomor. Nomor baris (kelas
+`.numberLines`) memudahkan penjelasan, mis. baris 1 memuat komentar dan baris 2
+melakukan estimasi model.
+
+## Contoh Chunk R dan Python
+
+Template ini memakai mesin **knitr**. Chunk **R** dieksekusi secara langsung. Chunk
+**Python** juga dapat dieksekusi pada dokumen yang sama melalui paket `reticulate`
+(perlu instalasi Python; objek dapat dibagi antar-bahasa).
+
+Contoh chunk R yang menghitung ringkasan sederhana:
+
+```{r}
+#| label: contoh-r
+nilai <- c(70, 85, 90, 65, 78)
+mean(nilai)
+```
+
+Contoh chunk Python (memerlukan `reticulate` dan instalasi Python). Jika Python belum
+disiapkan, beri opsi `#| eval: false` agar dokumen tetap dapat dirender:
+
+```{python}
+#| label: contoh-python
+#| eval: false
+import numpy as np
+nilai = np.array([70, 85, 90, 65, 78])
+print(nilai.mean())
+```
+
+::: {.callout-note}
+Untuk mengaktifkan Python: jalankan `install.packages("reticulate")` lalu arahkan ke
+interpreter Python (mis. `reticulate::use_python(...)` atau Miniconda via
+`reticulate::install_miniconda()`), kemudian hapus `#| eval: false`.
+:::

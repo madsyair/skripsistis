@@ -1,0 +1,76 @@
+# METODE PENELITIAN
+
+## Tinjauan Umum
+
+Penelitian ini menggunakan kerangka *Cross-Industry Standard Process for Data Mining*
+(CRISP-DM) yang mencakup enam fase: *Business Understanding*, *Data Understanding*,
+*Data Preparation*, *Modelling*, *Evaluation*, dan *Deployment* [@etang2022].
+
+Sesuai pedoman, subbab Tinjauan Umum **wajib memuat kerangka pikir penelitian** yang
+menggambarkan keterkaitan antara Permasalahan, Tujuan Penelitian, Solusi yang Diajukan,
+dan Kriteria Evaluasi. Kerangka pikir disajikan sebagai gambar (lihat @fig-kerangka).
+Ganti berkas placeholder berikut dengan diagram kerangka pikir penelitian Anda; diagram
+dibuat ulang sendiri (tidak menyalin langsung dari sumber lain) untuk menghindari plagiasi.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][4.5cm][c]{0.85\textwidth}{\centering
+  \textbf{PERMASALAHAN} $\rightarrow$ \textbf{TUJUAN PENELITIAN} $\rightarrow$
+  \textbf{SOLUSI YANG DIAJUKAN} $\rightarrow$ \textbf{KRITERIA EVALUASI}\\[0.4cm]
+  \itshape (Ganti kotak ini dengan diagram kerangka pikir penelitian Anda,
+  mis. dibuat dengan TikZ, draw.io, atau alat lain, lalu sisipkan sebagai gambar.)}}
+\caption{Kerangka pikir penelitian}
+\label{fig-kerangka}
+\end{figure}
+```
+
+## Tahapan Penelitian
+
+Data utama bersumber dari data mikro Survei Sosial Ekonomi Nasional (Susenas) yang
+diperoleh dari Badan Pusat Statistik (BPS). Variabel respons yang digunakan adalah
+pengeluaran per kapita rumah tangga sebulan.
+
+Kinerja klasifikasi dievaluasi menggunakan beberapa metrik. Akurasi dihitung sebagai
+proporsi prediksi yang benar terhadap seluruh observasi:
+
+$$
+\text{akurasi} = \frac{TP + TN}{P + N}
+$$ {#eq-akurasi}
+
+Selain akurasi, digunakan pula *precision* dan *recall* yang digabungkan ke dalam
+*F1-score*:
+
+$$
+F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
+$$ {#eq-f1}
+
+@eq-akurasi dan @eq-f1 menjadi dasar evaluasi model pada Bab 4. Penomoran
+persamaan dan rujukan silang (`@eq-...`) dilakukan otomatis oleh Quarto.
+
+## Prosedur Estimasi
+
+Keseluruhan prosedur estimasi model PMT diringkas pada Algoritme \ref{alg-pmt}.
+
+```{=latex}
+\begin{algorithm}[H]
+\caption{Estimasi dan evaluasi model PMT}\label{alg-pmt}
+\KwIn{Data rumah tangga $\mathbf{X}$, target $y$, jumlah lipatan $K$}
+\KwOut{Model terbaik $\hat{f}^\star$ dan metrik evaluasi}
+Praproses data (imputasi, penskalaan, penyandian)\;
+Bagi data menjadi himpunan latih dan uji\;
+\ForEach{algoritma kandidat $m$}{
+  \For{$k \leftarrow 1$ \KwTo $K$}{
+    Latih $m$ pada $K-1$ lipatan\;
+    Hitung metrik pada lipatan ke-$k$\;
+  }
+  Rerata metrik validasi silang untuk $m$\;
+}
+Pilih model dengan $F_1$ tertinggi sebagai $\hat{f}^\star$\;
+Evaluasi $\hat{f}^\star$ pada himpunan uji\;
+\Return $\hat{f}^\star$\;
+\end{algorithm}
+```
+
+Penomoran algoritma mengikuti bab (mis. Algoritme \ref{alg-pmt}) dengan kata kunci
+berbahasa Indonesia (Masukan, Keluaran, untuk, selama, dan seterusnya).
