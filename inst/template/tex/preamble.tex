@@ -125,6 +125,55 @@
 \AtBeginDocument{\renewcommand{\maketitle}{}}
 
 % ============================================================
+%  TikZ — untuk diagram alir (flowchart), use case diagram, dan
+%  gambar vektor lain. Caption gambar otomatis "Gambar X.Y" (lihat
+%  pengaturan \figurename & \thefigure di atas).
+% ============================================================
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.symbols,shapes.misc,arrows.meta,positioning,calc,fit,backgrounds,chains}
+
+% --- Gaya simpul diagram alir (flowchart) ---
+\tikzset{
+  % Terminator (Mulai/Selesai) — kapsul
+  fc-mulai/.style   = {rounded rectangle, draw, thick, minimum width=2.6cm,
+                       minimum height=0.9cm, align=center, font=\normalsize},
+  % Proses — persegi panjang
+  fc-proses/.style  = {rectangle, draw, thick, minimum width=3cm,
+                       minimum height=1cm, align=center, font=\normalsize},
+  % Input/Output — jajar genjang
+  fc-io/.style      = {trapezium, trapezium left angle=70, trapezium right angle=110,
+                       draw, thick, minimum width=2.6cm, minimum height=0.9cm,
+                       align=center, font=\normalsize},
+  % Keputusan — belah ketupat
+  fc-putusan/.style = {diamond, draw, thick, aspect=2, inner sep=2pt,
+                       minimum width=2.8cm, align=center, font=\normalsize},
+  % Anak panah alur
+  fc-panah/.style   = {-{Stealth[length=2.5mm]}, thick},
+}
+
+% --- Gaya elemen use case diagram ---
+\tikzset{
+  % Aktor (stick figure) sederhana
+  uc-aktor/.pic = {
+    \draw[thick] (0,0) circle (0.18);                  % kepala
+    \draw[thick] (0,-0.18) -- (0,-0.75);               % badan
+    \draw[thick] (-0.35,-0.40) -- (0.35,-0.40);        % tangan
+    \draw[thick] (0,-0.75) -- (-0.28,-1.15);           % kaki kiri
+    \draw[thick] (0,-0.75) -- (0.28,-1.15);            % kaki kanan
+  },
+  % Use case — elips
+  uc-case/.style = {ellipse, draw, thick, align=center,
+                    minimum width=2.8cm, minimum height=1cm, font=\small},
+  % Garis asosiasi aktor–use case
+  uc-asosiasi/.style = {thick},
+  % Relasi <<include>> / <<extend>> (panah putus-putus)
+  uc-relasi/.style   = {-{Stealth[length=2.5mm]}, thick, dashed, font=\footnotesize},
+  % Kotak batas sistem (system boundary)
+  uc-sistem/.style   = {rectangle, draw, thick, rounded corners=2pt,
+                        inner sep=0.6cm},
+}
+
+% ============================================================
 %  Algoritma (algorithm2e) — penamaan & kata kunci bahasa Indonesia,
 %  penomoran mengikuti bab (mis. Algoritme 3.1).
 % ============================================================

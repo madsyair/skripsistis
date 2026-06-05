@@ -13,6 +13,92 @@ Arsitektur sistem yang diimplementasikan dijelaskan beserta komponen utama dan h
 antarkomponen (disajikan dalam bentuk diagram). Dijelaskan pula spesifikasi perangkat
 keras dan perangkat lunak yang digunakan dalam pengembangan dan implementasi.
 
+#### Contoh Diagram Alir (Flowchart) dengan TikZ {.unnumbered}
+
+Diagram alir digambar langsung dengan TikZ sehingga berupa gambar vektor yang tajam dan
+menyatu dengan font dokumen. Caption otomatis bernomor mengikuti bab (mis. Gambar 5.1)
+dan dapat dirujuk silang dengan `@fig-flowchart`. Gaya simpul (`fc-mulai`, `fc-proses`,
+`fc-io`, `fc-putusan`) telah didefinisikan pada `tex/preamble.tex`.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.1cm and 1.6cm]
+  \node[fc-mulai]                       (mulai)  {Mulai};
+  \node[fc-io, below=of mulai]          (input)  {Masukkan data\\rumah tangga};
+  \node[fc-proses, below=of input]      (pra)    {Praproses\\(imputasi, penskalaan)};
+  \node[fc-putusan, below=of pra]       (valid)  {Data\\valid?};
+  \node[fc-proses, below=of valid]      (model)  {Prediksi status\\kesejahteraan};
+  \node[fc-io, below=of model]          (output) {Tampilkan hasil};
+  \node[fc-mulai, below=of output]      (selesai){Selesai};
+
+  \draw[fc-panah] (mulai)  -- (input);
+  \draw[fc-panah] (input)  -- (pra);
+  \draw[fc-panah] (pra)    -- (valid);
+  \draw[fc-panah] (valid)  -- node[right,font=\small] {ya} (model);
+  \draw[fc-panah] (model)  -- (output);
+  \draw[fc-panah] (output) -- (selesai);
+  % Cabang "tidak" kembali ke praproses
+  \draw[fc-panah] (valid.east) -- ++(2.2,0) node[above,font=\small,pos=0.5] {tidak}
+        |- (pra.east);
+\end{tikzpicture}
+\caption{Diagram alir proses prediksi status kesejahteraan}
+\label{fig-flowchart}
+\end{figure}
+```
+
+Gambar \ref{fig-flowchart} memperlihatkan alur proses dari masukan data hingga keluaran
+hasil prediksi, termasuk cabang keputusan validasi data.
+
+#### Contoh Use Case Diagram dengan TikZ {.unnumbered}
+
+Use case diagram pada Gambar \ref{fig-usecase} menyajikan interaksi antara aktor dengan
+fungsi-fungsi utama sistem. Aktor digambar memakai pic `uc-aktor`, use case memakai gaya
+`uc-case`, kotak batas sistem memakai `uc-sistem`, dan relasi `<<include>>` memakai gaya
+`uc-relasi`.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.9cm and 3.2cm]
+  % Use case di dalam sistem
+  \node[uc-case]                         (login)   {Masuk\\(Login)};
+  \node[uc-case, below=of login]         (input)   {Input data\\rumah tangga};
+  \node[uc-case, below=of input]         (prediksi){Jalankan\\prediksi};
+  \node[uc-case, below=of prediksi]      (laporan) {Lihat\\laporan};
+  \node[uc-case, right=2.4cm of prediksi](validasi){Validasi\\data};
+
+  % Kotak batas sistem membungkus seluruh use case
+  \begin{scope}[on background layer]
+    \node[uc-sistem, fit=(login)(input)(prediksi)(laporan)(validasi),
+          label=above:\textbf{Sistem Prediksi Kesejahteraan}] (sistem) {};
+  \end{scope}
+
+  % Aktor
+  \node[left=3.2cm of input]    (petugas) {};
+  \pic at (petugas) {uc-aktor}; \node[below=1.2cm of petugas] {Petugas};
+  \node[right=3.2cm of laporan] (kepala)  {};
+  \pic at (kepala)  {uc-aktor}; \node[below=1.2cm of kepala]  {Kepala BPS};
+
+  % Asosiasi aktor–use case
+  \draw[uc-asosiasi] (petugas) -- (login);
+  \draw[uc-asosiasi] (petugas) -- (input);
+  \draw[uc-asosiasi] (petugas) -- (prediksi);
+  \draw[uc-asosiasi] (kepala)  -- (laporan);
+
+  % Relasi <<include>>
+  \draw[uc-relasi] (input)    -- node[above,sloped] {$\langle\langle$include$\rangle\rangle$} (validasi);
+  \draw[uc-relasi] (prediksi) -- node[below,sloped] {$\langle\langle$include$\rangle\rangle$} (validasi);
+\end{tikzpicture}
+\caption{Use case diagram sistem prediksi kesejahteraan}
+\label{fig-usecase}
+\end{figure}
+```
+
+Pada Gambar \ref{fig-usecase}, aktor *Petugas* dapat melakukan login, input data, dan
+menjalankan prediksi, sedangkan *Kepala BPS* mengakses laporan. Use case *Validasi data*
+dipanggil melalui relasi `<<include>>` oleh dua use case lain.
+
 ### Implementasi Antarmuka
 
 Hasil implementasi antarmuka sistem ditampilkan berdasarkan rancangan pada Bab IV,
