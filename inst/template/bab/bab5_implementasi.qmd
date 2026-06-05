@@ -17,7 +17,7 @@ keras dan perangkat lunak yang digunakan dalam pengembangan dan implementasi.
 
 Diagram alir digambar langsung dengan TikZ sehingga berupa gambar vektor yang tajam dan
 menyatu dengan font dokumen. Caption otomatis bernomor mengikuti bab (mis. Gambar 5.1)
-dan dapat dirujuk silang dengan `@fig-flowchart`. Gaya simpul (`fc-mulai`, `fc-proses`,
+dan dapat dirujuk silang dengan `\ref{fig-flowchart}`. Gaya simpul (`fc-mulai`, `fc-proses`,
 `fc-io`, `fc-putusan`) telah didefinisikan pada `tex/preamble.tex`.
 
 ```{=latex}
@@ -134,6 +134,8 @@ tampil <- data.frame(
 tampil <- rbind(c("(1)", "(2)", "(3)", "(4)"), tampil)
 knitr::kable(
   tampil,
+  format = if (knitr::is_latex_output()) "latex" else "pipe",
+  longtable = FALSE,            # tabel pendek: pakai float biasa, bukan longtable
   col.names = c("Modul", "Jumlah Skenario", "Berhasil", "Keberhasilan (%)"),
   align = "lrrr",
   booktabs = TRUE

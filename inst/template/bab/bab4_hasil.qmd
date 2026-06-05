@@ -39,6 +39,8 @@ tampil <- rbind(c("(1)", "(2)", "(3)"), tampil)
 
 knitr::kable(
   tampil,
+  format = if (knitr::is_latex_output()) "latex" else "pipe",
+  longtable = FALSE,            # tabel pendek: pakai float biasa, bukan longtable
   col.names = c("Daerah", "Jumlah (ribu orang)", "Persentase (%)"),
   align = "lrr",
   booktabs = TRUE
