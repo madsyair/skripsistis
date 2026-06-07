@@ -107,6 +107,18 @@
   \counterwithout{equation}{chapter}%
 }
 
+% --- Nomor persamaan ber-kurung pada TAMPILAN dan pada RUJUKAN (\ref) ---
+%     Quarto menulis rujukan sebagai "Persamaan~\ref{eq-...}", dan \ref ke
+%     persamaan mengembalikan nilai \theequation. Agar rujukan menjadi
+%     "Persamaan (1)", kurung dipindah ke \theequation lalu kurung bawaan
+%     pada \tagform@ dihilangkan supaya tampilan persamaan tidak menjadi ((1)).
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand{\theequation}{(\arabic{equation})}%   nomor & rujukan: (n)
+  \renewcommand{\tagform@}[1]{\maketag@@@{#1}}%        cegah kurung ganda di tampilan
+}
+\makeatother
+
 % --- Penamaan caption: "Tabel" dan "Gambar" (bukan Table/Figure) ---
 %     Mengatur teks pada float; awalan rujukan silang diatur di _quarto.yml.
 \renewcommand{\tablename}{Tabel}

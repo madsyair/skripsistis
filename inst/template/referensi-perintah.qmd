@@ -136,7 +136,7 @@ Beri label berawalan jenis, lalu rujuk dengan `@`.
 |---|---|---|
 | `#fig-x` | `@fig-x` | Gambar N |
 | `#tbl-x` | `@tbl-x` | Tabel N |
-| `#eq-x` | `@eq-x` | Persamaan N |
+| `#eq-x` | `@eq-x` | Persamaan (N) |
 | `#def-x` | `@def-x` | Definisi N |
 | `#thm-x` | `@thm-x` | Teorema N |
 

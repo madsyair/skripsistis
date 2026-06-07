@@ -7,26 +7,210 @@
 
 ::: {.callout-tip title="Petunjuk Penulisan  -  Lampiran" appearance="simple"}
 Lampiran memuat materi pendukung yang terlalu panjang untuk badan teks: kuesioner,
-sintaks/kode lengkap, tabel besar, output, atau surat izin. Setiap lampiran diberi
-nomor dan judul, dirujuk dari badan teks, dan otomatis terdaftar di Daftar Lampiran
-melalui perintah `\lampiran{...}`. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
+sintaks/kode lengkap, tabel besar, keluaran, atau surat izin. Setiap lampiran
+didaftarkan otomatis ke **Daftar Lampiran** melalui perintah `\lampiran{...}`.
+Tiga lampiran di bawah merangkum perintah **R**, **Quarto/Markdown**, dan **LaTeX**
+yang dipakai untuk menulis skripsi dengan template ini; simpan sebagai rujukan atau
+ganti dengan lampiran penelitian Anda. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
 :::
 
 ```{=latex}
-\lampiran{Judul Lampiran 1}
+\lampiran{Daftar Perintah R yang Digunakan}
 ```
 
-**Lampiran 1.** Judul Lampiran 1
+**Lampiran 1.** Daftar Perintah R yang Digunakan
 
-Isi lampiran 1.
+Perintah R berikut dijalankan di dalam *chunk* kode (lihat Lampiran 2) untuk
+mengolah data serta menampilkan tabel dan gambar pada naskah.
+
+*Paket yang umum dipakai:*
+
+| Paket | Kegunaan |
+|---|---|
+| `readr`, `readxl`, `haven` | Membaca data CSV, Excel (`.xlsx`), dan SPSS/Stata. |
+| `dplyr`, `tidyr` | Manipulasi dan penataan data (saring, ringkas, ubah bentuk). |
+| `ggplot2` | Membuat grafik (diagram batang, garis, sebar). |
+| `kableExtra` | Membuat tabel berformat untuk PDF (termasuk tabel panjang). |
+| `caret`, `tidymodels` | Pemodelan klasifikasi/regresi dan evaluasinya. |
+
+*Fungsi dasar yang sering digunakan:*
+
+| Fungsi | Kegunaan |
+|---|---|
+| `read.csv("data.csv")` | Membaca berkas CSV menjadi *data frame*. |
+| `readxl::read_excel("data.xlsx")` | Membaca berkas Excel. |
+| `head(df)`, `str(df)`, `summary(df)` | Melihat cuplikan, struktur, dan ringkasan data. |
+| `table(x)`, `prop.table(table(x))` | Tabel frekuensi dan proporsi. |
+| `aggregate(y ~ grup, data, mean)` | Ringkasan per kelompok. |
+| `set.seed(123)` | Menetapkan benih acak agar hasil dapat direproduksi. |
+| `factor(x)`, `as.numeric(x)` | Mengubah tipe data. |
+| `mean()`, `sd()`, `quantile()` | Statistik deskriptif. |
+
+*Contoh menampilkan tabel dari R* (paket `kableExtra`):
+
+```r
+library(kableExtra)
+tab <- data.frame(Wilayah = c("A", "B", "C"),
+                  Jumlah  = c(120, 95, 143))
+kbl(tab, booktabs = TRUE, align = "lr",
+    caption = "Contoh tabel ringkasan") |>
+  kable_styling(latex_options = "HOLD_position", font_size = 10)
+```
+
+*Contoh membuat gambar dari R* (paket `ggplot2`):
+
+```r
+library(ggplot2)
+ggplot(df, aes(x = kelompok, y = nilai)) +
+  geom_col(fill = "grey40") +
+  labs(x = "Kelompok", y = "Nilai") +
+  theme_minimal()
+```
 
 ```{=latex}
-\lampiran{Judul Lampiran 2}
+\lampiran{Daftar Perintah Quarto/Markdown yang Digunakan}
 ```
 
-**Lampiran 2.** Judul Lampiran 2
+**Lampiran 2.** Daftar Perintah Quarto/Markdown yang Digunakan
 
-Isi lampiran 2.
+Naskah ditulis dalam berkas `.qmd` (Quarto). Markdown mengatur struktur dan teks,
+sedangkan *chunk* kode menjalankan R.
+
+*Pemformatan teks dan struktur:*
+
+| Sintaks | Hasil |
+|---|---|
+| `*miring*` | teks miring (italic) |
+| `**tebal**` | teks tebal (bold) |
+| `` `kode` `` | teks monospace |
+| `# Judul` | judul bab (level 1) |
+| `## Subjudul` | subbab (level 2) |
+| `### Sub-subjudul` | sub-subbab (level 3) |
+| `- item` / `1. item` | daftar berbutir / bernomor |
+| `> teks` | kutipan blok |
+| `# DAFTAR PUSTAKA {.unnumbered}` | judul tanpa nomor bab |
+
+*Chunk kode R* (opsi ditulis dengan `#|`):
+
+```{{r}}
+#| label: fig-contoh
+#| fig-cap: "Judul gambar"
+#| echo: false
+#| fig-width: 5.5
+plot(1:10)
+```
+
+Opsi *chunk* yang sering dipakai: `label:` (awalan `fig-`/`tbl-` menentukan jenis),
+`fig-cap:`/`tbl-cap:` (judul), `echo: false` (sembunyikan kode), `eval: false`
+(tampilkan tanpa menjalankan), `warning: false`/`message: false`.
+
+*Menyisipkan berkas bab* (dipakai pada `index.qmd`):
+
+```markdown
+{{{< include bab/bab1_pendahuluan.qmd >}}}
+```
+
+*Rujukan silang* — beri label berawalan jenis, lalu rujuk dengan `@`:
+
+| Penanda objek | Rujukan | Hasil |
+|---|---|---|
+| `#fig-x` | `@fig-x` | Gambar N |
+| `#tbl-x` | `@tbl-x` | Tabel N |
+| `#eq-x` | `@eq-x` | Persamaan (N) |
+| `#def-x` | `@def-x` | Definisi N |
+| `#thm-x` | `@thm-x` | Teorema N |
+
+*Persamaan bernomor* (otomatis masuk deret tunggal dan dapat dirujuk):
+
+```markdown
+$$
+F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
+$$ {#eq-f1}
+```
+
+*Kutipan dan daftar pustaka* (sumber dikelola di `referensi.bib`):
+
+| Sintaks | Hasil |
+|---|---|
+| `[@kunci]` | (Nama dkk., tahun) |
+| `@kunci` | Nama dkk. (tahun) |
+| `[@a; @b]` | gabungan beberapa sumber |
+| `[@kunci, hlm. 21]` | dengan nomor halaman |
+
+Daftar Pustaka terisi otomatis dari sumber yang dikutip melalui blok berikut
+(di akhir naskah):
+
+```markdown
+::: {#refs}
+:::
+```
+
+*Kotak petunjuk (callout)* — jenis: `callout-note`, `callout-tip`, `callout-warning`,
+`callout-important`, `callout-caution`:
+
+```markdown
+::: {.callout-note title="Judul" appearance="simple"}
+Isi catatan.
+:::
+```
+
+```{=latex}
+\lampiran{Daftar Perintah LaTeX yang Digunakan}
+```
+
+**Lampiran 3.** Daftar Perintah LaTeX yang Digunakan
+
+Perintah LaTeX mentah disisipkan di antara pembuka `` ```{=latex} `` dan penutup
+`` ``` `` untuk hal-hal yang tidak ditangani Quarto (halaman muka, lampiran,
+landscape, tabel panjang). Tanda *(template)* berarti perintah sudah disiapkan pada
+`tex/preamble.tex`.
+
+*Pengaturan spasi dan halaman:*
+
+| Perintah | Fungsi |
+|---|---|
+| `\clearpage` | Pindah ke halaman baru. |
+| `\cleardoublepage` | Pindah ke halaman ganjil berikutnya *(template)*. |
+| `\vspace{2\baselineskip}` | Spasi vertikal (sekitar 2 baris). |
+| `\singlespacing` / `\onehalfspacing` / `\doublespacing` | Spasi 1 / 1,5 / 2. |
+| `\noindent` | Paragraf tanpa indentasi awal. |
+| `\hangindent=2.4cm` | Indentasi gantung. |
+
+*Perintah khusus template* &nbsp;*(template)*:
+
+| Perintah | Fungsi |
+|---|---|
+| `\lampiran{Judul}` | Mendaftarkan satu lampiran ke Daftar Lampiran (penomoran otomatis). |
+| `\listoflampiran` | Mencetak halaman Daftar Lampiran. |
+| `\aktifkanNomorIsi` | Mengaktifkan penomoran halaman angka Arab sebelum Bab I. |
+| `\pageref*{LastPage}` | Nomor halaman terakhir (untuk hitung halaman di Abstrak). |
+
+*Rujukan silang manual* (untuk objek raw-LaTeX seperti TikZ/landscape):
+
+```latex
+\label{fig-flowchart}        % beri label
+Gambar \ref{fig-flowchart}   % rujuk nomornya
+```
+
+*Gambar/tabel melebar (landscape):*
+
+```latex
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=0.95\textheight]{img/diagram.pdf}
+\caption{Judul gambar melebar}
+\label{fig-landscape}
+\end{sidewaysfigure}
+```
+
+*Tabel panjang lintas-halaman* (lewat `kableExtra` di dalam chunk R):
+
+```r
+kbl(df, format = "latex", longtable = TRUE, booktabs = TRUE,
+    col.names = c("No.", "Wilayah", "Jumlah")) |>
+  kable_styling(latex_options = "repeat_header",
+                repeat_header_text = "(lanjutan)", font_size = 8)
+```
 
 # RIWAYAT HIDUP {.unnumbered}
 
