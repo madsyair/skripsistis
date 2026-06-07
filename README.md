@@ -50,8 +50,8 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
   Evaluasi) pada Bab III sesuai pedoman.
 - **Urutan halaman sesuai pedoman**: Sampul → Judul → Pernyataan → Pengesahan →
   Hak Cipta → Prakata → Abstrak → Daftar Isi → Daftar Tabel → Daftar Gambar →
-  Bab I–V → Daftar Pustaka → Lampiran → Riwayat Hidup. Halaman muka bernomor
-  Romawi, isi bernomor Arab.
+  Daftar Lampiran → Bab I–V → Daftar Pustaka → Lampiran → Riwayat Hidup. Halaman
+  muka bernomor Romawi kecil mulai dari Prakata (i), isi bernomor Arab di kanan bawah.
 - **Sitasi APA 7 Indonesia** (`apa-stis-id.csl`): penghubung **dan**, tiga penulis
   atau lebih disingkat **dkk.**, tanpa tahun **t.t.**, edisi **ed. ke-2**,
   penerjemah **Penerj.** Daftar pustaka tersusun otomatis dan alfabetis.
@@ -61,8 +61,8 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
   Contoh** (judul + rujukan silang berbahasa Indonesia) beserta lingkungan **Bukti**,
   semuanya bernomor dan dapat dirujuk dengan `@def-`, `@thm-`, dan seterusnya.
 - **Algoritma**: lingkungan `algorithm2e` dengan nama "Algoritme", kata kunci Indonesia
-  (Masukan, Keluaran, untuk, selama, kembalikan), dan penomoran per bab
-  (mis. Algoritme 3.1).
+  (Masukan, Keluaran, untuk, selama, kembalikan), dan penomoran deret tunggal
+  (mis. Algoritme 1).
 - **Kode sebagai gambar**: potongan kode dapat diberi judul "Gambar x. ..." dan dirujuk
   silang layaknya gambar (masuk pula ke Daftar Gambar), lengkap dengan nomor baris agar
   mudah dijelaskan baris per baris.
@@ -181,7 +181,7 @@ Bukti ... . $\qed$
 Lihat @def-pmt dan @thm-takbias.
 ````
 
-**Algoritma** (penomoran per bab; rujuk dengan `\ref{...}`):
+**Algoritma** (penomoran deret tunggal; rujuk dengan `\ref{...}`):
 
 ````markdown
 ```{=latex}

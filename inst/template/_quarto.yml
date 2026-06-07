@@ -6,6 +6,9 @@
 project:
   type: default
   output-dir: _output
+  render:
+    - index.qmd   # hanya naskah skripsi yang dirender otomatis;
+                  # 'referensi-perintah.qmd' dirender terpisah sesuai kebutuhan.
 
 # Metadata skripsi — diisi otomatis oleh buat_skripsi(), boleh diedit manual.
 title: "{{JUDUL}}"
@@ -42,14 +45,23 @@ crossref:
 format:
   pdf:
     documentclass: report
+    classoption:
+      - twoside        # tata letak bolak-balik (mirror margin)
+      - openright      # setiap bab dimulai pada halaman ganjil (rekto)
+      - fleqn          # persamaan rata kiri (1 tab dari batas kiri), sesuai pedoman
     papersize: a4
+    fontsize: 12pt
     pdf-engine: xelatex
     toc: false                # Daftar Isi disisipkan manual (lihat index.qmd)
     number-sections: true
     number-depth: 3
     fig-pos: "H"
+    code-overflow: wrap       # lipat baris kode panjang agar tidak menembus margin kanan
     link-citations: true
     keep-tex: true
+    # Daftar Isi bisa menjadi 2 halaman sehingga paginasi bergeser; paksa cukup
+    # lintasan LaTeX agar nomor halaman pada Daftar Isi/Tabel/Gambar/Lampiran konvergen.
+    latex-min-runs: 4
     include-in-header:
       - tex/preamble.tex
     include-before-body:

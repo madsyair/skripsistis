@@ -1,6 +1,16 @@
 # TINJAUAN PUSTAKA
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Bab Tinjauan Pustaka" appearance="simple"}
+Bab Tinjauan Pustaka memuat Landasan Teori (konsep, definisi, teori yang mendukung) dan Penelitian Terkait (state of the art). Sintesis, bukan sekadar kumpulan kutipan: tunjukkan keterkaitan antar-teori dan posisi penelitian Anda. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
+:::
+
+
 ## Landasan Teori
+
+::: {.callout-note title="Petunjuk: Landasan Teori" appearance="simple"}
+Sajikan konsep dan teori utama yang menjadi dasar penelitian secara terstruktur (dari umum ke khusus). Setiap teori wajib bersumber dan relevan dengan masalah.
+:::
+
 
 ### Pengukuran Kesejahteraan
 
@@ -42,12 +52,22 @@ $\mathrm{E}(\hat{\boldsymbol{\beta}}\mid\mathbf{X}) = \boldsymbol{\beta}$. $\qed
 
 ## Penelitian Terkait
 
+::: {.callout-note title="Petunjuk: Penelitian Terkait" appearance="simple"}
+Tinjau penelitian terdahulu yang relevan: metode, data, dan temuannya. Tunjukkan kesenjangan yang belum terjawab dan bagaimana penelitian Anda mengisinya (boleh berupa tabel sintesis).
+:::
+
+
 Beberapa penelitian terdahulu mengembangkan PMT dengan pendekatan *machine learning*.
 @pratama2025 membandingkan beberapa algoritma di Jawa Tengah, sedangkan @martinez2025
 menyoroti pentingnya mempertimbangkan heterogenitas spasial. Ringkasan beberapa metode
 yang umum digunakan disajikan pada penelitian-penelitian tersebut.
 
 ## Terkait Penulisan Kutipan
+
+::: {.callout-note title="Petunjuk: Terkait Penulisan Kutipan" appearance="simple"}
+Bagian ini hanya contoh teknis pengutipan; pada skripsi nyata, gabungkan kaidah pengutipan ke dalam Landasan Teori/Penelitian Terkait dan hapus subbab ini.
+:::
+
 
 Penulisan kutipan dan daftar pustaka pada templat ini mengikuti gaya **APA edisi ke-7
 dengan modifikasi bahasa Indonesia**, yaitu penghubung antarpenulis menggunakan kata

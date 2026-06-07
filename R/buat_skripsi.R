@@ -12,6 +12,15 @@
 #' @param nama Nama mahasiswa.
 #' @param nim Nomor Induk Mahasiswa.
 #' @param peminatan Peminatan: `"Sains Data"` atau `"Sistem Informasi Statistik"`.
+#' @param jenis_skripsi Jenis/struktur skripsi yang menentukan kerangka bab,
+#'   terlepas dari peminatan: `"Analisis"` (Bab I–V: Pendahuluan, Tinjauan
+#'   Pustaka, Metode, Hasil dan Pembahasan, Kesimpulan) atau `"Pengembangan
+#'   Sistem"` (Bab I–VI: Pendahuluan, Tinjauan Pustaka, Metode, Analisis dan
+#'   Perancangan, Implementasi dan Evaluasi, Kesimpulan). Bila `NULL` (default),
+#'   jenis disesuaikan otomatis dengan `peminatan` (Sains Data → "Analisis";
+#'   Sistem Informasi Statistik → "Pengembangan Sistem"). Dengan parameter ini,
+#'   mahasiswa Sains Data dapat menulis skripsi bertipe pengembangan sistem dan
+#'   sebaliknya.
 #' @param pembimbing,nip_pembimbing Nama dan NIP dosen pembimbing.
 #' @param penguji1,nip_penguji1 Nama dan NIP Penguji I.
 #' @param penguji2,nip_penguji2 Nama dan NIP Penguji II.
@@ -26,6 +35,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Skripsi analisis (default untuk Sains Data)
 #' buat_skripsi(
 #'   path        = "skripsi-saya",
 #'   judul       = "Pemodelan PMT Berbasis GPBoost di Provinsi Jawa Timur",
@@ -36,6 +46,16 @@
 #'   pembimbing  = "Nama Pembimbing",
 #'   render      = TRUE
 #' )
+#'
+#' # Mahasiswa Sains Data menulis skripsi PENGEMBANGAN SISTEM
+#' buat_skripsi(
+#'   path          = "skripsi-sd-sistem",
+#'   judul         = "Pengembangan Dasbor Monitoring Kemiskinan Berbasis Web",
+#'   nama          = "Nama Mahasiswa",
+#'   nim           = "222212501",
+#'   peminatan     = "Sains Data",
+#'   jenis_skripsi = "Pengembangan Sistem"
+#' )
 #' }
 buat_skripsi <- function(
     path            = "skripsi-stis",
@@ -44,6 +64,7 @@ buat_skripsi <- function(
     nama            = "NAMA MAHASISWA",
     nim             = "NIM",
     peminatan       = c("Sains Data", "Sistem Informasi Statistik"),
+    jenis_skripsi   = NULL,
     pembimbing      = "Nama Dosen Pembimbing",
     nip_pembimbing  = "0000",
     penguji1        = "Nama Dosen Penguji I",
@@ -62,6 +83,22 @@ buat_skripsi <- function(
   } else {
     "SISTEM INFORMASI STATISTIK"
   }
+
+  # --- Tentukan jenis/struktur skripsi (terpisah dari peminatan) ---
+  #     Bila tidak ditentukan, ikuti default berdasarkan peminatan, tetapi
+  #     mahasiswa boleh memilih jenis lain (mis. Sains Data menulis skripsi
+  #     pengembangan sistem, atau sebaliknya).
+  if (is.null(jenis_skripsi)) {
+    jenis_skripsi <- if (identical(peminatan, "Sistem Informasi Statistik")) {
+      "Pengembangan Sistem"
+    } else {
+      "Analisis"
+    }
+  }
+  jenis_skripsi <- match.arg(
+    jenis_skripsi,
+    c("Analisis", "Pengembangan Sistem")
+  )
 
   # --- Validasi direktori tujuan ---
   if (dir.exists(path)) {
@@ -92,14 +129,14 @@ buat_skripsi <- function(
     file.copy(src, dst, overwrite = TRUE)
   }
 
-  # --- Pilih kerangka bab sesuai peminatan ---
-  #     Sains Data                : Bab I-V (Pendahuluan, Tinjauan Pustaka,
-  #                                 Metode, Hasil dan Pembahasan, Kesimpulan).
-  #     Sistem Informasi Statistik: Bab I-VI (Pendahuluan, Tinjauan Pustaka,
-  #                                 Metode, Analisis dan Perancangan,
-  #                                 Implementasi dan Evaluasi, Kesimpulan).
+  # --- Pilih kerangka bab sesuai JENIS skripsi (bukan peminatan) ---
+  #     Analisis            : Bab I-V (Pendahuluan, Tinjauan Pustaka,
+  #                           Metode, Hasil dan Pembahasan, Kesimpulan).
+  #     Pengembangan Sistem : Bab I-VI (Pendahuluan, Tinjauan Pustaka,
+  #                           Metode, Analisis dan Perancangan,
+  #                           Implementasi dan Evaluasi, Kesimpulan).
   bab_dir <- file.path(path, "bab")
-  if (identical(peminatan, "Sistem Informasi Statistik")) {
+  if (identical(jenis_skripsi, "Pengembangan Sistem")) {
     urutan_bab <- c("bab1_pendahuluan", "bab2_tinjauan_pustaka",
                     "bab3_metode_si", "bab4_analisis", "bab5_implementasi",
                     "bab5_kesimpulan")
@@ -147,6 +184,7 @@ buat_skripsi <- function(
 
   abs_path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   message("Proyek skripsi STIS dibuat di: ", abs_path)
+  message("Peminatan: ", peminatan, " | Jenis skripsi: ", jenis_skripsi)
   message("Render dengan: quarto render \"", abs_path, "\"")
 
   if (isTRUE(render)) {

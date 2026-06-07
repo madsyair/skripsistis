@@ -1,10 +1,20 @@
 # ANALISIS DAN PERANCANGAN
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Bab Analisis Dan Perancangan" appearance="simple"}
+Bab Analisis dan Perancangan memuat analisis sistem berjalan, identifikasi permasalahan dan kebutuhan, serta rancangan sistem usulan (proses bisnis, use case, basis data, dan antarmuka). **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
+:::
+
+
 Bab ini membahas hasil analisis terhadap sistem yang berjalan serta perancangan sistem
 yang diusulkan sebagai solusi atas permasalahan yang telah diidentifikasi pada Bab I.
 Analisis dan perancangan dilakukan berdasarkan metode penelitian pada Bab III.
 
 ## Analisis Sistem Berjalan
+
+::: {.callout-note title="Petunjuk: Analisis Sistem Berjalan" appearance="simple"}
+Deskripsikan sistem/proses yang sedang berjalan, identifikasi permasalahannya, dan rumuskan kebutuhan fungsional serta non-fungsional sistem usulan.
+:::
+
 
 Bagian ini membahas kondisi sistem yang saat ini berjalan, termasuk proses bisnis,
 aktor yang terlibat, serta permasalahan yang dihadapi.
@@ -28,6 +38,11 @@ Hasil analisis kebutuhan dikelompokkan menjadi kebutuhan **fungsional** dan
 **nonfungsional**, disajikan secara jelas dan terstruktur sebagai dasar perancangan.
 
 ## Perancangan Sistem
+
+::: {.callout-note title="Petunjuk: Perancangan Sistem" appearance="simple"}
+Sajikan rancangan sistem usulan: proses bisnis usulan, use case diagram, rancangan basis data (ERD/relasi), dan rancangan antarmuka (mock-up).
+:::
+
 
 Perancangan menggambarkan bagaimana sistem akan dibangun dan dioperasikan.
 

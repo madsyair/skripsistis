@@ -1,6 +1,18 @@
 # HASIL DAN PEMBAHASAN
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Bab Hasil Dan Pembahasan" appearance="simple"}
+Bab Hasil dan Pembahasan menyajikan temuan penelitian (tabel/gambar dihitung langsung
+dari data) lalu membahasnya: makna, perbandingan dengan teori/penelitian terdahulu, dan
+implikasinya. Hindari sekadar mendeskripsikan angka. **Hapus seluruh kotak "Petunjuk
+Penulisan" pada naskah final.**
+:::
+
 ## Gambaran Umum Data
+
+::: {.callout-note title="Petunjuk: Gambaran Umum Data" appearance="simple"}
+Deskripsikan data yang digunakan: sumber, jumlah observasi/variabel, dan statistik
+ringkas. Dasari setiap angka dengan komputasi langsung dari kode agar konsisten.
+:::
 
 Bagian ini menyajikan contoh penyajian tabel dan gambar yang dihitung **langsung dari
 kode R** sehingga angka pada naskah selalu konsisten dengan hasil komputasi. Seluruh
@@ -9,7 +21,7 @@ simbol LaTeX.
 
 ## Contoh Penyajian Tabel
 
-@tbl-miskin menyajikan jumlah dan persentase penduduk miskin menurut daerah. Seluruh
+Tabel \ref{tbl-miskin} menyajikan jumlah dan persentase penduduk miskin menurut daerah. Seluruh
 angka dihitung di dalam dokumen. Sesuai pedoman, judul tabel diletakkan **di atas**
 tabel, setiap kolom diberi **nomor kolom** pada baris di bawah kepala tabel, dan
 **sumber data dicantumkan bila data bersifat sekunder** (untuk data primer atau hasil
@@ -23,8 +35,7 @@ dat <- data.frame(
   Jumlah     = c(1641.18, 2234.70, 3875.88),
   Persentase = c(7.00, 12.86, 9.50)
 )
-
-# Format angka mengikuti kaidah Indonesia (desimal ",", ribuan ".").
+# Format angka kaidah Indonesia (desimal ",", ribuan ".").
 tampil <- data.frame(
   Daerah     = dat$Daerah,
   Jumlah     = formatC(dat$Jumlah, format = "f", digits = 2,
@@ -32,19 +43,23 @@ tampil <- data.frame(
   Persentase = formatC(dat$Persentase, format = "f", digits = 2,
                        decimal.mark = ",")
 )
-
-# Sisipkan baris NOMOR KOLOM (1), (2), (3) tepat di bawah kepala tabel
-# sebagaimana dicontohkan pada pedoman (hlm. 39).
+# Baris NOMOR KOLOM (1)(2)(3) di bawah kepala tabel (sesuai pedoman).
 tampil <- rbind(c("(1)", "(2)", "(3)"), tampil)
 
-knitr::kable(
+tbl <- knitr::kable(
   tampil,
   format = if (knitr::is_latex_output()) "latex" else "pipe",
-  longtable = FALSE,            # tabel pendek: pakai float biasa, bukan longtable
+  longtable = FALSE,
   col.names = c("Daerah", "Jumlah (ribu orang)", "Persentase (%)"),
-  align = "lrr",
-  booktabs = TRUE
+  align = c("l", "r", "r"),
+  booktabs = FALSE, vline = "|", linesep = ""   # garis penuh (grid) sesuai pedoman
 )
+# Tambahkan garis tepi LUAR (kiri/kanan) agar grid penuh seperti contoh pedoman.
+if (knitr::is_latex_output()) {
+  tbl <- sub("\\{l\\|r\\|r\\}", "{|l|r|r|}", tbl)
+  tbl <- gsub("\\\\\\\\(\\s*)$", "\\\\\\\\ \\\\hline", tbl, perl = TRUE)  # garis tiap baris
+}
+knitr::asis_output(tbl)
 ```
 
 ::: {.content-visible when-format="pdf"}
@@ -56,13 +71,54 @@ knitr::kable(
 
 Catatan penyajian tabel:
 
-- **Ukuran huruf** di dalam tabel tidak boleh kurang dari 8 pt. Untuk tabel rapat,
+- **Posisi** tabel/gambar selalu **rata tengah** dan berjarak **±3 spasi** dari teks
+  (sudah diatur otomatis pada `preamble.tex` melalui `\intextsep`/`\textfloatsep`).
+- **Ukuran huruf** di dalam tabel tidak boleh kurang dari **8 pt**. Untuk tabel rapat,
   bungkus dengan `kableExtra::kable_styling(font_size = 8)` (jangan lebih kecil).
-- **Tabel lebar** yang melampaui lebar halaman ditempatkan dalam orientasi
-  *landscape* menggunakan lingkungan `landscape` (paket `pdflscape` telah dimuat),
-  atau diperkecil dengan ukuran huruf minimal 8 pt.
-- **Tabel lintas-halaman** memakai `longtable` (telah dimuat) agar judul kolom
-  terulang di tiap halaman; tambahkan keterangan "Tabel X (lanjutan)" pada lanjutannya.
+- **Tabel/gambar lebar** ditempatkan dalam orientasi *landscape* (lihat subbab "Contoh
+  Gambar Melebar" dan "Contoh Tabel Panjang/Lebar"), atau diperkecil dengan huruf ≥ 8 pt.
+
+### Contoh Tabel Panjang (Lintas-Halaman)
+
+::: {.callout-note title="Petunjuk: tabel panjang lintas-halaman" appearance="simple"}
+Bila tabel terlalu panjang untuk satu halaman, gunakan `longtable` melalui
+`kableExtra`. Dengan opsi `repeat_header`, judul kolom **terulang otomatis** di setiap
+halaman lanjutan dan keterangan **"(lanjutan)"** muncul otomatis  -  tanpa menuliskan
+ulang judul tabel. Ukuran huruf diatur `font_size = 8` (batas minimum pedoman, jangan
+kurang). Contoh pada @tbl-panjang.
+:::
+
+@tbl-panjang mencontohkan tabel panjang yang otomatis berlanjut ke halaman berikutnya
+dengan judul kolom berulang dan keterangan "(lanjutan)".
+
+```{r}
+#| label: tbl-panjang
+#| tbl-cap: "Contoh tabel panjang lintas-halaman (data ilustrasi)"
+library(kableExtra)
+set.seed(1)
+panjang <- data.frame(
+  No        = 1:40,
+  Kabupaten = sprintf("Kabupaten %02d", 1:40),
+  Jumlah    = formatC(round(runif(40, 50, 900), 1), format = "f", digits = 1,
+                      big.mark = ".", decimal.mark = ","),
+  Persen    = formatC(round(runif(40, 3, 18), 2), format = "f", digits = 2,
+                      decimal.mark = ",")
+)
+
+kbl(
+  panjang,
+  format    = if (knitr::is_latex_output()) "latex" else "pipe",
+  longtable = TRUE, booktabs = TRUE,
+  col.names = c("No.", "Kabupaten/Kota", "Jumlah (ribu)", "Persentase (%)"),
+  align     = "clrr"
+) |>
+  kable_styling(
+    font_size           = 8,                       # huruf 8 pt (batas minimum pedoman)
+    latex_options       = c("repeat_header"),
+    repeat_header_text  = "(lanjutan)",
+    repeat_header_method = "replace"
+  )
+```
 
 ## Contoh Penyajian Gambar
 
@@ -92,7 +148,59 @@ par(op)
 :::
 
 Berdasarkan @fig-bar, persentase kemiskinan di perdesaan hampir dua kali lipat
-dibandingkan perkotaan. Pembahasan dapat dikaitkan kembali dengan @eq-f1 pada Bab 3.
+dibandingkan perkotaan. Pembahasan dapat dikaitkan kembali dengan metrik $F_1$ yang
+dirumuskan pada Bab 3.
+
+## Contoh Gambar Melebar (Landscape)
+
+::: {.callout-note title="Petunjuk: Gambar/tabel melebar (landscape)" appearance="simple"}
+Untuk gambar atau tabel yang terlalu lebar untuk orientasi potret (mis. diagram alur
+panjang, peta, atau tabel banyak kolom), putar 90° menjadi **landscape**. Tersedia dua
+cara:
+
+- **`sidewaysfigure`/`sidewaystable`** (paket *rotating*): memutar **isi beserta
+  caption** 90° pada halaman potret. Pada cetak bolak-balik (*twoside*), arah putar
+  **otomatis menyesuaikan**: di halaman ganjil (rekto) dan genap (verso) kepala gambar
+  selalu menghadap **tepi luar**, sehingga pembaca memutar buku ke arah yang konsisten.
+  Caption ikut berputar bersama gambar.
+- **`landscape`** (paket *pdflscape*): memutar **halaman PDF** sehingga gambar enak
+  dibaca di layar; nomor halaman tetap pada posisi potret.
+
+Contoh di bawah memakai `sidewaysfigure`. Gambar dibuat lebar (rasio ~16:5) agar manfaat
+orientasi landscape terlihat. Rujuk dengan `\ref{fig-landscape}`.
+:::
+
+Gambar \ref{fig-landscape} menyajikan contoh diagram melebar yang diputar 90°. Karena
+dokumen ini dicetak bolak-balik, jalankan render lalu amati: pada halaman ganjil dan
+genap, arah putaran gambar berbeda agar caption selalu berada di sisi luar buku.
+
+```{r}
+#| label: fig-landscape-build
+#| echo: false
+#| results: hide
+# Buat plot lebar lalu SIMPAN ke berkas; gambar disisipkan via sidewaysfigure
+# di blok LaTeX berikutnya. Lebar sengaja besar (rasio ~16:5).
+ragam <- c("Sangat Rendah","Rendah","Menengah Bawah","Menengah",
+           "Menengah Atas","Tinggi","Sangat Tinggi","Teratas")
+nilai <- c(4.2, 7.8, 12.5, 18.3, 21.0, 16.4, 11.9, 7.9)
+dir.create("figure", showWarnings = FALSE)
+pdf("figure/landscape-contoh.pdf", width = 10, height = 3.1)
+op <- par(mar = c(4, 4, 1, 1))
+barplot(nilai, names.arg = ragam, col = "grey70", border = NA,
+        ylab = "Persentase (%)", ylim = c(0, 25), las = 1)
+par(op)
+invisible(dev.off())
+```
+
+```{=latex}
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=0.95\textheight]{figure/landscape-contoh.pdf}
+\caption{Contoh gambar melebar (landscape) dengan orientasi yang menyesuaikan
+halaman ganjil/genap}
+\label{fig-landscape}
+\end{sidewaysfigure}
+```
 
 ## Contoh Kode sebagai Gambar
 
@@ -128,12 +236,12 @@ nilai <- c(70, 85, 90, 65, 78)
 mean(nilai)
 ```
 
-Contoh chunk Python (memerlukan `reticulate` dan instalasi Python). Jika Python belum
-disiapkan, beri opsi `#| eval: false` agar dokumen tetap dapat dirender:
+Contoh chunk Python (memerlukan `reticulate` dan instalasi Python). Agar dokumen tetap
+dapat dirender tanpa Python, di bawah ini ditampilkan sebagai **kode statis**. Untuk
+mengeksekusinya, ubah pembuka blok dari ```` ```python ```` menjadi ```` ```{python} ````
+setelah Python siap:
 
-```{python}
-#| label: contoh-python
-#| eval: false
+```python
 import numpy as np
 nilai = np.array([70, 85, 90, 65, 78])
 print(nilai.mean())
@@ -142,5 +250,6 @@ print(nilai.mean())
 ::: {.callout-note}
 Untuk mengaktifkan Python: jalankan `install.packages("reticulate")` lalu arahkan ke
 interpreter Python (mis. `reticulate::use_python(...)` atau Miniconda via
-`reticulate::install_miniconda()`), kemudian hapus `#| eval: false`.
+`reticulate::install_miniconda()`), kemudian ubah blok di atas menjadi chunk eksekusi
+`{python}`.
 :::

@@ -2,28 +2,22 @@ Package: skripsistis
 Title: Template Quarto Skripsi Prodi D-IV Komputasi Statistik
         (Politeknik Statistika STIS)
 Version: 0.1.0
-Authors@R: 
+Authors@R: c(
     person("Achmad Syahrul", "Choir", role = c("aut", "cre"),
-           email = "madsyair@stis.ac.id")
+           email = "madsyair@stis.ac.id"),
+    person("Politeknik Statistika STIS", role = "cph",
+           comment = "pemegang hak cipta logo institusi pada inst/template/img/logo_stis.png, disertakan atas izin"))
 Description: Menyediakan kerangka (template) proyek Quarto untuk penyusunan
     skripsi yang dikhususkan bagi mahasiswa Program Studi D-IV Komputasi
     Statistik, Politeknik Statistika STIS, sesuai Pedoman Skripsi KS Edisi
-    Keenam (2025). Template ini bukan untuk program studi lain. Mencakup
-    halaman muka (sampul, judul, pernyataan, pengesahan, lembar hak cipta),
-    pengaturan format (margin, font Times, spasi 1,5, judul "BAB I" dan entri
-    Daftar Isi berawalan "BAB"), penyajian tabel sesuai pedoman, dua varian
-    kerangka bab sesuai peminatan (Sains Data: Bab I-V; Sistem Informasi
-    Statistik: Bab I-VI dengan Analisis dan Perancangan serta Implementasi
-    dan Evaluasi), templat proyek RStudio, contoh chunk R dan Python, serta
-    gaya kutipan dan daftar pustaka APA edisi ke-7 dengan modifikasi bahasa
-    Indonesia (penghubung "dan", singkatan "dkk.", "t.t.", "ed. ke-N",
-    "Penerj.").
+    Keenam (2025).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: id
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
 Imports: tools
-Suggests: testthat (>= 3.0.0), knitr, rmarkdown, tikzDevice
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, tikzDevice, kableExtra
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 SystemRequirements: Quarto (>= 1.4), XeLaTeX, LaTeX package
@@ -32,7 +26,8 @@ SystemRequirements: Quarto (>= 1.4), XeLaTeX, LaTeX package
 URL: https://github.com/madsyair/skripsistis
 BugReports: https://github.com/madsyair/skripsistis/issues
 NeedsCompilation: no
-Packaged: 2026-06-05 01:41:03 UTC; root
-Author: Achmad Syahrul Choir [aut, cre]
+Packaged: 2026-06-07 02:44:00 UTC; root
+Author: Achmad Syahrul Choir [aut, cre],
+  Politeknik Statistika STIS [cph] (pemegang hak cipta logo institusi
+    pada inst/template/img/logo_stis.png, disertakan atas izin)
 Maintainer: Achmad Syahrul Choir <madsyair@stis.ac.id>
-Config/roxygen2/version: 8.0.0

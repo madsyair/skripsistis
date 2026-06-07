@@ -1,10 +1,20 @@
 # METODE PENELITIAN
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Bab Metode Penelitian" appearance="simple"}
+Bab Metode Penelitian menjelaskan bagaimana penelitian dilakukan: data, variabel, alur/tahapan, serta teknik analisis atau perancangan sistem. Harus cukup rinci agar penelitian dapat direplikasi. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
+:::
+
+
 Bab ini menjelaskan pendekatan dan tahapan penelitian yang digunakan untuk mencapai
 tujuan penelitian. Untuk topik **sistem informasi**, metode penelitian berupa metode
 rekayasa perangkat lunak yang bertujuan menghasilkan suatu *artifact* (sistem/aplikasi).
 
 ## Tinjauan Umum
+
+::: {.callout-note title="Petunjuk: Tinjauan Umum" appearance="simple"}
+Gambarkan objek/lokus penelitian, sumber dan cakupan data (mis. Susenas/Sakernas/PODES), serta variabel yang digunakan beserta definisinya.
+:::
+
 
 Penelitian ini menggunakan metode pengembangan perangkat lunak *Modified Waterfall*
 (alternatif: *Prototyping* atau *Agile*), yang dipilih karena kebutuhan sistem relatif
@@ -13,7 +23,7 @@ gambaran umum tahapan pengembangan.
 
 Sesuai pedoman, subbab Tinjauan Umum **wajib memuat kerangka pikir penelitian** yang
 menggambarkan keterkaitan antara Permasalahan, Tujuan Penelitian, Solusi yang Diajukan,
-dan Kriteria Evaluasi. Ganti placeholder pada @fig-kerangka-si dengan diagram kerangka
+dan Kriteria Evaluasi. Ganti placeholder pada Gambar \ref{fig-kerangka-si} dengan diagram kerangka
 pikir penelitian Anda (dibuat ulang sendiri untuk menghindari plagiasi).
 
 ```{=latex}
@@ -37,14 +47,19 @@ digunakan, bukan menyalin langsung dari sumber pustaka.
 
 ## Tahapan Penelitian
 
+::: {.callout-note title="Petunjuk: Tahapan Penelitian" appearance="simple"}
+Uraikan alur penelitian langkah demi langkah (boleh dengan diagram alir): praproses data, pemodelan, evaluasi. Jelaskan tiap tahap agar dapat direplikasi.
+:::
+
+
 Setiap tahapan penelitian sekurang-kurangnya memuat tujuan tahapan, aktivitas/proses,
 data/alat/teknik yang digunakan, serta luaran (*output*) yang dihasilkan. Untuk metode
 *Modified Waterfall*, tahapan umum meliputi:
 
-1. **Analisis kebutuhan** — mengidentifikasi kebutuhan fungsional dan nonfungsional.
-2. **Perancangan** — merancang proses bisnis usulan, basis data (ERD), dan antarmuka.
-3. **Implementasi** — membangun sistem sesuai rancangan.
-4. **Pengujian** — *Blackbox Testing*, *Usability Testing*, *Performance/Security Testing*.
+1. **Analisis kebutuhan**  -  mengidentifikasi kebutuhan fungsional dan nonfungsional.
+2. **Perancangan**  -  merancang proses bisnis usulan, basis data (ERD), dan antarmuka.
+3. **Implementasi**  -  membangun sistem sesuai rancangan.
+4. **Pengujian**  -  *Blackbox Testing*, *Usability Testing*, *Performance/Security Testing*.
 
 Uraian pada bagian ini harus cukup rinci sehingga pembaca dapat memahami dan
 mereplikasi proses penelitian yang dilakukan.

@@ -7,3 +7,12 @@ berkas logo resmi (tetap dengan nama logo_stis.png) bila diperlukan. Logo dirend
 berukuran 5 cm x 5 cm pada halaman sampul dan halaman judul.
 
 Jika berkas tidak ada, halaman sampul & judul tetap dirender (ruang logo dikosongkan).
+
+-----------------------------------------------------------------------
+LISENSI LOGO
+Berkas logo_stis.png adalah logo/merek milik Politeknik Statistika STIS dan
+BUKAN berlisensi MIT seperti kode paket. Logo disertakan atas izin institusi,
+khusus untuk templat skripsi mahasiswa Prodi D-IV Komputasi Statistik STIS.
+Lihat berkas COPYRIGHTS pada paket terpasang (system.file("COPYRIGHTS",
+package = "skripsistis")). Bila Anda mengganti logo, gunakan logo yang Anda
+miliki haknya.

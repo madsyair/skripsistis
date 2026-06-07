@@ -19,6 +19,12 @@ buat_skripsi_rstudio <- function(path, ...) {
     if (is.null(x) || !nzchar(trimws(as.character(x)))) default else x
   }
 
+  # "(otomatis ...)" atau kosong -> NULL agar jenis_skripsi mengikuti peminatan.
+  jenis <- dots$jenis_skripsi
+  jenis <- if (is.null(jenis) ||
+               !nzchar(trimws(as.character(jenis))) ||
+               grepl("^\\(otomatis", trimws(as.character(jenis)))) NULL else jenis
+
   buat_skripsi(
     path       = path,
     judul      = kosong_jadi_default(dots$judul, "TULISKAN JUDUL SKRIPSI ANDA DI SINI"),
@@ -26,6 +32,7 @@ buat_skripsi_rstudio <- function(path, ...) {
     nama       = kosong_jadi_default(dots$nama, "NAMA MAHASISWA"),
     nim        = kosong_jadi_default(dots$nim, "NIM"),
     peminatan  = kosong_jadi_default(dots$peminatan, "Sains Data"),
+    jenis_skripsi = jenis,
     pembimbing = kosong_jadi_default(dots$pembimbing, "Nama Dosen Pembimbing"),
     overwrite  = TRUE
   )

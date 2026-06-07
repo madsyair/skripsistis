@@ -34,8 +34,15 @@ Fields: Sains Data, Sistem Informasi Statistik
 Default: Sains Data
 Position: left
 
+Parameter: jenis_skripsi
+Widget: SelectInput
+Label: Jenis Skripsi (struktur bab)
+Fields: (otomatis sesuai peminatan), Analisis, Pengembangan Sistem
+Default: (otomatis sesuai peminatan)
+Position: right
+
 Parameter: pembimbing
 Widget: TextInput
 Label: Dosen Pembimbing
 Default: Nama Dosen Pembimbing
-Position: right
+Position: left

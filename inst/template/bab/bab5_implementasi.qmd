@@ -1,9 +1,19 @@
 # IMPLEMENTASI DAN EVALUASI
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Bab Implementasi Dan Evaluasi" appearance="simple"}
+Bab Implementasi dan Evaluasi memaparkan realisasi rancangan (arsitektur, antarmuka) dan hasil pengujian (fungsional, kinerja, kegunaan, keamanan) beserta analisisnya. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
+:::
+
+
 Bab ini membahas hasil implementasi sistem berdasarkan rancangan pada Bab IV serta
 evaluasi terhadap sistem yang dikembangkan.
 
 ## Implementasi
+
+::: {.callout-note title="Petunjuk: Implementasi" appearance="simple"}
+Paparkan realisasi rancangan menjadi sistem nyata: arsitektur, teknologi yang dipakai, dan tampilan antarmuka beserta penjelasan alur penggunaannya.
+:::
+
 
 Bagian ini membahas proses dan hasil implementasi sistem.
 
@@ -16,7 +26,7 @@ keras dan perangkat lunak yang digunakan dalam pengembangan dan implementasi.
 #### Contoh Diagram Alir (Flowchart) dengan TikZ {.unnumbered}
 
 Diagram alir digambar langsung dengan TikZ sehingga berupa gambar vektor yang tajam dan
-menyatu dengan font dokumen. Caption otomatis bernomor mengikuti bab (mis. Gambar 5.1)
+menyatu dengan font dokumen. Caption otomatis bernomor deret tunggal (mis. Gambar 1)
 dan dapat dirujuk silang dengan `\ref{fig-flowchart}`. Gaya simpul (`fc-mulai`, `fc-proses`,
 `fc-io`, `fc-putusan`) telah didefinisikan pada `tex/preamble.tex`.
 
@@ -80,7 +90,7 @@ fungsi-fungsi utama sistem. Aktor digambar memakai pic `uc-aktor`, use case mema
   \node[right=3.2cm of laporan] (kepala)  {};
   \pic at (kepala)  {uc-aktor}; \node[below=1.2cm of kepala]  {Kepala BPS};
 
-  % Asosiasi aktor–use case
+  % Asosiasi aktor-use case
   \draw[uc-asosiasi] (petugas) -- (login);
   \draw[uc-asosiasi] (petugas) -- (input);
   \draw[uc-asosiasi] (petugas) -- (prediksi);
@@ -107,6 +117,11 @@ pengguna.
 
 ## Evaluasi
 
+::: {.callout-note title="Petunjuk: Evaluasi" appearance="simple"}
+Sajikan hasil pengujian sistem/model (fungsional, kinerja, kegunaan, keamanan) dan analisis apakah tujuan penelitian tercapai.
+:::
+
+
 Evaluasi dilakukan untuk menilai apakah sistem telah memenuhi kebutuhan dan tujuan
 penelitian. Evaluasi dapat mencakup pengujian fungsional (*Blackbox Testing*), pengujian
 kinerja (*Performance Testing*), uji kegunaan (*Usability Testing*, mis. CSUQ), serta
@@ -132,14 +147,19 @@ tampil <- data.frame(
   Persentase = hasil$Persentase
 )
 tampil <- rbind(c("(1)", "(2)", "(3)", "(4)"), tampil)
-knitr::kable(
+tbl <- knitr::kable(
   tampil,
   format = if (knitr::is_latex_output()) "latex" else "pipe",
-  longtable = FALSE,            # tabel pendek: pakai float biasa, bukan longtable
+  longtable = FALSE,
   col.names = c("Modul", "Jumlah Skenario", "Berhasil", "Keberhasilan (%)"),
-  align = "lrrr",
-  booktabs = TRUE
+  align = c("l", "r", "r", "r"),
+  booktabs = FALSE, vline = "|", linesep = ""   # garis penuh (grid) sesuai pedoman
 )
+if (knitr::is_latex_output()) {
+  tbl <- sub("\\{l\\|r\\|r\\|r\\}", "{|l|r|r|r|}", tbl)
+  tbl <- gsub("\\\\\\\\(\\s*)$", "\\\\\\\\ \\\\hline", tbl, perl = TRUE)
+}
+knitr::asis_output(tbl)
 ```
 
 Hasil evaluasi dianalisis untuk menunjukkan kelebihan, keterbatasan, serta potensi

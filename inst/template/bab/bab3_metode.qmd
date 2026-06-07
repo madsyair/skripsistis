@@ -1,6 +1,16 @@
 # METODE PENELITIAN
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Bab Metode Penelitian" appearance="simple"}
+Bab Metode Penelitian menjelaskan bagaimana penelitian dilakukan: data, variabel, alur/tahapan, serta teknik analisis atau perancangan sistem. Harus cukup rinci agar penelitian dapat direplikasi. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
+:::
+
+
 ## Tinjauan Umum
+
+::: {.callout-note title="Petunjuk: Tinjauan Umum" appearance="simple"}
+Gambarkan objek/lokus penelitian, sumber dan cakupan data (mis. Susenas/Sakernas/PODES), serta variabel yang digunakan beserta definisinya.
+:::
+
 
 Penelitian ini menggunakan kerangka *Cross-Industry Standard Process for Data Mining*
 (CRISP-DM) yang mencakup enam fase: *Business Understanding*, *Data Understanding*,
@@ -8,7 +18,7 @@ Penelitian ini menggunakan kerangka *Cross-Industry Standard Process for Data Mi
 
 Sesuai pedoman, subbab Tinjauan Umum **wajib memuat kerangka pikir penelitian** yang
 menggambarkan keterkaitan antara Permasalahan, Tujuan Penelitian, Solusi yang Diajukan,
-dan Kriteria Evaluasi. Kerangka pikir disajikan sebagai gambar (lihat @fig-kerangka).
+dan Kriteria Evaluasi. Kerangka pikir disajikan sebagai gambar (lihat Gambar \ref{fig-kerangka}).
 Ganti berkas placeholder berikut dengan diagram kerangka pikir penelitian Anda; diagram
 dibuat ulang sendiri (tidak menyalin langsung dari sumber lain) untuk menghindari plagiasi.
 
@@ -26,6 +36,11 @@ dibuat ulang sendiri (tidak menyalin langsung dari sumber lain) untuk menghindar
 ```
 
 ## Tahapan Penelitian
+
+::: {.callout-note title="Petunjuk: Tahapan Penelitian" appearance="simple"}
+Uraikan alur penelitian langkah demi langkah (boleh dengan diagram alir): praproses data, pemodelan, evaluasi. Jelaskan tiap tahap agar dapat direplikasi.
+:::
+
 
 Data utama bersumber dari data mikro Survei Sosial Ekonomi Nasional (Susenas) yang
 diperoleh dari Badan Pusat Statistik (BPS). Variabel respons yang digunakan adalah
@@ -49,6 +64,11 @@ $$ {#eq-f1}
 persamaan dan rujukan silang (`@eq-...`) dilakukan otomatis oleh Quarto.
 
 ## Prosedur Estimasi
+
+::: {.callout-note title="Petunjuk: Prosedur Estimasi" appearance="simple"}
+Jelaskan teknik estimasi/algoritma yang dipakai, asumsi, dan kriteria pemilihan model (mis. metrik evaluasi, validasi silang).
+:::
+
 
 Keseluruhan prosedur estimasi model PMT diringkas pada Algoritme \ref{alg-pmt}.
 

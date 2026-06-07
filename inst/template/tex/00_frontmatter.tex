@@ -5,6 +5,7 @@
 % ============================================================
 \begin{titlepage}
 \pagenumbering{gobble}
+\singlespacing  % seluruh halaman muka (sampul s.d. hak cipta) diketik 1 spasi
 
 % ---------- HALAMAN SAMPUL ----------
 \begin{center}
@@ -13,7 +14,7 @@
   {{SUBJUDUL_BLOCK}}
   \vspace{2.5cm}
 
-  {\bfseries\fontsize{12}{15}\selectfont {{NAMA}}\par}
+  {\bfseries\fontsize{12}{15}\selectfont {{NAMA_KAPITAL}}\par}
   {\bfseries\fontsize{12}{15}\selectfont {{NIM}}\par}
   \vspace{2cm}
 
@@ -51,7 +52,7 @@
   \vspace{1.5cm}
 
   {\bfseries Oleh:\par}
-  {{NAMA}}\par
+  {\bfseries\fontsize{12}{15}\selectfont {{NAMA_KAPITAL}}\par}
   {\bfseries {{NIM}}\par}
 
   \vfill
@@ -66,7 +67,7 @@
 
 % ---------- HALAMAN PERNYATAAN ----------
 %  Catatan: tanggal pada halaman ini = TANGGAL SIDANG/UJIAN AKHIR.
-\thispagestyle{plain}
+\thispagestyle{empty}
 \begin{center}{\bfseries\large PERNYATAAN}\end{center}
 \vspace{0.8cm}
 \begin{center}
@@ -75,76 +76,106 @@
 {\bfseries \MakeUppercase{{{JUDUL}}}\par}
 {{SUBJUDUL_PERNYATAAN}}
 \end{center}
-\vspace{0.4cm}
-\noindent Oleh:\par
-\begin{tabular}{@{}ll@{}}
-{{NAMA}} & \\
-{{NIM}}  & \\
-\end{tabular}
-\vspace{0.4cm}
+\vspace{1.2cm}
 
-\noindent adalah benar-benar hasil penelitian sendiri dan bukan hasil plagiat atau hasil
-karya orang lain. Jika di kemudian hari diketahui ternyata skripsi ini hasil plagiat
-atau hasil karya orang lain, penulis bersedia skripsi ini dinyatakan tidak sah dan
-sebutan Sarjana Terapan Statistika dicabut atau dibatalkan.
+% Identitas penulis: rata tengah, nama dan NIM huruf kapital (sesuai pedoman).
+\begin{center}
+Oleh:\\[0.2cm]
+\textbf{\MakeUppercase{{{NAMA}}}}\\
+\textbf{{{NIM}}}
+\end{center}
+\vspace{1.2cm}
+
+\noindent\justifying adalah benar-benar hasil penelitian sendiri dan bukan hasil plagiat
+atau hasil karya orang lain. Jika di kemudian hari diketahui ternyata skripsi ini hasil
+plagiat atau hasil karya orang lain, penulis bersedia skripsi ini dinyatakan tidak sah
+dan sebutan Sarjana Terapan Statistika dicabut atau dibatalkan.
 \vspace{1.5cm}
 
+% Blok tanggal & tanda tangan (tanpa meterai/kotak) diletakkan di SISI KANAN
+% halaman sesuai pedoman (Lampiran 3): tanggal, ruang tanda tangan, lalu nama.
+% Tanggal = tanggal sidang/ujian akhir.
 \begin{flushright}
-\begin{tabular}{c}
-Jakarta, [tanggal sidang] {{TAHUN}} \\[2.2cm]
-Meterai Rp10.000 \\[0.2cm]
-\textbf{{{NAMA}}} \\
-\end{tabular}
+\begin{minipage}{7cm}\centering
+Jakarta, [tanggal sidang] {{TAHUN}}\\[2.2cm]
+\textbf{{{NAMA}}}
+\end{minipage}
 \end{flushright}
 \clearpage
 
 % ---------- HALAMAN PENGESAHAN ----------
-\thispagestyle{plain}
+\thispagestyle{empty}
 \begin{center}{\bfseries\large \MakeUppercase{{{JUDUL}}}}\end{center}
 {{SUBJUDUL_PENGESAHAN}}
 \vspace{0.6cm}
-\begin{center}Oleh:\\[0.2cm]{{NAMA}}\\ \textbf{{{NIM}}}\end{center}
+\begin{center}Oleh:\\[0.2cm]\textbf{{{NAMA_KAPITAL}}}\\ \textbf{{{NIM}}}\end{center}
 \vspace{0.8cm}
 
-\begin{center}\textbf{Tim Penguji}\end{center}
+% Blok tanda tangan memakai \small agar nama + gelar muat dalam satu baris.
+% Lebar tiap kolom dibuat 0,5\textwidth dan rata tengah; \nohyphens mencegah
+% pemenggalan nama. Tinggi ruang tanda tangan diatur via \\[2cm].
+\begingroup
+\small
+\newcommand{\ttdblok}[3]{% #1 jabatan, #2 nama (bold), #3 NIP
+  \begin{minipage}[t]{0.5\textwidth}\centering
+  % Jabatan diberi tinggi tetap 2 baris agar nama di kedua kolom
+  % sejajar walau salah satu jabatan hanya satu baris.
+  \begin{minipage}[t][2.2\baselineskip][t]{\linewidth}\centering #1\end{minipage}\\[2cm]
+  \textbf{#2}\\
+  NIP #3
+  \end{minipage}%
+}
+
+\begin{center}\normalsize\textbf{Tim Penguji}\end{center}
 \vspace{0.2cm}
 \noindent
-\begin{tabular}{p{0.46\textwidth}p{0.46\textwidth}}
-\centering Penguji I & \centering Penguji II \tabularnewline[2cm]
-\centering \textbf{{{PENGUJI1}}}\newline NIP {{NIP_PENGUJI1}} &
-\centering \textbf{{{PENGUJI2}}}\newline NIP {{NIP_PENGUJI2}} \tabularnewline
-\end{tabular}
+\ttdblok{Penguji I}{{{PENGUJI1}}}{{{NIP_PENGUJI1}}}\hfill
+\ttdblok{Penguji II}{{{PENGUJI2}}}{{{NIP_PENGUJI2}}}
 \vspace{1cm}
 
-\begin{center}Mengetahui/Menyetujui\end{center}
+\begin{center}\normalsize Mengetahui/Menyetujui\end{center}
 \vspace{0.2cm}
 \noindent
-\begin{tabular}{p{0.46\textwidth}p{0.46\textwidth}}
-\centering Ketua Program Studi\newline Komputasi Statistik Program Diploma IV & \centering Pembimbing \tabularnewline[2cm]
-\centering \textbf{{{KETUA_PRODI}}}\newline NIP {{NIP_KETUA_PRODI}} &
-\centering \textbf{{{PEMBIMBING}}}\newline NIP {{NIP_PEMBIMBING}} \tabularnewline
-\end{tabular}
+\ttdblok{Ketua Program Studi\\Komputasi Statistik Program Diploma IV}{{{KETUA_PRODI}}}{{{NIP_KETUA_PRODI}}}\hfill
+\ttdblok{Pembimbing}{{{PEMBIMBING}}}{{{NIP_PEMBIMBING}}}
+\endgroup
 \clearpage
 
 % ---------- LEMBAR HAK CIPTA ----------
-\thispagestyle{plain}
-\begin{center}{\bfseries\large LEMBAR HAK CIPTA}\end{center}
-\vspace{1cm}
-\begin{center}\itshape
-\textcopyright\ Hak Cipta milik Politeknik Statistika STIS, Tahun {{TAHUN}}\\
-Hak Cipta dilindungi undang-undang
+%  Mengikuti contoh pedoman (Lampiran 4a): seluruh pernyataan hak cipta
+%  diletakkan dalam KOTAK proporsional yang dipusatkan di halaman; teks
+%  miring (italic) dengan penomoran 1./2. dan subbutir a./b.
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\fbox{%
+  \begin{minipage}{0.78\textwidth}
+  \itshape
+  \setlength{\parindent}{0pt}
+  \vspace{0.5\baselineskip}
+  {\bfseries \textcopyright\ Hak Cipta milik Politeknik Statistika STIS, Tahun {{TAHUN}}}
+
+  \vspace{0.5\baselineskip}
+  {\bfseries Hak Cipta dilindungi undang-undang}
+  \begin{enumerate}[leftmargin=*,labelsep=0.5em,topsep=0.3\baselineskip,itemsep=0.2\baselineskip]
+    \item Dilarang mengutip sebagian atau seluruh karya tulis, hasil analisis,
+          perancangan, basis data, program, dan artefak hasil skripsi ini tanpa
+          mencantumkan atau menyebutkan sumbernya.
+      \begin{enumerate}[label=\alph*.,leftmargin=1.5em,labelsep=0.5em,topsep=0.2\baselineskip,itemsep=0.2\baselineskip]
+        \item Pengutipan hanya untuk kepentingan pendidikan, penelitian, penulisan
+              karya ilmiah, penyusunan laporan, penulisan kritik atau tinjauan suatu
+              masalah.
+        \item Pengutipan tidak merugikan kepentingan yang wajar Politeknik Statistika
+              STIS.
+      \end{enumerate}
+    \item Dilarang mengumumkan dan memperbanyak sebagian atau seluruh karya tulis,
+          hasil analisis, perancangan, basis data, program, dan artefak hasil skripsi
+          ini dalam bentuk apa pun tanpa seizin Politeknik Statistika STIS.
+  \end{enumerate}
+  \vspace{0.3\baselineskip}
+  \end{minipage}%
+}
 \end{center}
-\vspace{0.6cm}
-\begin{itemize}\itshape
-  \item Dilarang mengutip sebagian atau seluruh karya tulis, hasil analisis, perancangan,
-        basis data, program, dan artefak hasil skripsi ini tanpa mencantumkan atau
-        menyebutkan sumbernya.
-  \item Pengutipan hanya untuk kepentingan pendidikan, penelitian, penulisan karya ilmiah,
-        penyusunan laporan, penulisan kritik atau tinjauan suatu masalah.
-  \item Pengutipan tidak merugikan kepentingan yang wajar Politeknik Statistika STIS.
-  \item Dilarang mengumumkan dan memperbanyak sebagian atau seluruh karya tulis, hasil
-        analisis, perancangan, basis data, program, dan artefak hasil skripsi ini dalam
-        bentuk apa pun tanpa seizin Politeknik Statistika STIS.
-\end{itemize}
+\vspace*{\fill}
 \clearpage
 \end{titlepage}

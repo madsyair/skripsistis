@@ -5,6 +5,13 @@
 
 # LAMPIRAN {.unnumbered}
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Lampiran" appearance="simple"}
+Lampiran memuat materi pendukung yang terlalu panjang untuk badan teks: kuesioner,
+sintaks/kode lengkap, tabel besar, output, atau surat izin. Setiap lampiran diberi
+nomor dan judul, dirujuk dari badan teks, dan otomatis terdaftar di Daftar Lampiran
+melalui perintah `\lampiran{...}`. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
+:::
+
 ```{=latex}
 \lampiran{Judul Lampiran 1}
 ```
@@ -22,6 +29,12 @@ Isi lampiran 1.
 Isi lampiran 2.
 
 # RIWAYAT HIDUP {.unnumbered}
+
+::: {.callout-tip title="Petunjuk Penulisan  -  Riwayat Hidup" appearance="simple"}
+Tuliskan riwayat hidup singkat penulis dalam bentuk naratif (tempat/tanggal lahir,
+riwayat pendidikan, dan pengalaman relevan bila ada). Boleh disertai pasfoto sesuai
+ketentuan. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
+:::
 
 Penulis dilahirkan di xxxxxxxx pada tanggal xx bulan 20xx dari pasangan xxxxxxxx dan
 xxxxxxxx, dan merupakan anak ke-x dari x bersaudara.

@@ -72,7 +72,7 @@
     <terms>
     <!-- LONG GENERAL TERMS -->
     <term name="accessed">diakses</term>
-    <term name="advance-online-publication">advance online publication</term>
+    <term name="advance-online-publication">publikasi daring lebih awal</term>
     <term name="album">album</term>
     <term name="and">dan</term>
     <term name="and others">dan lainnya</term>
@@ -97,16 +97,16 @@
     <term name="no date">tanpa tanggal</term>
     <term name="no-place">tanpa tempat</term>
     <term name="no-publisher">tanpa penerbit</term> <!-- sine nomine -->
-    <term name="on">on</term>
+    <term name="on">pada</term>
     <term name="online">daring</term>
     <term name="op-cit">op. cit.</term> <!-- like ibid., the abbreviated form is the regular form  -->
-    <term name="original-work-published">original work published</term>
+    <term name="original-work-published">karya asli diterbitkan</term>
     <term name="personal-communication">komunikasi pribadi</term>
     <term name="podcast">podcast</term>
-    <term name="podcast-episode">podcast episode</term>
-    <term name="preprint">preprint</term>
+    <term name="podcast-episode">episode podcast</term>
+    <term name="preprint">pracetak</term>
     <term name="presented at">dipresentasikan pada</term>
-    <term name="radio-broadcast">radio broadcast</term>
+    <term name="radio-broadcast">siaran radio</term>
     <term name="radio-series">seri radio</term>
     <term name="radio-series-episode">episode seri radio</term>
     <term name="reference">
@@ -114,7 +114,7 @@
     <multiple>referensi</multiple>
     </term>
     <term name="retrieved">diambil</term>
-    <term name="review-of">review of</term>
+    <term name="review-of">ulasan atas</term>
     <term name="scale">skala</term>
     <term name="special-issue">edisi khusus</term>
     <term name="special-section">bagian khusus</term>
@@ -236,7 +236,7 @@
     <term name="ordinal-13"/>
 
     <!-- LONG ORDINALS -->
-    <term name="long-ordinal-01">pertama</term>
+    <term name="long-ordinal-01">kesatu</term>
     <term name="long-ordinal-02">kedua</term>
     <term name="long-ordinal-03">ketiga</term>
     <term name="long-ordinal-04">keempat</term>
@@ -890,17 +890,17 @@
     </group>
   </macro>
   <macro name="label-edition">
-    <group delimiter=" ">
-      <choose>
-        <if is-numeric="edition">
-          <label form="short" variable="edition"/>
-          <number variable="edition" prefix="ke-"/>
-        </if>
-        <else>
-          <text variable="edition"/>
-        </else>
-      </choose>
-    </group>
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <text term="edition" form="long" text-case="capitalize-first"/>
+          <number variable="edition" form="long-ordinal"/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition"/>
+      </else>
+    </choose>
   </macro>
   <macro name="label-issue">
     <group delimiter=" ">
@@ -2950,7 +2950,7 @@
       </choose>
     </group>
   </macro>
-  <bibliography entry-spacing="0" et-al-min="21" et-al-use-first="19" et-al-use-last="true" hanging-indent="true" line-spacing="2">
+  <bibliography entry-spacing="1" et-al-min="21" et-al-use-first="19" et-al-use-last="true" hanging-indent="true" line-spacing="1">
     <sort>
       <key macro="author-sort"/>
       <key macro="date-sort-group"/>

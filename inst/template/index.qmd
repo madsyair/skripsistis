@@ -5,9 +5,13 @@
 #| label: setup-global
 #| include: false
 # Pengaturan global untuk seluruh bab (knitr berbagi state antar-include).
+# fig.width 5.5 in (~14 cm) = lebar teks -> grafik tidak melebihi margin tanpa diperkecil.
 knitr::opts_chunk$set(
-  echo = FALSE, warning = FALSE, message = FALSE, fig.align = "center"
+  echo = FALSE, warning = FALSE, message = FALSE, fig.align = "center",
+  fig.width = 5.5, fig.height = 3.4, out.width = "100%"
 )
+# Batasi lebar keluaran konsol/print R agar tabel teks tidak meluber ke kanan.
+options(width = 72)
 
 # Samakan font grafik R dengan teks dokumen (Times New Roman / TeX Gyre Termes)
 # dan dukung simbol LaTeX pada label grafik. Hanya untuk output PDF (xelatex).
@@ -30,10 +34,22 @@ if (knitr::is_latex_output()) {
 ```
 
 ```{=latex}
+% Bagian awal (Prakata, Abstrak, Daftar-daftar) bernomor Romawi kecil i, ii, iii,
+% ... dimulai dari PRAKATA = i (Halaman Judul s.d. Hak Cipta tidak diberi nomor
+% tampil), sesuai contoh Daftar Isi pada pedoman (Lampiran 7).
+\pagenumbering{roman}
+\setcounter{page}{1}
 \pagestyle{plain}
 ```
 
 # PRAKATA {.unnumbered}
+
+::: {.callout-tip title="Petunjuk Penulisan  -  Prakata" appearance="simple"}
+Prakata berisi ucapan syukur dan terima kasih kepada pihak yang membantu penyusunan
+skripsi, disusun menurut tingkat kontribusi/kelembagaan. Tulis dengan bahasa formal,
+ringkas (umumnya ≤ 1 halaman), diakhiri tempat/tanggal dan nama penulis. **Hapus kotak
+"Petunjuk Penulisan" pada naskah final.**
+:::
 
 Puji syukur penulis ucapkan kepada Allah SWT, karena atas izin-Nya penulis dapat
 menyelesaikan skripsi yang berjudul "{{JUDUL}}". Penulis juga mengucapkan terima
@@ -60,28 +76,54 @@ Jakarta, tanggal bulan {{TAHUN}} \\[1.4cm]
 
 # ABSTRAK {.unnumbered}
 
+::: {.callout-tip title="Petunjuk Penulisan  -  Abstrak" appearance="simple"}
+Abstrak (1,5 spasi, maksimum ~200 kata, satu/dua paragraf) memuat: masalah/tujuan, data
+dan metode, hasil utama, serta kesimpulan. Diawali baris nama penulis dan judul,
+diakhiri 3-6 kata kunci. Hindari sitasi dan singkatan tak baku. **Hapus kotak "Petunjuk
+Penulisan" pada naskah final.**
+:::
+
 ```{=latex}
 \vspace{2\baselineskip}
+\begin{onehalfspace}
+\setlength{\parindent}{0pt}
 ```
 
-**{{NAMA_KAPITAL}}**, "{{JUDUL}}".
+**{{NAMA}}**, "{{JUDUL}}".
 
-vii+xx halaman
+```{=latex}
+% Jumlah halaman dihitung OTOMATIS sesuai pedoman: (banyak halaman bagian awal,
+% romawi) + (banyak halaman isi+lampiran). \pageref* memberi nomor halaman yang
+% sudah terformat: romawi (viii) untuk label di bagian awal, arab untuk LastPage.
+% Nilai konvergen setelah beberapa lintasan (lihat latex-min-runs di _quarto.yml).
+\pageref*{pgawalakhir}+\pageref*{LastPage} halaman
+```
 
 Abstrak berisi ringkasan skripsi yang dideskripsikan secara jelas, padat, dan singkat,
 dengan maksimum terdiri atas 200 kata. Isi abstrak terdiri atas permasalahan penelitian,
 deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan saran.
 
-**Kata Kunci:** kata, kunci, tiga, sampai, enam, kata
+```{=latex}
+\vspace{0.5\baselineskip}
+\par\noindent
+\hangindent=2.4cm\hangafter=1
+\textbf{Kata Kunci:}\hspace{0.9cm}kata, kunci, tiga, sampai, enam, kata\par
+```
+
+```{=latex}
+\end{onehalfspace}
+```
 
 ```{=latex}
 \clearpage
 % Nama judul diset ulang TEPAT sebelum tiap daftar agar tidak ditimpa oleh
 % definisi Quarto/babel (yang dijalankan lewat \AtBeginDocument lebih akhir).
 \renewcommand{\contentsname}{DAFTAR ISI}
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR ISI}
 \tableofcontents
 \clearpage
-% DAFTAR TABEL — daftarkan sebagai entri bab tak bernomor di Daftar Isi
+% DAFTAR TABEL  -  daftarkan sebagai entri bab tak bernomor di Daftar Isi
 \renewcommand{\listtablename}{DAFTAR TABEL}
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR TABEL}
@@ -97,17 +139,44 @@ deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan sar
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR LAMPIRAN}
 \listoflampiran
+% Tangkap jumlah halaman bagian awal (romawi): label ini berada pada halaman
+% terakhir bernomor romawi, sehingga nilainya = banyak halaman muka.
+\label{pgawalakhir}
 \clearpage
 \aktifkanNomorIsi
 \pagenumbering{arabic}
 \setcounter{page}{1}
+% Teks isi (Bab I dst.) diketik 2 spasi sesuai pedoman hlm. 34. Halaman muka,
+% daftar, dan Daftar Pustaka tetap 1,5 spasi (lihat blok sebelum Daftar Pustaka).
+\doublespacing
 ```
 
 {{INCLUDE_BAB}}
 
+```{=latex}
+% Daftar Pustaka: 1 spasi di dalam entri, ~1,5 spasi antar entri (pedoman hlm. 13).
+% Jarak antar entri = entry-spacing(CSL) x \cslentryspacingunit; diset 0,5 baris.
+\singlespacing
+\makeatletter
+\@ifundefined{cslentryspacingunit}{}{\setlength{\cslentryspacingunit}{0.5\baselineskip}}
+\makeatother
+```
+
 # DAFTAR PUSTAKA {.unnumbered}
+
+::: {.callout-tip title="Petunjuk Penulisan  -  Daftar Pustaka" appearance="simple"}
+Daftar Pustaka terisi otomatis dari berkas `referensi.bib` dan hanya memuat sumber yang
+benar-benar dikutip dalam naskah. Format mengikuti gaya APA 7 (modifikasi Indonesia)
+melalui berkas CSL `apa-stis-id.csl`. Cukup kelola entri di `referensi.bib`; jangan
+menulis daftar secara manual. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
+:::
 
 ::: {#refs}
 :::
+
+```{=latex}
+% Lampiran & Riwayat Hidup kembali 1,5 spasi (daftar pustaka di atas tetap 1 spasi).
+\onehalfspacing
+```
 
 {{< include bab/lampiran.qmd >}}
