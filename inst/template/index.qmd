@@ -84,7 +84,7 @@ Penulisan" pada naskah final.**
 :::
 
 ```{=latex}
-\vspace{2\baselineskip}
+\vspace{\baselineskip}
 \begin{onehalfspace}
 \setlength{\parindent}{0pt}
 ```
@@ -123,24 +123,39 @@ deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan sar
 \addcontentsline{toc}{chapter}{DAFTAR ISI}
 \tableofcontents
 \clearpage
-% DAFTAR TABEL  -  daftarkan sebagai entri bab tak bernomor di Daftar Isi
+% DAFTAR TABEL  -  daftarkan sebagai entri bab tak bernomor di Daftar Isi.
+% Daftar diketik 1 spasi (entri) sesuai pedoman.
+\begingroup\singlespacing
 \renewcommand{\listtablename}{DAFTAR TABEL}
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR TABEL}
 \listoftables
+\endgroup
 \clearpage
 % DAFTAR GAMBAR
+\begingroup\singlespacing
 \renewcommand{\listfigurename}{DAFTAR GAMBAR}
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
 \listoffigures
+\endgroup
 \clearpage
 % DAFTAR LAMPIRAN
+\begingroup\singlespacing
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR LAMPIRAN}
 \listoflampiran
+\endgroup
+```
+
+{{INCLUDE_SINGKATAN}}
+
+```{=latex}
 % Tangkap jumlah halaman bagian awal (romawi): label ini berada pada halaman
-% terakhir bernomor romawi, sehingga nilainya = banyak halaman muka.
+% terakhir bernomor romawi, sehingga nilainya = banyak halaman muka. Bila Daftar
+% Singkatan aktif, \judulfrontmatter sudah berpindah halaman sehingga label jatuh
+% di halaman terakhir Daftar Singkatan (hitungan tetap benar; saat nonaktif label
+% jatuh di halaman Daftar Lampiran).
 \label{pgawalakhir}
 \clearpage
 \aktifkanNomorIsi

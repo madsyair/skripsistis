@@ -65,12 +65,10 @@ Uraian pada bagian ini harus cukup rinci sehingga pembaca dapat memahami dan
 mereplikasi proses penelitian yang dilakukan.
 
 Keberhasilan pengujian fungsional (*Blackbox*) dapat diukur dengan tingkat
-keberhasilan, yaitu proporsi kasus uji yang lolos terhadap seluruh kasus uji:
-
-$$
-\text{tingkat keberhasilan} = \frac{\text{jumlah kasus uji lolos}}{\text{jumlah seluruh kasus uji}} \times 100\%
-$$ {#eq-keberhasilan-si}
-
-@eq-keberhasilan-si menjadi salah satu dasar penilaian pada Bab Implementasi dan
-Evaluasi. Penomoran persamaan dan rujukan silang (`@eq-...`) dilakukan otomatis
-oleh Quarto, sehingga nomor pada persamaan dan pada rujukan selalu konsisten.
+keberhasilan, yaitu proporsi kasus uji yang lolos terhadap seluruh kasus uji
+$$ \text{tingkat keberhasilan} = \frac{\text{jumlah kasus uji lolos}}{\text{jumlah seluruh kasus uji}} \times 100\%. $$ {#eq-keberhasilan-si}
+Persamaan @eq-keberhasilan-si menjadi salah satu dasar penilaian pada Bab Implementasi
+dan Evaluasi. Persamaan ditulis **mengalir di dalam paragraf** sehingga jaraknya dengan
+baris sebelum dan sesudahnya sama dengan jarak antar baris. Penomoran persamaan
+dilakukan otomatis oleh Quarto; rujukan silang (`@eq-...`) hanya menghasilkan **nomor di
+dalam kurung**, mis. (1), sedangkan kata "persamaan" ditulis manual di depannya.

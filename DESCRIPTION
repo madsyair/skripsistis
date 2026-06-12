@@ -1,7 +1,7 @@
 Package: skripsistis
 Title: Template Quarto Skripsi Prodi D-IV Komputasi Statistik (Politeknik
     Statistika STIS)
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Achmad Syahrul", "Choir", role = c("aut", "cre"),
            email = "madsyair@stis.ac.id"),
@@ -10,7 +10,7 @@ Authors@R: c(
 Description: Menyediakan kerangka (template) proyek Quarto untuk penyusunan
     skripsi yang dikhususkan bagi mahasiswa Program Studi D-IV Komputasi
     Statistik, Politeknik Statistika STIS, sesuai Pedoman Skripsi KS Edisi
-    Keenam (2025).
+    Keenam (2025). 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: id

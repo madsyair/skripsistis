@@ -1,0 +1,9 @@
+```{=latex}
+% Dua daftar terpisah (mode glossaries): HANYA istilah yang dipakai di teks lewat
+% \istilah{...}/\simbol{...} atau \gls{...} yang muncul, terurut otomatis.
+% Judul diseragamkan via \judulfrontmatter; tiap daftar di halaman tersendiri.
+\judulfrontmatter{Daftar Singkatan}{DAFTAR SINGKATAN}
+\printnoidxglossary[type=singkatan, style=gayasingkatan, nonumberlist, nogroupskip, sort=word]
+\judulfrontmatter{Daftar Simbol}{DAFTAR SIMBOL}
+\printnoidxglossary[type=simbol, style=gayasimbol, nonumberlist, nogroupskip, sort=word]
+```

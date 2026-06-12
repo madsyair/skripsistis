@@ -19,10 +19,51 @@
 %     melalui \doublespacing di awal bagian isi (lihat index.qmd). ---
 \usepackage{setspace}
 \onehalfspacing
+% Cegah perataan vertikal (flushbottom) meregang glue antar-elemen (teorema,
+% bukti, tabel, gambar) saat halaman tak penuh; pakai bawah ragged (konsisten).
+\raggedbottom
+% Kotak bantu untuk menyamakan lebar blok tabel/gambar (agar Sumber & judul
+% rata dengan tepi kiri tabel/gambar; blok tetap di tengah halaman).
+\newsavebox{\skripsiblokbox}
+
+% --- Jarak persamaan (display math) sesuai pedoman hlm. 8 ---
+% Pedoman meminta persamaan pada BARIS TERSENDIRI dengan jarak ~1 baris (sama
+% dengan jarak antar baris) dari teks sebelum & sesudahnya. Agar tercapai:
+%   (1) tulis $$...$$ MENGALIR di dalam paragraf (tanpa baris kosong) - lihat
+%       contoh di bab Metode; bila diberi baris kosong, persamaan menjadi
+%       paragraf tersendiri dan jaraknya melebar (glue antar-paragraf spasi
+%       ganda yang tidak dipengaruhi display-skip), dan
+%   (2) skip display diset kecil & seragam di awal SETIAP lingkungan persamaan
+%       (di bawah, lewat \AtBeginEnvironment) sehingga jarak rapat = jarak baris.
+\usepackage{etoolbox}
+\makeatletter
+\newcommand{\skripsi@dispskip}{%
+  \setlength{\abovedisplayskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+  \setlength{\belowdisplayskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+  \setlength{\abovedisplayshortskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+  \setlength{\belowdisplayshortskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+}
+\AtBeginEnvironment{equation}{\skripsi@dispskip}
+\AtBeginEnvironment{equation*}{\skripsi@dispskip}
+\AtBeginEnvironment{align}{\skripsi@dispskip}
+\AtBeginEnvironment{align*}{\skripsi@dispskip}
+\AtBeginEnvironment{gather}{\skripsi@dispskip}
+\AtBeginEnvironment{gather*}{\skripsi@dispskip}
+\AtBeginEnvironment{multline}{\skripsi@dispskip}
+\makeatother
+
+% --- Tautan dicetak hitam tanpa kotak (sesuai gaya skripsi cetak) ---
+% Tautan tetap dapat diklik di PDF, namun tidak berwarna agar konsisten dengan
+% contoh pedoman (teks hitam). Mahasiswa dapat mengubahnya di preamble-tambahan.
+\AtBeginDocument{\hypersetup{hidelinks}}
 
 % --- Indentasi paragraf & lain-lain ---
 \usepackage{indentfirst}
 \setlength{\parindent}{1.27cm} % indentasi 1,27 cm (0,5 inci)
+% Quarto memuat paket parskip (parskip=6pt, parindent=0). Kembalikan ke gaya
+% pedoman: alinea HANYA ditandai indentasi 1 tab, TANPA spasi ekstra antar
+% paragraf, sehingga jarak antar paragraf = jarak antar baris (2 spasi).
+\setlength{\parskip}{0pt plus 0.5pt}
 \setlength{\mathindent}{1.27cm} % persamaan (fleqn) menjorok 1 tab dari batas kiri
 
 % --- Dukungan tabel sesuai pedoman ---
@@ -65,17 +106,20 @@
   {\MakeUppercase{\chaptername}\ \Roman{chapter}}{0pt}
   {\MakeUppercase}
 % Jarak judul bab ke teks/subbab di bawahnya ~3-4 spasi (lihat pedoman hlm. 34)
-\titlespacing*{\chapter}{0pt}{0pt}{2\baselineskip}
+\titlespacing*{\chapter}{0pt}{0pt}{0.3\baselineskip}
 \titleformat{\section}{\normalfont\bfseries\singlespacing}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\bfseries\singlespacing}{\thesubsection}{1em}{}
 % Judul level ke-4 (####) tidak bernomor (number-depth:3) -> cukup TEBAL (pedoman
 % hlm. 35), tanpa miring.
 \titleformat{\subsubsection}{\normalfont\bfseries\singlespacing}{\thesubsubsection}{1em}{}
-% Jarak sub bab dengan teks ~3 spasi (pedoman hlm. 34). Di bawah \doublespacing
-% pada teks isi, 1,5\baselineskip ~= 3 baris tunggal. (Perkiraan; cek saat render.)
-\titlespacing*{\section}{0pt}{1.5\baselineskip}{1.5\baselineskip}
-\titlespacing*{\subsection}{0pt}{1.5\baselineskip}{1.5\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{1.5\baselineskip}{1.5\baselineskip}
+% Jarak judul sesuai pedoman hlm. 34 (relatif thd jarak baris teks = 2 spasi):
+%   bab->sub bab 4 spasi, bab/sub bab->teks 3 spasi. Nilai dikalibrasi via
+%   pengukuran piksel render (body baseline 50px@150dpi): hasil ~3,0-3,7 spasi,
+%   bab->sub bab terbesar. titlesec menjumlah afterskip bab + beforeskip sub bab
+%   sehingga bab->sub bab otomatis > transisi lain.
+\titlespacing*{\section}{0pt}{0.38\baselineskip}{0.42\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.38\baselineskip}{0.42\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0.38\baselineskip}{0.42\baselineskip}
 
 % Judul bab TAK bernomor (DAFTAR ISI, DAFTAR TABEL, DAFTAR GAMBAR, PRAKATA,
 % ABSTRAK, DAFTAR PUSTAKA, dll.) dibuat seragam dengan judul bab bernomor:
@@ -84,7 +128,7 @@
   {\normalfont\bfseries\centering\singlespacing}
   {}{0pt}
   {\MakeUppercase}
-\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{2\baselineskip}
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{0.3\baselineskip}
 
 % Judul daftar (DAFTAR ISI/TABEL/GAMBAR/LAMPIRAN) diseragamkan dengan judul
 % bab — tebal, rata tengah, ukuran normal (12pt), jarak ~2 baris — melalui API
@@ -108,10 +152,12 @@
 }
 
 % --- Nomor persamaan ber-kurung pada TAMPILAN dan pada RUJUKAN (\ref) ---
-%     Quarto menulis rujukan sebagai "Persamaan~\ref{eq-...}", dan \ref ke
-%     persamaan mengembalikan nilai \theequation. Agar rujukan menjadi
-%     "Persamaan (1)", kurung dipindah ke \theequation lalu kurung bawaan
-%     pada \tagform@ dihilangkan supaya tampilan persamaan tidak menjadi ((1)).
+%     Dengan eq-prefix kosong di _quarto.yml, Quarto menulis rujukan persamaan
+%     hanya sebagai "\ref{eq-...}" (tanpa kata "Persamaan"). \ref ke persamaan
+%     mengembalikan \theequation; karena \theequation diberi kurung, rujukan
+%     menjadi "(1)" saja, sehingga kata "persamaan" ditulis manual di naskah.
+%     Kurung bawaan pada \tagform@ dihilangkan supaya tampilan persamaan tidak
+%     menjadi ganda ((1)).
 \makeatletter
 \AtBeginDocument{%
   \renewcommand{\theequation}{(\arabic{equation})}%   nomor & rujukan: (n)
@@ -139,9 +185,9 @@
 \makeatletter
 \g@addto@macro\@floatboxreset\centering   % semua isi float otomatis rata tengah
 \makeatother
-\setlength{\intextsep}{3\baselineskip}     % jarak float (here/H) dgn teks atas-bawah
-\setlength{\textfloatsep}{3\baselineskip}   % jarak float atas/bawah halaman dgn teks
-\setlength{\floatsep}{2\baselineskip}       % jarak antar-float
+\setlength{\intextsep}{3\normalbaselineskip}     % jarak float (here/H) dgn teks atas-bawah = 3 spasi
+\setlength{\textfloatsep}{3\normalbaselineskip}   % jarak float atas/bawah halaman dgn teks = 3 spasi
+\setlength{\floatsep}{2\normalbaselineskip}       % jarak antar-float
 \setlength{\abovecaptionskip}{0.5\baselineskip}
 \setlength{\belowcaptionskip}{0.5\baselineskip}
 
@@ -198,15 +244,39 @@
 \renewcommand{\cfttoctitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
 \renewcommand{\cftaftertoctitle}{\hfil\par\nobreak\vskip0.5\baselineskip\mbox{}\hfill{\normalfont Halaman}}
 \renewcommand{\cftlottitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftafterlottitle}{\hfil\par\nobreak\vskip0.5\baselineskip{\normalfont No.~Tabel\hfill Judul Tabel\hfill Halaman}}
+\renewcommand{\cftafterlottitle}{\hfil\par\nobreak\vskip4\baselineskip{\normalfont No.~Tabel\hfill Judul Tabel\hfill Halaman}}
 \renewcommand{\cftloftitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftafterloftitle}{\hfil\par\nobreak\vskip0.5\baselineskip{\normalfont No.~Gambar\hfill Judul Gambar\hfill Halaman}}
+\renewcommand{\cftafterloftitle}{\hfil\par\nobreak\vskip4\baselineskip{\normalfont No.~Gambar\hfill Judul Gambar\hfill Halaman}}
 \renewcommand{\cftlmptitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftafterlmptitle}{\hfil\par\nobreak\vskip0.5\baselineskip{\normalfont No.~Lampiran\hfill Judul Lampiran\hfill Halaman}}
+\renewcommand{\cftafterlmptitle}{\hfil\par\nobreak\vskip4\baselineskip{\normalfont No.~Lampiran\hfill Judul Lampiran\hfill Halaman}}
 \setlength{\cftbeforetoctitleskip}{2\baselineskip}\setlength{\cftaftertoctitleskip}{2\baselineskip}
-\setlength{\cftbeforelottitleskip}{2\baselineskip}\setlength{\cftafterlottitleskip}{2\baselineskip}
-\setlength{\cftbeforeloftitleskip}{2\baselineskip}\setlength{\cftafterloftitleskip}{2\baselineskip}
-\setlength{\cftbeforelmptitleskip}{2\baselineskip}\setlength{\cftafterlmptitleskip}{2\baselineskip}
+\setlength{\cftbeforelottitleskip}{2\baselineskip}\setlength{\cftafterlottitleskip}{1.5\baselineskip}
+\setlength{\cftbeforeloftitleskip}{2\baselineskip}\setlength{\cftafterloftitleskip}{1.5\baselineskip}
+\setlength{\cftbeforelmptitleskip}{2\baselineskip}\setlength{\cftafterlmptitleskip}{1.5\baselineskip}
+
+% --- Jarak entri Daftar Gambar & Daftar Tabel seragam (1 spasi) ---
+%     report.cls menambah \addvspace{10pt} ke .lof/.lot di setiap pergantian
+%     bab, sehingga entri gambar/tabel dari bab berbeda terlihat berjarak lebih
+%     lebar daripada yang sebab. Hapus agar semua entri berjarak sama (pedoman:
+%     daftar ditulis 1 spasi).
+\makeatletter
+\patchcmd{\@chapter}{\addtocontents{lof}{\protect\addvspace{10\p@}}}{}{}{}
+\patchcmd{\@chapter}{\addtocontents{lot}{\protect\addvspace{10\p@}}}{}{}{}
+\makeatother
+
+% --- Judul elemen front-matter non-tocloft (mis. Daftar Singkatan & Lambang) ---
+%     Meniru PERSIS gaya judul daftar tocloft: rata tengah, tebal, KAPITAL,
+%     jarak ~2 baris atas-bawah, dan terdaftar di Daftar Isi sebagai entri bab.
+%     Memakai \clearpage (bukan \cleardoublepage) agar tidak menyisipkan halaman
+%     kosong, konsisten dengan daftar lain. #1 = judul tampil, #2 = entri Daftar Isi.
+\newcommand{\judulfrontmatter}[2]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{#2}%
+  \vspace*{2\baselineskip}%
+  {\centering\normalfont\bfseries\MakeUppercase{#1}\par}%
+  \vspace{2\baselineskip}%
+}
 
 % --- Daftar Isi: entri bab tampil "BAB I  PENDAHULUAN ........ hlm." ---
 %     Awalan "BAB" ditambahkan pada entri bab bernomor; bab tak bernomor
@@ -308,3 +378,21 @@
 % Penomoran algoritme: deret tunggal (Algoritme 1, 2, ...) agar konsisten
 % dengan tabel/gambar/persamaan. (Pedoman tidak mengatur algoritme.)
 \renewcommand{\thealgocf}{\arabic{algocf}}
+
+% ============================================================
+%  Daftar Singkatan & Lambang berbasis paket glossaries (opsional).
+%  Diisi otomatis oleh buat_skripsi() sesuai argumen `daftar_singkatan`:
+%   - mode "glossaries": memuat paket + entri (otomatis muncul bila dipakai
+%     lewat \gls{...}); memakai \makenoidxglossaries (murni LaTeX, tanpa
+%     makeglossaries eksternal).
+%   - mode lain: hanya menyediakan \gls dkk. sebagai jaring pengaman agar
+%     dokumen tetap kompilasi bila ada sisa \gls{...}.
+% ============================================================
+{{GLOSSARIES_PREAMBLE}}
+
+% ============================================================
+%  Kustomisasi mahasiswa (TIDAK ditimpa saat pembaruan paket).
+%  Tulis paket / perintah LaTeX tambahan Anda di berkas terpisah:
+%  tex/preamble-tambahan.tex
+% ============================================================
+\IfFileExists{tex/preamble-tambahan.tex}{\input{tex/preamble-tambahan.tex}}{}

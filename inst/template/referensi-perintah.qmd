@@ -150,14 +150,19 @@ Beri label berawalan jenis, lalu rujuk dengan `@`.
 ``` markdown
 Sebaris: $y = a + bx$.
 
-Blok bernomor:
-$$
-F_1 = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
-$$ {#eq-f1}
+Blok bernomor (tulis MENGALIR di dalam paragraf, tanpa baris kosong, agar
+jaraknya sama dengan jarak antar baris):
+...teks sebelum diakhiri tanpa baris kosong
+$$ F_1 = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}. $$ {#eq-f1}
+teks sesudahnya melanjutkan paragraf yang sama.
 ```
 
 Pada template, persamaan blok otomatis **rata kiri 1 tab** (opsi kelas `fleqn`) dengan
-nomor rata kanan, sesuai pedoman.
+nomor rata kanan, sesuai pedoman. **Penting:** tulis `$$...$$` **menempel** pada teks
+(tanpa baris kosong sebelum/sesudah) agar persamaan mengalir di dalam paragraf dan
+jaraknya sama dengan jarak antar baris. Jika diberi baris kosong, persamaan menjadi
+paragraf tersendiri dan jaraknya menjadi lebih lebar. Letakkan tanda baca (mis. titik)
+**di dalam** `$$ ... . $$` bila persamaan mengakhiri kalimat.
 
 ## Teorema, Definisi, dan Bukti
 

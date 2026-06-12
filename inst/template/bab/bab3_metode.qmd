@@ -46,22 +46,35 @@ Data utama bersumber dari data mikro Survei Sosial Ekonomi Nasional (Susenas) ya
 diperoleh dari Badan Pusat Statistik (BPS). Variabel respons yang digunakan adalah
 pengeluaran per kapita rumah tangga sebulan.
 
-Kinerja klasifikasi dievaluasi menggunakan beberapa metrik. Akurasi dihitung sebagai
-proporsi prediksi yang benar terhadap seluruh observasi:
-
-$$
-\text{akurasi} = \frac{TP + TN}{P + N}
-$$ {#eq-akurasi}
+Kinerja klasifikasi dievaluasi menggunakan beberapa metrik. Sebagai contoh
+**persamaan di tengah paragraf**, akurasi dihitung sebagai proporsi prediksi yang
+benar terhadap seluruh observasi
+$$ \text{akurasi} = \frac{TP + TN}{P + N} $$ {#eq-akurasi}
+dengan $TP$, $TN$, $P$, dan $N$ berturut-turut menyatakan banyaknya prediksi positif
+benar, negatif benar, total observasi positif, dan total observasi negatif. Perhatikan
+jarak persamaan @eq-akurasi dengan baris sebelum dan sesudahnya **sama dengan jarak
+antar baris** pada paragraf ini.
 
 Selain akurasi, digunakan pula *precision* dan *recall* yang digabungkan ke dalam
-*F1-score*:
+*F1-score*. Sebagai contoh **persamaan di akhir kalimat**, metrik tersebut dirumuskan
+sebagai
+$$ F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}. $$ {#eq-f1}
+Kalimat berikutnya tetap berada pada paragraf yang sama sehingga jaraknya pun rapat.
+Persamaan @eq-akurasi dan persamaan @eq-f1 menjadi dasar evaluasi model pada Bab 4.
+Penomoran persamaan dilakukan otomatis oleh Quarto; rujukan silang (`@eq-...`) hanya
+menghasilkan **nomor di dalam kurung**, mis. (1), sedangkan kata "persamaan" ditulis
+manual di depannya.
 
+Untuk persamaan yang terlalu panjang, pemotongan dilakukan dengan menempatkan
+operator (mis. `+`) di **awal baris lanjutan** dan menyejajarkannya setelah tanda "="
+(sesuai pedoman hlm. 8), seperti pada model
 $$
-F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
-$$ {#eq-f1}
-
-@eq-akurasi dan @eq-f1 menjadi dasar evaluasi model pada Bab 4. Penomoran
-persamaan dan rujukan silang (`@eq-...`) dilakukan otomatis oleh Quarto.
+\begin{aligned}
+\hat{y} = {} & \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_4 \\
+             & + \beta_5 x_5 + \beta_6 x_6
+\end{aligned}
+$$ {#eq-model}
+yang ditulis dalam dua baris.
 
 ## Prosedur Estimasi
 

@@ -21,15 +21,15 @@ simbol LaTeX.
 
 ## Contoh Penyajian Tabel
 
-Tabel \ref{tbl-miskin} menyajikan jumlah dan persentase penduduk miskin menurut daerah. Seluruh
+Tabel \ref{tab:miskin} menyajikan jumlah dan persentase penduduk miskin menurut daerah. Seluruh
 angka dihitung di dalam dokumen. Sesuai pedoman, judul tabel diletakkan **di atas**
 tabel, setiap kolom diberi **nomor kolom** pada baris di bawah kepala tabel, dan
 **sumber data dicantumkan bila data bersifat sekunder** (untuk data primer atau hasil
 olahan sendiri, baris sumber dihapus).
 
 ```{r}
-#| label: tbl-miskin
-#| tbl-cap: "Jumlah dan persentase penduduk miskin menurut daerah"
+#| label: bangun-tabel-miskin
+#| echo: false
 dat <- data.frame(
   Daerah     = c("Perkotaan", "Perdesaan", "Total"),
   Jumlah     = c(1641.18, 2234.70, 3875.88),
@@ -37,117 +37,112 @@ dat <- data.frame(
 )
 # Format angka kaidah Indonesia (desimal ",", ribuan ".").
 tampil <- data.frame(
-  Daerah     = dat$Daerah,
-  Jumlah     = formatC(dat$Jumlah, format = "f", digits = 2,
-                       big.mark = ".", decimal.mark = ","),
-  Persentase = formatC(dat$Persentase, format = "f", digits = 2,
-                       decimal.mark = ",")
+  Daerah               = dat$Daerah,
+  `Jumlah (ribu orang)` = formatC(dat$Jumlah, format = "f", digits = 2,
+                                  big.mark = ".", decimal.mark = ","),
+  `Persentase (%)`      = formatC(dat$Persentase, format = "f", digits = 2,
+                                  decimal.mark = ","),
+  check.names = FALSE, stringsAsFactors = FALSE
 )
-# Baris NOMOR KOLOM (1)(2)(3) di bawah kepala tabel (sesuai pedoman).
-tampil <- rbind(c("(1)", "(2)", "(3)"), tampil)
-
-tbl <- knitr::kable(
+# Satu pemanggilan -> tabel patuh pedoman (grid, nomor kolom rata tengah,
+# garis pemisah, judul di atas, sumber menyatu, non-float). Logika kepatuhan
+# ada di paket, sehingga perbaikan format cukup lewat pembaruan paket.
+skripsistis::tabel_skripsi(
   tampil,
-  format = if (knitr::is_latex_output()) "latex" else "pipe",
-  longtable = FALSE,
-  col.names = c("Daerah", "Jumlah (ribu orang)", "Persentase (%)"),
-  align = c("l", "r", "r"),
-  booktabs = FALSE, vline = "|", linesep = ""   # garis penuh (grid) sesuai pedoman
+  judul       = "Jumlah dan persentase penduduk miskin menurut daerah",
+  label       = "tab:miskin",
+  sumber      = "Badan Pusat Statistik Provinsi Jawa Timur (data ilustrasi)",
+  garis_total = TRUE
 )
-# Tambahkan garis tepi LUAR (kiri/kanan) agar grid penuh seperti contoh pedoman.
-if (knitr::is_latex_output()) {
-  tbl <- sub("\\{l\\|r\\|r\\}", "{|l|r|r|}", tbl)
-  tbl <- gsub("\\\\\\\\(\\s*)$", "\\\\\\\\ \\\\hline", tbl, perl = TRUE)  # garis tiap baris
-}
-knitr::asis_output(tbl)
 ```
-
-::: {.content-visible when-format="pdf"}
-```{=latex}
-\vspace{-0.5\baselineskip}
-\noindent{\footnotesize Sumber: Badan Pusat Statistik Provinsi Jawa Timur (data ilustrasi)}
-```
-:::
 
 Catatan penyajian tabel:
 
-- **Posisi** tabel/gambar selalu **rata tengah** dan berjarak **±3 spasi** dari teks
-  (sudah diatur otomatis pada `preamble.tex` melalui `\intextsep`/`\textfloatsep`).
-- **Ukuran huruf** di dalam tabel tidak boleh kurang dari **8 pt**. Untuk tabel rapat,
-  bungkus dengan `kableExtra::kable_styling(font_size = 8)` (jangan lebih kecil).
+- Gunakan **`skripsistis::tabel_skripsi(df, judul, label, ...)`** untuk tabel biasa dan
+  **`skripsistis::tabel_skripsi_panjang(...)`** untuk tabel lintas-halaman. Kedua fungsi
+  sudah menerapkan kaidah pedoman (judul di atas, **grid**, baris **nomor kolom** rata
+  tengah, **Sumber**/**Keterangan** menyatu, *non-float*). Karena logika ada di paket,
+  perbaikan format cukup lewat **pembaruan paket** lalu render ulang  -  tanpa menyusun ulang.
+- **Sumber** diisi lewat argumen `sumber=` (data sekunder). Untuk **data primer/olahan
+  sendiri**, kosongkan (`sumber = NULL`, default) sehingga baris Sumber tidak muncul.
+- **Posisi** tabel selalu **rata tengah** dan berjarak **±3 spasi** dari teks, serta
+  **ukuran huruf** isi tabel **≥ 8 pt**  -  diatur otomatis oleh fungsi tersebut dan
+  `preamble.tex`. Hindari menyetel ukuran huruf di bawah 8 pt.
 - **Tabel/gambar lebar** ditempatkan dalam orientasi *landscape* (lihat subbab "Contoh
-  Gambar Melebar" dan "Contoh Tabel Panjang/Lebar"), atau diperkecil dengan huruf ≥ 8 pt.
+  Gambar Melebar" dan "Contoh Tabel Panjang/Lebar").
 
 ### Contoh Tabel Panjang (Lintas-Halaman)
 
 ::: {.callout-note title="Petunjuk: tabel panjang lintas-halaman" appearance="simple"}
-Bila tabel terlalu panjang untuk satu halaman, gunakan `longtable` melalui
-`kableExtra`. Dengan opsi `repeat_header`, judul kolom **terulang otomatis** di setiap
-halaman lanjutan dan keterangan **"(lanjutan)"** muncul otomatis  -  tanpa menuliskan
-ulang judul tabel. Ukuran huruf diatur `font_size = 8` (batas minimum pedoman, jangan
-kurang). Contoh pada @tbl-panjang.
+Bila tabel terlalu panjang untuk satu halaman, gunakan `longtable`. Judul kolom dan
+baris **nomor kolom** **terulang otomatis** di setiap halaman lanjutan, disertai
+keterangan **"Tabel N (lanjutan)"** di atasnya  -  tanpa menuliskan ulang judul tabel.
+Bentuk tabel tetap **grid** (bergaris kolom) sesuai pedoman dan ukuran huruf di dalam
+tabel **tidak kurang dari 8 pt**. Contoh pada Tabel \ref{tab:panjang}.
 :::
 
-@tbl-panjang mencontohkan tabel panjang yang otomatis berlanjut ke halaman berikutnya
+Tabel \ref{tab:panjang} mencontohkan tabel panjang yang otomatis berlanjut ke halaman berikutnya
 dengan judul kolom berulang dan keterangan "(lanjutan)".
 
 ```{r}
-#| label: tbl-panjang
-#| tbl-cap: "Contoh tabel panjang lintas-halaman (data ilustrasi)"
-library(kableExtra)
+#| label: bangun-tabel-panjang
+#| echo: false
 set.seed(1)
 panjang <- data.frame(
-  No        = 1:40,
-  Kabupaten = sprintf("Kabupaten %02d", 1:40),
-  Jumlah    = formatC(round(runif(40, 50, 900), 1), format = "f", digits = 1,
-                      big.mark = ".", decimal.mark = ","),
-  Persen    = formatC(round(runif(40, 3, 18), 2), format = "f", digits = 2,
-                      decimal.mark = ",")
+  `No.`           = 1:40,
+  `Kabupaten/Kota` = sprintf("Kabupaten %02d", 1:40),
+  `Jumlah (ribu)`  = formatC(round(runif(40, 50, 900), 1), format = "f", digits = 1,
+                             big.mark = ".", decimal.mark = ","),
+  `Persentase (%)` = formatC(round(runif(40, 3, 18), 2), format = "f", digits = 2,
+                             decimal.mark = ","),
+  check.names = FALSE, stringsAsFactors = FALSE
 )
-
-kbl(
+# Tabel panjang lintas-halaman: judul kolom + nomor kolom berulang, "(lanjutan)",
+# grid, huruf >= 8 pt - semua ditangani fungsi paket.
+skripsistis::tabel_skripsi_panjang(
   panjang,
-  format    = if (knitr::is_latex_output()) "latex" else "pipe",
-  longtable = TRUE, booktabs = TRUE,
-  col.names = c("No.", "Kabupaten/Kota", "Jumlah (ribu)", "Persentase (%)"),
-  align     = "clrr"
-) |>
-  kable_styling(
-    font_size           = 8,                       # huruf 8 pt (batas minimum pedoman)
-    latex_options       = c("repeat_header"),
-    repeat_header_text  = "(lanjutan)",
-    repeat_header_method = "replace"
-  )
+  judul = "Contoh tabel panjang lintas-halaman (data ilustrasi)",
+  label = "tab:panjang",
+  align = c("r", "l", "r", "r")
+)
 ```
 
 ## Contoh Penyajian Gambar
 
-@fig-bar menampilkan persentase penduduk miskin per daerah; perhatikan label sumbu yang
-memuat simbol LaTeX dan ber-font Times serasi dengan teks.
+Gambar \ref{fig:bar} menampilkan persentase penduduk miskin per daerah; perhatikan
+label sumbu ber-font Times serasi dengan teks.
 
 ```{r}
-#| label: fig-bar
-#| fig-cap: "Persentase penduduk miskin menurut daerah"
-#| fig-width: 5
-#| fig-height: 3.2
+#| label: simpan-gambar-bar
+#| echo: false
+#| include: false
+# Simpan plot ke berkas; gambar_skripsi() menyisipkannya non-float dengan judul
+# "Gambar N." dan Sumber menyatu di bawahnya (sesuai pedoman).
+dir.create("img", showWarnings = FALSE)
+grDevices::png("img/contoh-bar.png", width = 1500, height = 980, res = 220)
 op <- par(mar = c(4, 4, 1, 1))
 barplot(
   height = dat$Persentase,
   names.arg = dat$Daerah,
-  ylab = "Persentase $(\\%)$",
+  ylab = "Persentase (%)",
   col = "grey70", border = NA, ylim = c(0, 15)
 )
 par(op)
+invisible(grDevices::dev.off())
 ```
 
-::: {.content-visible when-format="pdf"}
-```{=latex}
-\vspace{-0.5\baselineskip}
-\begin{center}{\footnotesize Sumber: diolah dari Tabel di atas (data ilustrasi)}\end{center}
+```{r}
+#| echo: false
+skripsistis::gambar_skripsi(
+  "img/contoh-bar.png",
+  judul  = "Persentase penduduk miskin menurut daerah",
+  label  = "fig:bar",
+  sumber = "diolah dari Tabel di atas (data ilustrasi)",
+  lebar  = "0.7\\linewidth"
+)
 ```
-:::
 
-Berdasarkan @fig-bar, persentase kemiskinan di perdesaan hampir dua kali lipat
+Berdasarkan Gambar \ref{fig:bar}, persentase kemiskinan di perdesaan hampir dua kali lipat
 dibandingkan perkotaan. Pembahasan dapat dikaitkan kembali dengan metrik $F_1$ yang
 dirumuskan pada Bab 3.
 

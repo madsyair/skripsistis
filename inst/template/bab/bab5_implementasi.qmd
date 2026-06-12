@@ -131,35 +131,28 @@ Contoh penyajian ringkasan hasil pengujian fungsional (angka dihitung di dokumen
 baris nomor kolom dan sumber data mengikuti pedoman).
 
 ```{r}
-#| label: tbl-blackbox
-#| tbl-cap: "Ringkasan hasil pengujian Blackbox"
+#| label: bangun-tabel-blackbox
+#| echo: false
 hasil <- data.frame(
-  Modul  = c("Login", "Penjadwalan", "Laporan"),
+  Modul    = c("Login", "Penjadwalan", "Laporan"),
   Skenario = c(8L, 15L, 6L),
   Berhasil = c(8L, 14L, 6L)
 )
 hasil$Persentase <- formatC(100 * hasil$Berhasil / hasil$Skenario,
                             format = "f", digits = 1, decimal.mark = ",")
 tampil <- data.frame(
-  Modul = hasil$Modul,
-  Skenario = hasil$Skenario,
-  Berhasil = hasil$Berhasil,
-  Persentase = hasil$Persentase
+  Modul              = hasil$Modul,
+  `Jumlah Skenario`  = hasil$Skenario,
+  Berhasil           = hasil$Berhasil,
+  `Keberhasilan (%)` = hasil$Persentase,
+  check.names = FALSE, stringsAsFactors = FALSE
 )
-tampil <- rbind(c("(1)", "(2)", "(3)", "(4)"), tampil)
-tbl <- knitr::kable(
+# Data hasil olahan sendiri -> tanpa Sumber (sesuai pedoman).
+skripsistis::tabel_skripsi(
   tampil,
-  format = if (knitr::is_latex_output()) "latex" else "pipe",
-  longtable = FALSE,
-  col.names = c("Modul", "Jumlah Skenario", "Berhasil", "Keberhasilan (%)"),
-  align = c("l", "r", "r", "r"),
-  booktabs = FALSE, vline = "|", linesep = ""   # garis penuh (grid) sesuai pedoman
+  judul = "Ringkasan hasil pengujian Blackbox",
+  label = "tab:blackbox"
 )
-if (knitr::is_latex_output()) {
-  tbl <- sub("\\{l\\|r\\|r\\|r\\}", "{|l|r|r|r|}", tbl)
-  tbl <- gsub("\\\\\\\\(\\s*)$", "\\\\\\\\ \\\\hline", tbl, perl = TRUE)
-}
-knitr::asis_output(tbl)
 ```
 
 Hasil evaluasi dianalisis untuk menunjukkan kelebihan, keterbatasan, serta potensi

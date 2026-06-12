@@ -1,0 +1,10 @@
+kunci,tipe,nama,keterangan
+bps,singkatan,BPS,Badan Pusat Statistik
+csv,singkatan,CSV,Comma-Separated Values
+rmse,singkatan,RMSE,Root Mean Squared Error
+sis,singkatan,SIS,Sistem Informasi Statistik
+alpha,simbol,$\alpha$,taraf nyata (tingkat signifikansi)
+beta,simbol,$\beta$,koefisien regresi
+mu,simbol,$\mu$,rata-rata (mean) populasi
+sigma,simbol,$\sigma$,simpangan baku (standar deviasi) populasi
+yhat,simbol,$\hat{y}$,nilai dugaan (prediksi) peubah respons

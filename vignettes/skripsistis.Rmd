@@ -344,3 +344,17 @@ Dengan paket ini, seluruh laporan dapat dirender satu kali (`quarto render`) dan
 mesin LaTeX di balik layar menyusunnya dengan format yang konsisten: halaman muka
 STIS, penomoran Romawi/Arab, gaya sitasi APA 7 Indonesia, serta penyajian tabel,
 gambar, persamaan, definisi/teorema, algoritma, dan kode-sebagai-gambar.
+
+## Daftar Singkatan dan Lambang (opsional)
+
+Elemen ini nonaktif secara bawaan (Pedoman KS 2025 tidak mewajibkannya).
+Aktifkan dengan `daftar_singkatan = TRUE`; isinya dibaca dari `singkatan.csv`
+(live-computed) atau diisi lewat argumen `singkatan` (vektor bernama / data.frame
+2 kolom / matriks 2 kolom). Elemen muncul setelah Daftar Lampiran dengan gaya dan
+penomoran halaman Romawi yang seragam.
+
+```r
+buat_skripsi(path = "skripsi-saya", daftar_singkatan = TRUE,
+             singkatan = c("BPS" = "Badan Pusat Statistik",
+                           "$\\mu$" = "rata-rata populasi"))
+```

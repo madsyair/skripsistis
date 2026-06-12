@@ -116,16 +116,22 @@ Opsi *chunk* yang sering dipakai: `label:` (awalan `fig-`/`tbl-` menentukan jeni
 |---|---|---|
 | `#fig-x` | `@fig-x` | Gambar N |
 | `#tbl-x` | `@tbl-x` | Tabel N |
-| `#eq-x` | `@eq-x` | Persamaan (N) |
+| `#eq-x` | `persamaan @eq-x` | persamaan (N) |
 | `#def-x` | `@def-x` | Definisi N |
 | `#thm-x` | `@thm-x` | Teorema N |
 
-*Persamaan bernomor* (otomatis masuk deret tunggal dan dapat dirujuk):
+: Rujukan **gambar/tabel/definisi/teorema** otomatis memuat kata jenisnya (mis.
+"Gambar 2"). Khusus **persamaan**, rujukan `@eq-x` hanya menghasilkan **nomor di dalam
+kurung**, mis. "(1)", sehingga kata "persamaan" ditulis manual di depan rujukan
+(mis. tulis `persamaan @eq-x` agar menjadi "persamaan (1)").
+
+*Persamaan bernomor* (tulis **mengalir** di dalam paragraf, tanpa baris kosong,
+agar jaraknya sama dengan jarak antar baris; dapat dirujuk dengan `@eq-...`):
 
 ```markdown
-$$
-F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
-$$ {#eq-f1}
+...teks sebelum persamaan tanpa baris kosong
+$$ F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}. $$ {#eq-f1}
+teks sesudah persamaan melanjutkan paragraf yang sama.
 ```
 
 *Kutipan dan daftar pustaka* (sumber dikelola di `referensi.bib`):

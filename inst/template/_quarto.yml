@@ -9,6 +9,7 @@ project:
   render:
     - index.qmd   # hanya naskah skripsi yang dirender otomatis;
                   # 'referensi-perintah.qmd' dirender terpisah sesuai kebutuhan.
+{{PRERENDER_SINGKATAN}}
 
 # Metadata skripsi — diisi otomatis oleh buat_skripsi(), boleh diedit manual.
 title: "{{JUDUL}}"
@@ -22,7 +23,7 @@ csl: apa-stis-id.csl
 crossref:
   fig-prefix: "Gambar"
   tbl-prefix: "Tabel"
-  eq-prefix: "Persamaan"
+  eq-prefix: ""
   sec-prefix: "Subbab"
   # Lingkungan matematika (judul + awalan rujukan dalam bahasa Indonesia)
   thm-prefix: "Teorema"

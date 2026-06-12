@@ -1,0 +1,50 @@
+```{r}
+#| label: daftar-singkatan-simbol
+#| echo: false
+#| output: asis
+# Mode CSV (tabel statis). Isi dibaca dari singkatan.csv (live-computed). Entri
+# dipisah berdasarkan kolom 'tipe' menjadi Daftar Singkatan dan Daftar Simbol.
+# Kolom 'nama' boleh memuat matematika dalam $...$.
+.berkas <- "singkatan.csv"
+.tampilkan <- function(df, judul_tampil, judul_toc, label_kolom) {
+  cat(sprintf(
+    "\n\\judulfrontmatter{%s}{%s}\n", judul_tampil, judul_toc))
+  if (knitr::is_latex_output() && nrow(df) > 0L) {
+    library(kableExtra)
+    k <- kbl(df, format = "latex", longtable = TRUE, booktabs = FALSE,
+             escape = FALSE, align = c("l", "l"), linesep = "",
+             row.names = FALSE, col.names = c(label_kolom, "Keterangan"))
+    k <- kable_styling(k, latex_options = "repeat_header",
+                       repeat_header_text = "(lanjutan)", font_size = 12,
+                       full_width = FALSE)
+    k <- column_spec(k, 1, width = "3cm")
+    k <- column_spec(k, 2, width = "11cm")
+    cat(k, "\n")
+  } else {
+    cat("\n\\emph{(Belum ada entri.)}\n")
+  }
+}
+
+if (file.exists(.berkas)) {
+  d <- utils::read.csv(.berkas, stringsAsFactors = FALSE,
+                       fileEncoding = "UTF-8", check.names = FALSE)
+  nm <- tolower(names(d))
+  if (all(c("tipe","nama","keterangan") %in% nm)) {
+    tipe <- tolower(trimws(d[[which(nm=="tipe")]]))
+    nama <- d[[which(nm=="nama")]]; ket <- d[[which(nm=="keterangan")]]
+  } else if (ncol(d) >= 4L) {
+    tipe <- tolower(trimws(d[[2]])); nama <- d[[3]]; ket <- d[[4]]
+  } else if (ncol(d) == 3L) {
+    tipe <- rep("singkatan", nrow(d)); nama <- d[[2]]; ket <- d[[3]]
+  } else {
+    tipe <- rep("singkatan", nrow(d)); nama <- d[[1]]; ket <- d[[2]]
+  }
+  is_lb <- tipe %in% c("simbol","lambang","symbol")
+  sing <- data.frame(nama = nama[!is_lb], ket = ket[!is_lb], stringsAsFactors = FALSE)
+  lamb <- data.frame(nama = nama[ is_lb], ket = ket[ is_lb], stringsAsFactors = FALSE)
+  sing <- sing[order(toupper(sing$nama)), , drop = FALSE]
+  lamb <- lamb[order(toupper(lamb$nama)), , drop = FALSE]
+  .tampilkan(sing, "Daftar Singkatan", "DAFTAR SINGKATAN", "Singkatan")
+  .tampilkan(lamb, "Daftar Simbol",   "DAFTAR SIMBOL",   "Simbol")
+}
+```

@@ -26,6 +26,21 @@
 #' @param penguji2,nip_penguji2 Nama dan NIP Penguji II.
 #' @param ketua_prodi,nip_ketua_prodi Nama dan NIP Ketua Program Studi.
 #' @param tahun Tahun (default tahun berjalan).
+#' @param daftar_singkatan Menyertakan elemen opsional **Daftar Singkatan** dan
+#'   **Daftar Simbol** (setelah Daftar Lampiran). Nilai: `FALSE` (default),
+#'   `TRUE`/`"csv"` (dua tabel statis dari `singkatan.csv`), atau `"glossaries"`
+#'   (memakai paket `glossaries`: istilah muncul **otomatis** hanya bila dipakai
+#'   di teks; entri dapat berasal dari `singkatan.csv` maupun ditulis langsung di
+#'   teks dengan `\\istilah{kunci}{nama}{ket}` -> Daftar Singkatan, atau
+#'   `\\simbol{kunci}{nama}{ket}` -> Daftar Simbol; rujuk dengan `\\gls{kunci}`).
+#'   Pemisahan singkatan vs simbol memakai kolom `tipe` (nilai `singkatan`/
+#'   `simbol`). Pedoman KS 2025 tidak mewajibkan elemen ini.
+#' @param singkatan Isi awal (opsional). `data.frame` (kolom `kunci,tipe,nama,
+#'   keterangan`; atau `nama,keterangan`), matriks, atau vektor karakter bernama
+#'   (nama = singkatan/simbol, nilai = keterangan). Tanpa `tipe`, entri dianggap
+#'   singkatan. Bila `NULL`, dipakai contoh `singkatan.csv` bawaan. Pada mode
+#'   `"glossaries"`, pemindai pra-render (`scan_singkatan.R`) menggabungkan sumber
+#'   ini dengan definisi di teks; bila kunci sama, sumber pusat diutamakan.
 #' @param overwrite Bila `TRUE`, menimpa direktori yang sudah ada.
 #' @param render Bila `TRUE`, langsung menjalankan `quarto render` setelah membuat
 #'   proyek (membutuhkan Quarto terpasang).
@@ -74,6 +89,8 @@ buat_skripsi <- function(
     ketua_prodi     = "Nama Ketua Program Studi",
     nip_ketua_prodi = "0000",
     tahun           = format(Sys.Date(), "%Y"),
+    daftar_singkatan = FALSE,
+    singkatan        = NULL,
     overwrite       = FALSE,
     render          = FALSE) {
 
@@ -158,10 +175,56 @@ buat_skripsi <- function(
     collapse = "\n\n"
   )
 
+  # --- Elemen opsional: Daftar Singkatan dan Daftar Simbol ---
+  #     Pedoman KS 2025 tidak mewajibkan elemen ini (OPSIONAL, default nonaktif),
+  #     ditempatkan setelah Daftar Lampiran. Dua mode:
+  #       "csv"        : tabel dua kolom; isi dibaca dari singkatan.csv (manual).
+  #       "glossaries" : memakai paket glossaries (\makenoidxglossaries); HANYA
+  #                      istilah yang dipakai di teks lewat \gls{...} yang muncul,
+  #                      terurut otomatis. Entri di tex/singkatan-entries.tex.
+  mode_singkatan <- if (isFALSE(daftar_singkatan) || is.null(daftar_singkatan)) {
+    "tidak"
+  } else if (isTRUE(daftar_singkatan)) {
+    "csv"
+  } else {
+    match.arg(as.character(daftar_singkatan)[1], c("csv", "glossaries"))
+  }
+
+  f_qmd_csv <- file.path(bab_dir, "daftar-singkatan.qmd")
+  f_qmd_gls <- file.path(bab_dir, "daftar-singkatan-gls.qmd")
+  f_csv     <- file.path(path, "singkatan.csv")
+  f_entries <- file.path(path, "tex", "singkatan-entries.tex")
+  f_scan    <- file.path(path, "scan_singkatan.R")
+  .buang <- function(f) if (file.exists(f)) unlink(f, force = TRUE)
+  prerender_singkatan <- ""
+
+  if (identical(mode_singkatan, "csv")) {
+    if (!is.null(singkatan)) .tulis_singkatan_csv(singkatan, f_csv)
+    .buang(f_qmd_gls); .buang(f_entries); .buang(f_scan)
+    include_singkatan   <- "{{< include bab/daftar-singkatan.qmd >}}"
+    glossaries_preamble <- .preamble_gls_fallback()
+  } else if (identical(mode_singkatan, "glossaries")) {
+    if (!is.null(singkatan)) .tulis_singkatan_csv(singkatan, f_csv)
+    .buang(f_qmd_csv)
+    .sisipkan_contoh_gls(file.path(bab_dir, "bab1_pendahuluan.qmd"))
+    # Cadangan entri dari CSV (akan ditimpa scan_singkatan.R saat render).
+    tryCatch(.tulis_entries_dari_csv(f_csv, f_entries), error = function(e) NULL)
+    include_singkatan   <- "{{< include bab/daftar-singkatan-gls.qmd >}}"
+    glossaries_preamble <- .preamble_gls_aktif()
+    prerender_singkatan <- "  pre-render:\n    - scan_singkatan.R"
+  } else {
+    .buang(f_qmd_csv); .buang(f_qmd_gls); .buang(f_csv); .buang(f_entries); .buang(f_scan)
+    include_singkatan   <- ""
+    glossaries_preamble <- .preamble_gls_fallback()
+  }
+
   # --- Susun peta substitusi token ---
   peta <- c(
     list(
       JUDUL           = judul,
+      INCLUDE_SINGKATAN   = include_singkatan,
+      GLOSSARIES_PREAMBLE = glossaries_preamble,
+      PRERENDER_SINGKATAN = prerender_singkatan,
       NAMA            = nama,
       NAMA_KAPITAL    = toupper(nama),
       NIM             = nim,
@@ -182,6 +245,22 @@ buat_skripsi <- function(
 
   .substitusi_berkas(path, peta)
 
+  # --- Konfigurasi + berkas terkelola (untuk pembaruan tanpa menyusun ulang) ---
+  .tulis_konfig(path, peminatan = peminatan, jenis_skripsi = jenis_skripsi,
+                mode_singkatan = mode_singkatan)
+  f_tambahan <- file.path(path, "tex", "preamble-tambahan.tex")
+  if (!file.exists(f_tambahan)) {
+    writeLines(c(
+      "% ------------------------------------------------------------",
+      "% Kustomisasi LaTeX milik Anda (paket / perintah tambahan).",
+      "% Berkas ini TIDAK ditimpa saat pembaruan paket.",
+      "% Contoh:  \\usepackage{namapaket}",
+      "% ------------------------------------------------------------"
+    ), f_tambahan)
+  }
+  # Segarkan berkas terkelola sekaligus menstempel banner (idempoten).
+  perbarui_template(path, backup = FALSE, diam = TRUE)
+
   abs_path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   message("Proyek skripsi STIS dibuat di: ", abs_path)
   message("Peminatan: ", peminatan, " | Jenis skripsi: ", jenis_skripsi)
@@ -196,12 +275,24 @@ buat_skripsi <- function(
 
 #' Render proyek skripsi menggunakan Quarto
 #'
-#' Pembungkus tipis untuk menjalankan `quarto render` pada direktori proyek.
+#' Pembungkus untuk menjalankan `quarto render` pada direktori proyek. Sebelum
+#' render, berkas infrastruktur yang DIKELOLA paket (preamble, CSL, dll.)
+#' otomatis disegarkan dari paket terpasang (lihat [perbarui_template()]),
+#' sehingga perbaikan format cukup dilakukan dengan memperbarui paket.
 #'
 #' @param path Direktori proyek skripsi.
+#' @param perbarui Bila `TRUE` (default), segarkan berkas terkelola dari paket
+#'   sebelum render. Set `FALSE` untuk render apa adanya.
 #' @return (Secara *invisible*) `path`.
 #' @export
-render_skripsi <- function(path = ".") {
+render_skripsi <- function(path = ".", perbarui = TRUE) {
+  if (isTRUE(perbarui) && file.exists(file.path(path, "_skripsistis.yml"))) {
+    # Segarkan berkas terkelola dari paket terpasang sebelum render, sehingga
+    # perbaikan format pada paket langsung berlaku tanpa menyusun ulang skripsi.
+    tryCatch(perbarui_template(path, backup = FALSE, diam = TRUE),
+             error = function(e) warning("Gagal menyegarkan berkas terkelola: ",
+                                         conditionMessage(e), call. = FALSE))
+  }
   quarto <- Sys.which("quarto")
   if (!nzchar(quarto)) {
     stop("Perintah 'quarto' tidak ditemukan pada PATH. Pasang Quarto terlebih dahulu: ",

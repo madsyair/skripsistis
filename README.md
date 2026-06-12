@@ -113,22 +113,61 @@ quarto render skripsi-saya
 
 Hasil PDF berada di `skripsi-saya/_output/`.
 
-### Lewat menu RStudio (Templat Proyek)
+### Daftar Singkatan dan Simbol (opsional)
 
-Setelah paket terpasang, template muncul di RStudio melalui:
+Pedoman KS 2025 tidak mewajibkan elemen ini, sehingga **nonaktif secara
+bawaan**. Aktifkan dengan `daftar_singkatan = TRUE`; elemen muncul setelah
+Daftar Lampiran dengan gaya judul dan penomoran halaman yang seragam. Isinya
+*live-computed* dari `singkatan.csv` (kolom 1 = singkatan/simbol, boleh memuat
+matematika dalam `$...$`; kolom 2 = keterangan) dan dapat diisi langsung:
 
-**File → New Project… → New Directory → Skripsi Komputasi Statistik (Politeknik
-Statistika STIS)**
+```r
+buat_skripsi(
+  path = "skripsi-saya", peminatan = "Sains Data",
+  daftar_singkatan = TRUE,
+  singkatan = c(
+    "BPS"        = "Badan Pusat Statistik",
+    "RMSE"       = "Root Mean Squared Error",
+    "$\\mu$"     = "rata-rata populasi",
+    "$\\sigma$"  = "simpangan baku populasi"
+  ),
+  render = TRUE
+)
+```
 
-Dialog akan menanyakan judul, nama, NIM, peminatan, dan pembimbing, lalu membuat
-proyek dan membuka `index.qmd`.
+`singkatan` menerima vektor karakter bernama, `data.frame` 2 kolom, atau matriks
+2 kolom. Tanpa argumen ini, dipakai contoh `singkatan.csv` bawaan yang dapat
+disunting langsung. Entri diurutkan alfabetis otomatis.
 
-> **Catatan tentang "New Quarto Document".** Dialog *File → New File → Quarto Document*
-> di RStudio hanya membuat satu berkas `.qmd` kosong dan **tidak dapat memuat template
-> dari paket R**. Karena skripsi ini berupa **proyek multi-berkas** (banyak bab, berkas
-> `.tex`, `.csl`, `.bib`, dan gambar), mekanisme yang tepat adalah **Templat Proyek**
-> di atas (atau fungsi `buat_skripsi()`), bukan "New Quarto Document". Ini batasan
-> RStudio/Quarto, bukan paket ini.
+#### Mode otomatis: Daftar Singkatan & Daftar Simbol (glossaries)
+
+`daftar_singkatan = "glossaries"` memakai paket `glossaries`
+(`\\makenoidxglossaries`, murni LaTeX). Istilah **muncul otomatis hanya bila
+dipakai** di teks, terpisah menjadi dua daftar: **Daftar Singkatan** dan **Daftar
+Simbol** (dibedakan kolom `tipe`). Entri dapat berasal dari dua sumber yang
+digabung tanpa konflik (sumber pusat diutamakan):
+
+1. **Daftar pusat** `singkatan.csv` (kolom `kunci,tipe,nama,keterangan`).
+2. **Langsung di teks**: `\\istilah{kunci}{nama}{keterangan}` untuk singkatan dan
+   `\\simbol{kunci}{nama}{keterangan}` untuk simbol. Cukup ditulis sekali di
+   mana pun dalam naskah; sebuah pemindai pra-render (`scan_singkatan.R`)
+   mengangkat definisinya secara otomatis.
+
+```r
+buat_skripsi(
+  path = "skripsi-saya", daftar_singkatan = "glossaries",
+  singkatan = data.frame(
+    kunci = c("bps", "alpha"),
+    tipe  = c("singkatan", "simbol"),
+    nama  = c("BPS", "$\\alpha$"),
+    keterangan = c("Badan Pusat Statistik", "taraf nyata")
+  ),
+  render = TRUE
+)
+```
+
+Di teks, rujuk dengan `\\gls{bps}`, `\\gls{alpha}`, dst. Hanya istilah yang
+dipakai yang tampil; urutannya otomatis.
 
 ## Struktur proyek yang dihasilkan
 
