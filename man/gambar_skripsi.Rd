@@ -26,7 +26,7 @@ gambar_skripsi(
 \item{sumber}{Teks sumber (tanpa kata "Sumber:"). \code{NULL} (default) bila tidak
 ada / olahan sendiri.}
 
-\item{ket}{Keterangan tambahan di bawah judul.}
+\item{ket}{Keterangan tambahan (menempel di bawah gambar, sebelum judul).}
 
 \item{lebar}{Lebar gambar sebagai panjang LaTeX. Default \code{"0.8\\\\linewidth"}.}
 
@@ -38,10 +38,11 @@ Objek \code{knitr::raw_latex} (PDF) atau \code{knitr::include_graphics}
 }
 \description{
 Menyisipkan berkas gambar sebagai gambar yang patuh Pedoman KS 2025: gambar
-rata tengah, \strong{judul di bawah} berformat "Gambar N. ..." (penomoran otomatis
-via \verb{\\\\captionof\{figure\}}), dan baris \strong{Sumber}/\strong{Keterangan} menyatu tepat
-di bawah judul. Bersifat \emph{non-float} sehingga tidak berpindah halaman dan
-sumber tidak terlepas dari gambar. Berjarak ~3 spasi dari teks.
+rata tengah dengan urutan \strong{gambar -> Sumber -> judul} (judul "Gambar N. ..."
+di paling bawah, penomoran otomatis via \verb{\\\\captionof\{figure\}}; baris
+\strong{Sumber}/\strong{Keterangan} menempel langsung di bawah gambar). Bersifat
+\emph{non-float} sehingga tidak berpindah halaman dan sumber tidak terlepas dari
+gambar. Berjarak ~3 spasi dari teks.
 }
 \details{
 Simpan plot ke berkas terlebih dahulu (mis. \code{png()}/\code{ggplot2::ggsave()}),
