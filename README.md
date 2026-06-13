@@ -88,11 +88,7 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
 ## Pemasangan
 
 ```r
-# dari sumber (folder paket)
-install.packages("skripsistis_0.2.2.tar.gz", repos = NULL, type = "source")
-
-# atau dari GitHub
-# remotes::install_github("madsyair/skripsistis")
+remotes::install_github("madsyair/skripsistis")
 ```
 
 ## Penggunaan
