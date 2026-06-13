@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Tim skripsistis" />
+
+<meta name="date" content="2026-06-13" />
+
+<title>Panduan Lengkap Paket skripsistis</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Panduan Lengkap Paket skripsistis</h1>
+<h4 class="author">Tim skripsistis</h4>
+<h4 class="date">2026-06-13</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#prasyarat" id="toc-prasyarat">Prasyarat</a></li>
+<li><a href="#instalasi" id="toc-instalasi">Instalasi</a></li>
+<li><a href="#membuat-proyek-skripsi" id="toc-membuat-proyek-skripsi">Membuat proyek skripsi</a>
+<ul>
+<li><a href="#lewat-menu-rstudio" id="toc-lewat-menu-rstudio">Lewat menu
+RStudio</a></li>
+<li><a href="#peminatan-dan-kerangka-bab" id="toc-peminatan-dan-kerangka-bab">Peminatan dan kerangka bab</a></li>
+<li><a href="#daftar-argumen" id="toc-daftar-argumen">Daftar
+argumen</a></li>
+<li><a href="#contoh" id="toc-contoh">Contoh</a></li>
+</ul></li>
+<li><a href="#merender-ke-pdf" id="toc-merender-ke-pdf">Merender ke
+PDF</a></li>
+<li><a href="#mengganti-logo-dan-metadata" id="toc-mengganti-logo-dan-metadata">Mengganti logo dan
+metadata</a></li>
+<li><a href="#menulis-isi-skripsi" id="toc-menulis-isi-skripsi">Menulis
+isi skripsi</a>
+<ul>
+<li><a href="#kutipan-dan-daftar-pustaka" id="toc-kutipan-dan-daftar-pustaka">Kutipan dan daftar pustaka</a></li>
+<li><a href="#tabel-dengan-sumber" id="toc-tabel-dengan-sumber">Tabel
+dengan sumber</a></li>
+<li><a href="#gambar-berfont-times-dengan-simbol-latex" id="toc-gambar-berfont-times-dengan-simbol-latex">Gambar berfont Times
+dengan simbol LaTeX</a></li>
+<li><a href="#kode-sebagai-gambar" id="toc-kode-sebagai-gambar">Kode
+sebagai gambar</a></li>
+<li><a href="#persamaan" id="toc-persamaan">Persamaan</a></li>
+<li><a href="#definisi-teorema-dan-bukti" id="toc-definisi-teorema-dan-bukti">Definisi, teorema, dan
+bukti</a></li>
+<li><a href="#algoritma" id="toc-algoritma">Algoritma</a></li>
+<li><a href="#ringkasan-rujukan-silang" id="toc-ringkasan-rujukan-silang">Ringkasan rujukan silang</a></li>
+</ul></li>
+<li><a href="#memakai-gaya-sitasi-pada-dokumen-lain" id="toc-memakai-gaya-sitasi-pada-dokumen-lain">Memakai gaya sitasi pada
+dokumen lain</a></li>
+<li><a href="#pemecahan-masalah" id="toc-pemecahan-masalah">Pemecahan
+masalah</a></li>
+<li><a href="#penutup" id="toc-penutup">Penutup</a>
+<ul>
+<li><a href="#daftar-singkatan-dan-lambang-opsional" id="toc-daftar-singkatan-dan-lambang-opsional">Daftar Singkatan dan
+Lambang (opsional)</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Paket <strong>skripsistis</strong> menyediakan kerangka (template)
+proyek <a href="https://quarto.org/">Quarto</a> untuk penyusunan skripsi
+yang <strong>dikhususkan bagi mahasiswa Program Studi D-IV Komputasi
+Statistik, Politeknik Statistika STIS</strong>, sesuai <em>Pedoman
+Skripsi KS Edisi Keenam (2025)</em>. Template ini <strong>tidak
+ditujukan</strong> untuk program studi lain. Panduan ini membahas
+penggunaan paket secara menyeluruh: mulai dari membuat proyek, mengisi
+metadata, menulis isi (kutipan, tabel, gambar, persamaan,
+definisi/teorema, algoritma, dan kode-sebagai-gambar), hingga merender
+ke PDF.</p>
+<div style="border-left:4px solid #d9534f;padding:0.5em 1em;background:#fdf3f2;">
+<p><strong>⚠️ Status: versi pengembangan (tidak resmi).</strong> Paket
+ini masih dalam tahap pengembangan dan <strong>belum sepenuhnya
+mengikuti</strong> panduan penulisan skripsi Politeknik Statistika STIS.
+Format dan ketentuan yang dihasilkan dapat berubah serta perlu diperiksa
+kembali terhadap pedoman resmi sebelum digunakan untuk pengajuan; ini
+<strong>bukan</strong> templat resmi STIS. Versi stabil akan dirilis
+setelah seluruh ketentuan sesuai dengan panduan.</p>
+</div>
+<div id="prasyarat" class="section level1">
+<h1>Prasyarat</h1>
+<p>Sebelum memakai paket ini, pastikan perangkat berikut tersedia:</p>
+<ul>
+<li><strong>R</strong> beserta paket <code>knitr</code>,
+<code>rmarkdown</code>, dan <code>tikzDevice</code>;</li>
+<li><strong>Quarto</strong> versi 1.4 atau lebih baru (<a href="https://quarto.org/docs/get-started/" class="uri">https://quarto.org/docs/get-started/</a>);</li>
+<li>distribusi <strong>LaTeX dengan XeLaTeX</strong> beserta paket
+<code>algorithm2e</code>. Cara termudah adalah memasang TinyTeX melalui
+Quarto:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># di terminal</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>quarto install tinytex</span></code></pre></div>
+<p>Paket LaTeX yang belum ada (mis. <code>algorithm2e</code>,
+<code>lmodern</code>) akan dipasang otomatis oleh Quarto/TinyTeX saat
+render pertama.</p>
+</div>
+<div id="instalasi" class="section level1">
+<h1>Instalasi</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># dari berkas sumber (.tar.gz)</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;skripsistis_0.2.1.tar.gz&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># atau dari GitHub</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;madsyair/skripsistis&quot;)</span></span></code></pre></div>
+</div>
+<div id="membuat-proyek-skripsi" class="section level1">
+<h1>Membuat proyek skripsi</h1>
+<p>Fungsi utama paket ini adalah <code>buat_skripsi()</code>. Fungsi
+tersebut menyalin seluruh kerangka proyek ke direktori baru dan mengisi
+metadata (judul, nama, NIM, pembimbing, penguji, dan lain-lain) secara
+otomatis.</p>
+<div id="lewat-menu-rstudio" class="section level2">
+<h2>Lewat menu RStudio</h2>
+<p>Selain dari konsol, template tersedia di RStudio melalui <strong>File
+→ New Project… → New Directory → Skripsi Komputasi Statistik (Politeknik
+Statistika STIS)</strong>. Dialog menanyakan judul, nama, NIM,
+peminatan, dan pembimbing.</p>
+<p>Perlu dicatat: dialog <em>File → New File → Quarto Document</em> di
+RStudio <strong>tidak</strong> dapat memuat template dari paket R (hanya
+membuat satu <code>.qmd</code> kosong). Karena skripsi ini berupa proyek
+multi-berkas, gunakan <strong>Templat Proyek</strong> di atas atau
+fungsi <code>buat_skripsi()</code>.</p>
+</div>
+<div id="peminatan-dan-kerangka-bab" class="section level2">
+<h2>Peminatan dan kerangka bab</h2>
+<p>Argumen <code>peminatan</code> menentukan kerangka bab:</p>
+<ul>
+<li><strong>Sains Data</strong> — Bab I Pendahuluan, II Tinjauan
+Pustaka, III Metode Penelitian, IV Hasil dan Pembahasan, V Kesimpulan
+dan Saran.</li>
+<li><strong>Sistem Informasi Statistik</strong> — Bab I–III sama, lalu
+IV Analisis dan Perancangan, V Implementasi dan Evaluasi, VI Kesimpulan
+dan Saran.</li>
+</ul>
+<p>Berkas bab yang tidak relevan dengan peminatan terpilih otomatis
+dihapus, dan daftar <code>include</code> pada <code>index.qmd</code>
+disusun sesuai kerangka tersebut.</p>
+</div>
+<div id="daftar-argumen" class="section level2">
+<h2>Daftar argumen</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Argumen</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>path</code></td>
+<td>Direktori tujuan proyek (akan dibuat).</td>
+</tr>
+<tr class="even">
+<td><code>judul</code></td>
+<td>Judul skripsi (tanpa subjudul).</td>
+</tr>
+<tr class="odd">
+<td><code>subjudul</code></td>
+<td>Subjudul (opsional; <code>NULL</code> jika tidak ada).</td>
+</tr>
+<tr class="even">
+<td><code>nama</code>, <code>nim</code></td>
+<td>Nama dan NIM mahasiswa.</td>
+</tr>
+<tr class="odd">
+<td><code>peminatan</code></td>
+<td><code>&quot;Sains Data&quot;</code> atau
+<code>&quot;Sistem Informasi Statistik&quot;</code>.</td>
+</tr>
+<tr class="even">
+<td><code>pembimbing</code>, <code>nip_pembimbing</code></td>
+<td>Nama dan NIP dosen pembimbing.</td>
+</tr>
+<tr class="odd">
+<td><code>penguji1</code>, <code>nip_penguji1</code></td>
+<td>Nama dan NIP Penguji I.</td>
+</tr>
+<tr class="even">
+<td><code>penguji2</code>, <code>nip_penguji2</code></td>
+<td>Nama dan NIP Penguji II.</td>
+</tr>
+<tr class="odd">
+<td><code>ketua_prodi</code>, <code>nip_ketua_prodi</code></td>
+<td>Nama dan NIP Ketua Program Studi.</td>
+</tr>
+<tr class="even">
+<td><code>tahun</code></td>
+<td>Tahun (default: tahun berjalan).</td>
+</tr>
+<tr class="odd">
+<td><code>overwrite</code></td>
+<td><code>TRUE</code> untuk menimpa direktori yang sudah ada.</td>
+</tr>
+<tr class="even">
+<td><code>render</code></td>
+<td><code>TRUE</code> untuk langsung menjalankan
+<code>quarto render</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="contoh" class="section level2">
+<h2>Contoh</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(skripsistis)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">buat_skripsi</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="at">path        =</span> <span class="st">&quot;skripsi-saya&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="at">judul       =</span> <span class="st">&quot;Pemodelan Proxy Means Test Berbasis GPBoost di Provinsi Jawa Timur&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="at">nama        =</span> <span class="st">&quot;Nama Mahasiswa&quot;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  <span class="at">nim         =</span> <span class="st">&quot;222212501&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  <span class="at">peminatan   =</span> <span class="st">&quot;Sains Data&quot;</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="at">ketua_prodi =</span> <span class="st">&quot;Nama Ketua Program Studi&quot;</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="at">pembimbing  =</span> <span class="st">&quot;Nama Pembimbing&quot;</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="at">render      =</span> <span class="cn">FALSE</span>   <span class="co"># set TRUE untuk langsung membuat PDF</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>)</span></code></pre></div>
+<p>Cuplikan berikut menjalankan <code>buat_skripsi()</code> ke direktori
+sementara dan menampilkan struktur proyek yang dihasilkan:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(skripsistis)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;contoh-skripsi&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">suppressMessages</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">buat_skripsi</span>(dir, <span class="at">judul =</span> <span class="st">&quot;Judul Contoh&quot;</span>, <span class="at">nama =</span> <span class="st">&quot;Nama Mahasiswa&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>               <span class="at">nim =</span> <span class="st">&quot;222212501&quot;</span>, <span class="at">peminatan =</span> <span class="st">&quot;Sains Data&quot;</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># tampilkan berkas-berkas yang dibuat</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">list.files</span>(dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; _quarto.yml</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; _skripsistis.yml</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; apa-stis-id.csl</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; bab/bab1_pendahuluan.qmd</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; bab/bab2_tinjauan_pustaka.qmd</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; bab/bab3_metode.qmd</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; bab/bab4_hasil.qmd</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; bab/bab5_kesimpulan.qmd</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; bab/lampiran.qmd</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; img/README.txt</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; img/logo_stis.png</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; index.qmd</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; referensi-perintah.qmd</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; referensi.bib</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; tex/00_frontmatter.tex</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; tex/preamble-tambahan.tex</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; tex/preamble.tex</span></span></code></pre></div>
+<p>Penjelasan singkat tiap berkas:</p>
+<ul>
+<li><code>_quarto.yml</code> — pusat konfigurasi (format PDF, gaya
+sitasi, bibliografi, awalan rujukan silang berbahasa Indonesia).</li>
+<li><code>index.qmd</code> — Prakata, Abstrak, penyisipan Daftar
+Isi/Tabel/Gambar, pemanggilan tiap bab, Daftar Pustaka, dan
+Lampiran.</li>
+<li><code>bab/</code> — berkas tiap bab
+(<code>bab1_pendahuluan.qmd</code> … <code>bab5_kesimpulan.qmd</code>,
+<code>lampiran.qmd</code>).</li>
+<li><code>tex/preamble.tex</code> — pengaturan format (margin 4-3-3-3
+cm, font Times, spasi 1,5, judul bab, algoritma).</li>
+<li><code>tex/00_frontmatter.tex</code> — halaman muka (sampul s.d.
+lembar hak cipta).</li>
+<li><code>referensi.bib</code> — basis data referensi (BibTeX).</li>
+<li><code>apa-stis-id.csl</code> — gaya sitasi APA 7 modifikasi bahasa
+Indonesia.</li>
+<li><code>img/</code> — berisi <code>logo_stis.png</code> (logo bawaan
+sudah disertakan; boleh diganti).</li>
+</ul>
+</div>
+</div>
+<div id="merender-ke-pdf" class="section level1">
+<h1>Merender ke PDF</h1>
+<p>Setelah proyek dibuat, render dengan salah satu cara berikut:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># dari R</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>skripsistis<span class="sc">::</span><span class="fu">render_skripsi</span>(<span class="st">&quot;skripsi-saya&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># atau langsung dari terminal</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># quarto render skripsi-saya</span></span></code></pre></div>
+<p>Hasil PDF berada di subfolder <code>_output/</code>.</p>
+</div>
+<div id="mengganti-logo-dan-metadata" class="section level1">
+<h1>Mengganti logo dan metadata</h1>
+<ul>
+<li><strong>Logo</strong>: <code>logo_stis.png</code> sudah disertakan
+di folder <code>img/</code> (boleh diganti). Jika tidak ada, halaman
+sampul tetap dirender dengan ruang logo dikosongkan.</li>
+<li><strong>Metadata</strong>: nilai yang diisi lewat
+<code>buat_skripsi()</code> sudah tertanam pada <code>_quarto.yml</code>
+dan berkas <code>.tex</code>. Untuk mengubahnya kemudian, sunting
+langsung berkas-berkas tersebut.</li>
+</ul>
+</div>
+<div id="menulis-isi-skripsi" class="section level1">
+<h1>Menulis isi skripsi</h1>
+<div id="kutipan-dan-daftar-pustaka" class="section level2">
+<h2>Kutipan dan daftar pustaka</h2>
+<p>Gaya sitasi mengikuti <strong>APA edisi ke-7 dengan modifikasi bahasa
+Indonesia</strong> (penghubung “dan”, tiga penulis atau lebih disingkat
+“dkk.”, tanpa tahun “t.t.”, “ed. ke-2”, “Penerj.”). Tambahkan entri ke
+<code>referensi.bib</code>, lalu rujuk pada naskah:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Penulisan</th>
+<th>Hasil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[@kunci2025]</code></td>
+<td>(Nama dkk., 2025)</td>
+</tr>
+<tr class="even">
+<td><code>@kunci2025</code></td>
+<td>Nama dkk. (2025)</td>
+</tr>
+<tr class="odd">
+<td><code>[@a2020; @b2021]</code></td>
+<td>(A dkk., 2020; B dkk., 2021)</td>
+</tr>
+</tbody>
+</table>
+<p>Daftar Pustaka tersusun otomatis, hanya memuat referensi yang
+dikutip, dan terurut alfabetis.</p>
+</div>
+<div id="tabel-dengan-sumber" class="section level2">
+<h2>Tabel dengan sumber</h2>
+<p>Tabel dapat dihitung langsung dari kode R agar angka selalu
+konsisten:</p>
+<pre><code>
+``` r
+dat &lt;- data.frame(Daerah = c(&quot;Perkotaan&quot;, &quot;Perdesaan&quot;),
+                  Persentase = c(7.00, 12.86))
+knitr::kable(dat, format.args = list(decimal.mark = &quot;,&quot;))
+```
+
+
+
+|Daerah    | Persentase|
+|:---------|----------:|
+|Perkotaan |       7,00|
+|Perdesaan |      12,86|
+
+
+
+::: {.content-visible when-format=&quot;pdf&quot;}
+\noindent\footnotesize Sumber: BPS (data ilustrasi)\normalsize
+:::</code></pre>
+<p>Rujuk dengan <code>@tbl-miskin</code> (menghasilkan “Tabel 1”).</p>
+</div>
+<div id="gambar-berfont-times-dengan-simbol-latex" class="section level2">
+<h2>Gambar berfont Times dengan simbol LaTeX</h2>
+<p>Setelan global pada <code>index.qmd</code> mengaktifkan
+<code>dev = &quot;tikz&quot;</code> untuk seluruh gambar saat output PDF, sehingga
+grafik R memakai font dokumen (Times New Roman) dan dapat memuat simbol
+LaTeX pada label (perhatikan <em>double backslash</em> <code>\\</code>
+di dalam string R):</p>
+<pre><code>
+``` r
+x &lt;- 1:10
+plot(x, x^2, xlab = &quot;Sumbu $\\alpha$&quot;, ylab = &quot;$\\sigma^2$&quot;)
+```
+
+![Contoh grafik berfont Times dengan simbol LaTeX](/tmp/RtmptSclNS/Rbuild5017c71b136/skripsistis/vignettes/skripsistis_files/figure-html/fig-kurva-1.png)</code></pre>
+<p>Rujuk dengan <code>@fig-kurva</code>. Untuk satu gambar yang tidak
+ingin memakai tikz, tambahkan opsi chunk
+<code>#| dev: ragg_png</code>.</p>
+</div>
+<div id="kode-sebagai-gambar" class="section level2">
+<h2>Kode sebagai gambar</h2>
+<p>Potongan kode dapat diperlakukan sebagai <strong>gambar</strong>
+(judul “Gambar x.” dan dapat dirujuk silang seperti gambar, termasuk
+masuk Daftar Gambar). Bungkus blok kode dalam div dengan id berawalan
+<code>#fig-</code>. Tambahkan kelas <code>.numberLines</code> agar
+setiap baris bernomor sehingga mudah dijelaskan (mis. “baris 2 melakukan
+estimasi model”):</p>
+<pre><code>::: {#fig-kode-regresi}
+```{.r .numberLines}
+model &lt;- lm(pengeluaran ~ aset + pendidikan, data = rt)
+summary(model)
+```
+
+Kode penghitungan regresi linear
+:::</code></pre>
+<p>Rujuk dengan <code>@fig-kode-regresi</code>.</p>
+</div>
+<div id="persamaan" class="section level2">
+<h2>Persamaan</h2>
+<pre><code>$$
+F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
+$$ {#eq-f1}</code></pre>
+<p>Rujuk dengan <code>@eq-f1</code> (menghasilkan “Persamaan 3.2”).</p>
+</div>
+<div id="definisi-teorema-dan-bukti" class="section level2">
+<h2>Definisi, teorema, dan bukti</h2>
+<p>Tersedia lingkungan matematika bernomor dan dapat dirujuk: Definisi
+(<code>#def-</code>), Teorema (<code>#thm-</code>), Lema
+(<code>#lem-</code>), Akibat (<code>#cor-</code>), Proposisi
+(<code>#prp-</code>), Contoh (<code>#exm-</code>), serta lingkungan
+Bukti (<code>.proof</code>).</p>
+<pre><code>::: {#def-pmt}
+**(Proxy Means Test).** Misalkan $y_i$ menyatakan log pengeluaran per kapita ... .
+:::
+
+::: {#thm-takbias}
+Penduga kuadrat terkecil $\hat{\boldsymbol{\beta}}$ bersifat takbias.
+:::
+
+::: {.proof}
+Bukti mengikuti definisi. $\qed$
+:::
+
+Lihat @def-pmt dan @thm-takbias.</code></pre>
+</div>
+<div id="algoritma" class="section level2">
+<h2>Algoritma</h2>
+<p>Algoritma ditulis dengan <code>algorithm2e</code> (kata kunci telah
+dilokalkan ke bahasa Indonesia: Masukan, Keluaran, untuk, selama,
+kembalikan) dan bernomor deret tunggal.</p>
+<pre><code>```{=latex}
+\begin{algorithm}[H]
+\caption{Estimasi PMT}\label{alg-pmt}
+\KwIn{Data $\mathbf{X}$, target $y$}
+\KwOut{Model $\hat{f}$}
+\ForEach{kandidat $m$}{ Latih $m$\; }
+\Return $\hat{f}$\;
+\end{algorithm}
+```</code></pre>
+<p>Rujuk dengan <code>Algoritme \ref{alg-pmt}</code>.</p>
+</div>
+<div id="ringkasan-rujukan-silang" class="section level2">
+<h2>Ringkasan rujukan silang</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Objek</th>
+<th>Awalan id</th>
+<th>Penulisan</th>
+<th>Rujukan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gambar</td>
+<td><code>fig-</code></td>
+<td>div/gambar</td>
+<td><code>@fig-xxx</code></td>
+</tr>
+<tr class="even">
+<td>Tabel</td>
+<td><code>tbl-</code></td>
+<td><code>#\| label: tbl-xxx</code></td>
+<td><code>@tbl-xxx</code></td>
+</tr>
+<tr class="odd">
+<td>Persamaan</td>
+<td><code>eq-</code></td>
+<td><code>$$ ... $$ {#eq-xxx}</code></td>
+<td><code>@eq-xxx</code></td>
+</tr>
+<tr class="even">
+<td>Definisi</td>
+<td><code>def-</code></td>
+<td><code>::: {#def-xxx}</code></td>
+<td><code>@def-xxx</code></td>
+</tr>
+<tr class="odd">
+<td>Teorema</td>
+<td><code>thm-</code></td>
+<td><code>::: {#thm-xxx}</code></td>
+<td><code>@thm-xxx</code></td>
+</tr>
+<tr class="even">
+<td>Algoritma</td>
+<td><code>\label{alg-xxx}</code></td>
+<td><code>algorithm2e</code></td>
+<td><code>\ref{alg-xxx}</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="memakai-gaya-sitasi-pada-dokumen-lain" class="section level1">
+<h1>Memakai gaya sitasi pada dokumen lain</h1>
+<p>Berkas CSL APA 7 modifikasi Indonesia dapat dipakai pada dokumen
+Quarto/R Markdown lain. Lokasinya:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>skripsistis<span class="sc">::</span><span class="fu">path_csl</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/RtmptSclNS/Rinst50149ea08f7/skripsistis/csl/apa-stis-id.csl&quot;</span></span></code></pre></div>
+<p>Pada YAML dokumen lain, cukup tambahkan
+<code>csl: path/ke/apa-stis-id.csl</code> dan <code>lang: id</code>.</p>
+</div>
+<div id="pemecahan-masalah" class="section level1">
+<h1>Pemecahan masalah</h1>
+<ul>
+<li><strong><code>quarto</code> tidak ditemukan</strong> — pasang Quarto
+dan pastikan ada pada PATH.</li>
+<li><strong><code>rmarkdown</code>/<code>knitr</code> tidak
+tersedia</strong> —
+<code>install.packages(c(&quot;rmarkdown&quot;, &quot;knitr&quot;))</code>.</li>
+<li><strong>Gambar tikz gagal</strong> — pastikan
+<code>tikzDevice</code> terpasang dan XeLaTeX tersedia; untuk satu
+gambar bermasalah, gunakan opsi chunk
+<code>#| dev: ragg_png</code>.</li>
+<li><strong>Paket LaTeX hilang (mis. <code>algorithm2e</code>)</strong>
+— biarkan TinyTeX memasang otomatis, atau jalankan
+<code>quarto install tinytex</code>.</li>
+</ul>
+</div>
+<div id="penutup" class="section level1">
+<h1>Penutup</h1>
+<p>Dengan paket ini, seluruh laporan dapat dirender satu kali
+(<code>quarto render</code>) dan mesin LaTeX di balik layar menyusunnya
+dengan format yang konsisten: halaman muka STIS, penomoran Romawi/Arab,
+gaya sitasi APA 7 Indonesia, serta penyajian tabel, gambar, persamaan,
+definisi/teorema, algoritma, dan kode-sebagai-gambar.</p>
+<div id="daftar-singkatan-dan-lambang-opsional" class="section level2">
+<h2>Daftar Singkatan dan Lambang (opsional)</h2>
+<p>Elemen ini nonaktif secara bawaan (Pedoman KS 2025 tidak
+mewajibkannya). Aktifkan dengan <code>daftar_singkatan = TRUE</code>;
+isinya dibaca dari <code>singkatan.csv</code> (live-computed) atau diisi
+lewat argumen <code>singkatan</code> (vektor bernama / data.frame 2
+kolom / matriks 2 kolom). Elemen muncul setelah Daftar Lampiran dengan
+gaya dan penomoran halaman Romawi yang seragam.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">buat_skripsi</span>(<span class="at">path =</span> <span class="st">&quot;skripsi-saya&quot;</span>, <span class="at">daftar_singkatan =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>             <span class="at">singkatan =</span> <span class="fu">c</span>(<span class="st">&quot;BPS&quot;</span> <span class="ot">=</span> <span class="st">&quot;Badan Pusat Statistik&quot;</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>                           <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">mu$&quot;</span> <span class="ot">=</span> <span class="st">&quot;rata-rata populasi&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

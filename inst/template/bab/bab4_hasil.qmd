@@ -65,6 +65,14 @@ Catatan penyajian tabel:
   perbaikan format cukup lewat **pembaruan paket** lalu render ulang  -  tanpa menyusun ulang.
 - **Sumber** diisi lewat argumen `sumber=` (data sekunder). Untuk **data primer/olahan
   sendiri**, kosongkan (`sumber = NULL`, default) sehingga baris Sumber tidak muncul.
+- **Lebar tabel** diatur lewat `lebar=` sebagai pecahan/persen dari lebar teks (margin),
+  mis. `lebar = 0.8` atau `lebar = 80` membuat tabel selebar 80% margin (kolom dibuat
+  sama lebar dan teks membungkus). Default `lebar = NULL` mengikuti lebar isi (alami).
+- **Kerapatan baris** diatur lewat `regang_baris=` (default `1.15`). Pakai nilai lebih
+  kecil (mis. `1.0`) untuk baris **agak rapat**, atau lebih besar (mis. `1.4`) untuk
+  baris **agak longgar**. Berlaku pada tabel biasa maupun tabel panjang.
+- **Jarak judul → tabel** sudah seragam (~1 spasi, sesuai pedoman) untuk semua tabel
+  (biasa, panjang/lanjutan, dengan atau tanpa sumber)  -  diatur otomatis oleh fungsi.
 - **Posisi** tabel selalu **rata tengah** dan berjarak **±3 spasi** dari teks, serta
   **ukuran huruf** isi tabel **≥ 8 pt**  -  diatur otomatis oleh fungsi tersebut dan
   `preamble.tex`. Hindari menyetel ukuran huruf di bawah 8 pt.

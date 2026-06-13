@@ -12,6 +12,8 @@ tabel_skripsi_panjang(
   ket = NULL,
   align = NULL,
   nomor_kolom = TRUE,
+  lebar = NULL,
+  regang_baris = 1.15,
   escape = TRUE
 )
 }
@@ -34,6 +36,14 @@ data primer/olahan sendiri - baris sumber tidak ditampilkan.}
 
 \item{nomor_kolom}{Tampilkan baris nomor kolom \verb{(1)(2)...} (default \code{TRUE}).}
 
+\item{lebar}{Lebar tabel sebagai pecahan/persen dari lebar teks. \code{NULL}
+(default) memakai \strong{0,8 (80\%)}. Nilai \verb{< 0,8} dinaikkan otomatis ke 0,8
+(minimum); nilai \verb{> 1} dianggap persen; maksimum 1 (lebar penuh).}
+
+\item{regang_baris}{Faktor tinggi/kerapatan baris (\verb{\\\\arraystretch}). Default
+\code{1.15}. Nilai lebih kecil (mis. \code{1.0}) membuat baris \strong{agak rapat}, nilai
+lebih besar (mis. \code{1.4}) membuat baris \strong{agak longgar}.}
+
 \item{escape}{Lolos-kan karakter khusus LaTeX (\verb{& \% # _}) pada judul kolom &
 data. Default \code{TRUE}. Set \code{FALSE} bila Anda sengaja menulis LaTeX/math.}
 }
@@ -41,8 +51,14 @@ data. Default \code{TRUE}. Set \code{FALSE} bila Anda sengaja menulis LaTeX/math
 Objek \code{knitr::raw_latex} (PDF) atau \code{knitr::kable} (non-LaTeX).
 }
 \description{
-Seperti \code{\link[=tabel_skripsi]{tabel_skripsi()}} tetapi memakai \code{longtable} untuk tabel yang
-melampaui satu halaman: judul kolom dan baris nomor kolom \strong{terulang} di
+Seperti \code{\link[=tabel_skripsi]{tabel_skripsi()}} tetapi memakai \code{longtable}/\code{xltabular} untuk tabel
+yang melampaui satu halaman: judul kolom dan baris nomor kolom \strong{terulang} di
 tiap halaman, disertai keterangan \strong{"Tabel N (lanjutan)"}. Bentuk tetap grid
 (garis kolom) dengan huruf \verb{\\\\small} (>= 8 pt sesuai pedoman).
+}
+\details{
+Berbeda dengan \code{\link[=tabel_skripsi]{tabel_skripsi()}}, \strong{lebar tabel panjang minimal 80\% lebar
+teks} dengan batas kiri (rata margin) dan batas kanan terkontrol pada lebar
+target, sehingga tepi tabel rapi dan seragam. Kolom label (perataan \code{"l"})
+melebar untuk mengisi ruang, sedangkan kolom angka tetap ringkas.
 }

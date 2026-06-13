@@ -388,8 +388,8 @@
     <term name="note" form="short">ctt.</term>
     <term name="opus" form="short">op.</term>
     <term name="page" form="short">
-    <single>hlm.</single>
-    <multiple>hlm.</multiple>
+    <single>hal.</single>
+    <multiple>hal.</multiple>
     </term>
     <term name="paragraph" form="short">para.</term>
     <term name="part" form="short">bag.</term>
@@ -628,8 +628,8 @@
     <multiple>dir.</multiple>
     </term>
     <term name="editor" form="short">
-    <single>ed.</single>
-    <multiple>ed.</multiple>
+    <single>Ed.</single>
+    <multiple>Eds.</multiple>
     </term>
     <term name="editor-translator" form="short">
     <single>ed. &amp; penerj.</single>

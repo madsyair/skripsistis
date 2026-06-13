@@ -8,7 +8,8 @@
 ::: {.callout-tip title="Petunjuk Penulisan  -  Lampiran" appearance="simple"}
 Lampiran memuat materi pendukung yang terlalu panjang untuk badan teks: kuesioner,
 sintaks/kode lengkap, tabel besar, keluaran, atau surat izin. Setiap lampiran
-didaftarkan otomatis ke **Daftar Lampiran** melalui perintah `\lampiran{...}`.
+didaftarkan otomatis ke **Daftar Lampiran** melalui perintah `\lampiran{...}`, dan
+setiap lampiran baru otomatis dimulai pada halaman berikutnya.
 Tiga lampiran di bawah merangkum perintah **R**, **Quarto/Markdown**, dan **LaTeX**
 yang dipakai untuk menulis skripsi dengan template ini; simpan sebagai rujukan atau
 ganti dengan lampiran penelitian Anda. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
@@ -136,12 +137,17 @@ teks sesudah persamaan melanjutkan paragraf yang sama.
 
 *Kutipan dan daftar pustaka* (sumber dikelola di `referensi.bib`):
 
-| Sintaks | Hasil |
-|---|---|
-| `[@kunci]` | (Nama dkk., tahun) |
-| `@kunci` | Nama dkk. (tahun) |
-| `[@a; @b]` | gabungan beberapa sumber |
-| `[@kunci, hlm. 21]` | dengan nomor halaman |
+| Sintaks | Hasil | Jenis |
+|---|---|---|
+| `@kunci` | Nama dkk. (tahun) | tidak langsung, naratif |
+| `[@kunci]` | (Nama dkk., tahun) | tidak langsung, dalam kurung |
+| `@kunci [hal. 5]` | Nama dkk. (tahun, hal. 5) | langsung, naratif |
+| `[@kunci, hal. 5]` | (Nama dkk., tahun, hal. 5) | langsung, dalam kurung |
+| `[@a; @b]` | gabungan beberapa sumber | — |
+
+Sitasi **tidak langsung** (parafrase) tidak memakai tanda kutip dan tanpa nomor
+halaman; sitasi **langsung** (kutipan persis) diapit tanda kutip `"..."` (ditulis
+manual) dan wajib menyertakan nomor halaman.
 
 Daftar Pustaka terisi otomatis dari sumber yang dikutip melalui blok berikut
 (di akhir naskah):
@@ -186,7 +192,7 @@ landscape, tabel panjang). Tanda *(template)* berarti perintah sudah disiapkan p
 
 | Perintah | Fungsi |
 |---|---|
-| `\lampiran{Judul}` | Mendaftarkan satu lampiran ke Daftar Lampiran (penomoran otomatis). |
+| `\lampiran{Judul}` | Mendaftarkan satu lampiran ke Daftar Lampiran (penomoran otomatis) dan memulai halaman baru. |
 | `\listoflampiran` | Mencetak halaman Daftar Lampiran. |
 | `\aktifkanNomorIsi` | Mengaktifkan penomoran halaman angka Arab sebelum Bab I. |
 | `\pageref*{LastPage}` | Nomor halaman terakhir (untuk hitung halaman di Abstrak). |

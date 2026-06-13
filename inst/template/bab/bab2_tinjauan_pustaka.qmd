@@ -80,3 +80,36 @@ Sebagai contoh pengutipan buku dengan edisi dan buku terjemahan, perhatikan ruju
 berikut: analisis data kategorik dibahas secara mendalam oleh @agresti2000, sedangkan
 teknik penarikan sampel klasik dapat dilihat pada @cochran1991. Kedua entri tersebut akan
 muncul di Daftar Pustaka dengan format "ed. ke-2" dan "(... , Penerj.)".
+
+### Sitasi Tidak Langsung (Parafrase)
+
+Sitasi tidak langsung menyajikan gagasan sumber dengan kalimat sendiri (parafrase),
+tanpa tanda kutip, dan **tidak** memerlukan nomor halaman. Nama penulis dapat menjadi
+bagian kalimat (bentuk naratif) atau diletakkan di dalam kurung. Sebagai contoh bentuk
+naratif, @deaton1997 menjelaskan bahwa pengeluaran konsumsi lebih representatif daripada
+pendapatan untuk mengukur kesejahteraan. Gagasan yang sama dapat ditulis dengan sumber
+di dalam kurung di akhir kalimat, yaitu pengeluaran dinilai lebih stabil dibandingkan
+pendapatan pada perekonomian informal [@deaton1997].
+
+### Sitasi Langsung (Kutipan Langsung)
+
+Sitasi langsung menyalin kalimat sumber **persis seperti aslinya**, wajib diapit tanda
+kutip, dan **harus** mencantumkan nomor halaman. Kutipan pendek (kurang dari 40 kata)
+ditulis menyatu di dalam paragraf. Sebagai contoh bentuk naratif, @etang2022 [hal. 5]
+menyatakan bahwa "*proxy means testing* memprediksi kesejahteraan rumah tangga melalui
+karakteristik yang mudah diamati". Nomor halaman juga dapat diletakkan bersama sumber di
+dalam kurung, misalnya kesejahteraan dapat diprediksi dari karakteristik teramati
+"tanpa memerlukan pendataan pendapatan secara langsung" [@etang2022, hal. 5].
+
+::: {.callout-note title="Sintaks sitasi pada Quarto" appearance="simple"}
+Ringkasan penulisan sitasi di naskah (sumber dikelola di `referensi.bib`):
+
+| Sintaks | Hasil | Jenis |
+|---|---|---|
+| `@kunci` | Nama (tahun) | tidak langsung, naratif |
+| `[@kunci]` | (Nama, tahun) | tidak langsung, dalam kurung |
+| `@kunci [hal. 5]` | Nama (tahun, hal. 5) | langsung, naratif |
+| `[@kunci, hal. 5]` | (Nama, tahun, hal. 5) | langsung, dalam kurung |
+
+Pada sitasi langsung, tanda kutip `"..."` ditulis manual mengapit teks kutipan.
+:::

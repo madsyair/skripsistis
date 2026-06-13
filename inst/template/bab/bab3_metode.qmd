@@ -67,7 +67,7 @@ manual di depannya.
 
 Untuk persamaan yang terlalu panjang, pemotongan dilakukan dengan menempatkan
 operator (mis. `+`) di **awal baris lanjutan** dan menyejajarkannya setelah tanda "="
-(sesuai pedoman hlm. 8), seperti pada model
+(sesuai pedoman hal. 8), seperti pada model
 $$
 \begin{aligned}
 \hat{y} = {} & \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_4 \\

@@ -13,6 +13,8 @@ tabel_skripsi(
   align = NULL,
   nomor_kolom = TRUE,
   garis_total = FALSE,
+  lebar = NULL,
+  regang_baris = 1.15,
   escape = TRUE
 )
 }
@@ -37,6 +39,16 @@ data primer/olahan sendiri - baris sumber tidak ditampilkan.}
 
 \item{garis_total}{Tambah garis di atas baris terakhir (mis. baris "Total").
 Default \code{FALSE}.}
+
+\item{lebar}{Lebar tabel sebagai pecahan/persen dari lebar teks (margin).
+\code{NULL} (default): lebar mengikuti isi (alami). Angka \verb{0 < lebar <= 1}
+dipakai langsung (mis. \code{0.8} = 80\%), sedangkan angka \verb{> 1} dianggap persen
+(mis. \code{80}). Bila diisi, kolom dibuat sama lebar (tipe \code{X}) dan teks
+membungkus agar total tabel persis selebar yang diminta.}
+
+\item{regang_baris}{Faktor tinggi/kerapatan baris (\verb{\\\\arraystretch}). Default
+\code{1.15}. Nilai lebih kecil (mis. \code{1.0}) membuat baris \strong{agak rapat}, nilai
+lebih besar (mis. \code{1.4}) membuat baris \strong{agak longgar}.}
 
 \item{escape}{Lolos-kan karakter khusus LaTeX (\verb{& \% # _}) pada judul kolom &
 data. Default \code{TRUE}. Set \code{FALSE} bila Anda sengaja menulis LaTeX/math.}
@@ -66,5 +78,8 @@ df <- data.frame(Daerah = c("Perkotaan","Perdesaan","Total"),
 tabel_skripsi(df, "Jumlah dan persentase penduduk miskin menurut daerah",
               label = "tab:miskin", sumber = "Badan Pusat Statistik",
               garis_total = TRUE)
+# Lebar 80\% margin, baris agak rapat:
+tabel_skripsi(df, "Contoh tabel 80\% lebar", label = "tab:lebar",
+              lebar = 0.8, regang_baris = 1.0)
 }
 }

@@ -184,14 +184,17 @@ Lingkungan `#def-...`, `#thm-...`, `#lem-...`, dll. otomatis bernomor dan dapat 
 
 ## Kutipan dan Daftar Pustaka
 
-Kelola sumber di `referensi.bib`, lalu sitasi di naskah:
+Kelola sumber di `referensi.bib`, lalu sitasi di naskah. Sitasi **tidak langsung**
+(parafrase, tanpa tanda kutip, tanpa halaman) dan **langsung** (kutipan persis, diapit
+`"..."`, wajib bernomor halaman):
 
-| Sintaks | Hasil |
-|---|---|
-| `[@kunci]` | (Nama dkk., tahun) — kutipan dalam kurung |
-| `@kunci` | Nama dkk. (tahun) — kutipan naratif |
-| `[@a; @b]` | gabungan beberapa sumber |
-| `[@kunci, hlm. 21]` | dengan nomor halaman |
+| Sintaks | Hasil | Jenis |
+|---|---|---|
+| `@kunci` | Nama dkk. (tahun) | tidak langsung, naratif |
+| `[@kunci]` | (Nama dkk., tahun) | tidak langsung, dalam kurung |
+| `@kunci [hal. 5]` | Nama dkk. (tahun, hal. 5) | langsung, naratif |
+| `[@kunci, hal. 5]` | (Nama dkk., tahun, hal. 5) | langsung, dalam kurung |
+| `[@a; @b]` | gabungan beberapa sumber | — |
 
 Daftar Pustaka terisi otomatis dari sumber yang dikutip melalui blok:
 
@@ -252,7 +255,7 @@ Dipakai untuk objek yang dibuat dengan raw LaTeX (TikZ, `sidewaysfigure`, `longt
 
 | Perintah | Fungsi |
 |---|---|
-| `\lampiran{Judul Lampiran}` | Mendaftarkan satu lampiran ke **Daftar Lampiran** secara otomatis (penomoran berurut). |
+| `\lampiran{Judul Lampiran}` | Mendaftarkan satu lampiran ke **Daftar Lampiran** secara otomatis (penomoran berurut) dan memulai halaman baru. |
 | `\aktifkanNomorIsi` | Mengubah penomoran halaman ke angka Arab dan posisi sisi luar; dipanggil sekali sebelum Bab I. |
 | `\listoflampiran` | Mencetak halaman Daftar Lampiran. |
 

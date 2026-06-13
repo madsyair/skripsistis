@@ -80,5 +80,4 @@ Uraikan secara ringkas isi tiap bab (Bab I s.d. Bab V) dalam bentuk paragraf nar
 bukan daftar, sehingga pembaca memperoleh gambaran alur skripsi.
 :::
 
-Penulisan skripsi ini terdiri atas lima bab: Pendahuluan, Tinjauan Pustaka, Metode
-Penelitian, Hasil dan Pembahasan, serta Kesimpulan dan Saran.
+{{SISTEMATIKA_PENULISAN}}

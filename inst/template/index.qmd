@@ -21,12 +21,12 @@ if (knitr::is_latex_output()) {
     tikzDefaultEngine = "xetex",
     tikzXelatexPackages = c(
       getOption("tikzXelatexPackages"),
-      "\\setmainfont{TeX Gyre Termes}\n",
+      "\\IfFontExistsTF{Times New Roman}{\\setmainfont{Times New Roman}}{\\setmainfont{TeX Gyre Termes}}\n",
       "\\usepackage{amssymb,amsmath}\n"
     ),
     tikzUnicodeMetricPackages = c(
       getOption("tikzUnicodeMetricPackages"),
-      "\\setmainfont{TeX Gyre Termes}\n"
+      "\\IfFontExistsTF{Times New Roman}{\\setmainfont{Times New Roman}}{\\setmainfont{TeX Gyre Termes}}\n"
     )
   )
   knitr::opts_chunk$set(dev = "tikz")
@@ -161,7 +161,7 @@ deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan sar
 \aktifkanNomorIsi
 \pagenumbering{arabic}
 \setcounter{page}{1}
-% Teks isi (Bab I dst.) diketik 2 spasi sesuai pedoman hlm. 34. Halaman muka,
+% Teks isi (Bab I dst.) diketik 2 spasi sesuai pedoman hal. 34. Halaman muka,
 % daftar, dan Daftar Pustaka tetap 1,5 spasi (lihat blok sebelum Daftar Pustaka).
 \doublespacing
 ```
@@ -169,7 +169,7 @@ deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan sar
 {{INCLUDE_BAB}}
 
 ```{=latex}
-% Daftar Pustaka: 1 spasi di dalam entri, ~1,5 spasi antar entri (pedoman hlm. 13).
+% Daftar Pustaka: 1 spasi di dalam entri, ~1,5 spasi antar entri (pedoman hal. 13).
 % Jarak antar entri = entry-spacing(CSL) x \cslentryspacingunit; diset 0,5 baris.
 \singlespacing
 \makeatletter

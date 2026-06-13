@@ -1,7 +1,7 @@
 Package: skripsistis
-Title: Template Quarto Skripsi Prodi D-IV Komputasi Statistik (Politeknik
-    Statistika STIS)
-Version: 0.2.0
+Title: Template Quarto Skripsi Prodi D-IV Komputasi Statistik
+        (Politeknik Statistika STIS)
+Version: 0.2.2
 Authors@R: c(
     person("Achmad Syahrul", "Choir", role = c("aut", "cre"),
            email = "madsyair@stis.ac.id"),
@@ -26,3 +26,8 @@ URL: https://github.com/madsyair/skripsistis
 BugReports: https://github.com/madsyair/skripsistis/issues
 NeedsCompilation: no
 Config/roxygen2/version: 8.0.0
+Packaged: 2026-06-13 09:22:03 UTC; root
+Author: Achmad Syahrul Choir [aut, cre],
+  Politeknik Statistika STIS [cph] (pemegang hak cipta logo institusi
+    pada inst/template/img/logo_stis.png, disertakan atas izin)
+Maintainer: Achmad Syahrul Choir <madsyair@stis.ac.id>

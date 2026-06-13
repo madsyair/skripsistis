@@ -218,10 +218,37 @@ buat_skripsi <- function(
     glossaries_preamble <- .preamble_gls_fallback()
   }
 
+  # --- Sistematika Penulisan (jumlah & nama bab sesuai JENIS skripsi) ---
+  #     Disisipkan ke bab1_pendahuluan.qmd (token {{SISTEMATIKA_PENULISAN}}) agar
+  #     prosa benar untuk kedua jenis: Analisis (5 bab) & Pengembangan Sistem (6 bab).
+  sistematika <- if (identical(jenis_skripsi, "Pengembangan Sistem")) {
+    paste0(
+      "Penulisan skripsi ini terdiri atas enam bab. Bab I Pendahuluan menguraikan ",
+      "latar belakang, identifikasi dan batasan masalah, tujuan, manfaat, serta ",
+      "sistematika penulisan. Bab II Tinjauan Pustaka memuat landasan teori dan ",
+      "penelitian terkait. Bab III Metode Penelitian menjelaskan data, tahapan, dan ",
+      "teknik yang digunakan. Bab IV Analisis dan Perancangan menyajikan analisis ",
+      "kebutuhan serta rancangan sistem. Bab V Implementasi dan Evaluasi memaparkan ",
+      "implementasi sistem dan hasil pengujiannya. Bab VI Kesimpulan dan Saran berisi ",
+      "kesimpulan penelitian dan saran untuk pengembangan selanjutnya."
+    )
+  } else {
+    paste0(
+      "Penulisan skripsi ini terdiri atas lima bab. Bab I Pendahuluan menguraikan ",
+      "latar belakang, identifikasi dan batasan masalah, tujuan, manfaat, serta ",
+      "sistematika penulisan. Bab II Tinjauan Pustaka memuat landasan teori dan ",
+      "penelitian terkait. Bab III Metode Penelitian menjelaskan data, tahapan, dan ",
+      "teknik analisis yang digunakan. Bab IV Hasil dan Pembahasan menyajikan temuan ",
+      "penelitian beserta pembahasannya. Bab V Kesimpulan dan Saran berisi kesimpulan ",
+      "penelitian dan saran untuk penelitian selanjutnya."
+    )
+  }
+
   # --- Susun peta substitusi token ---
   peta <- c(
     list(
       JUDUL           = judul,
+      SISTEMATIKA_PENULISAN = sistematika,
       INCLUDE_SINGKATAN   = include_singkatan,
       GLOSSARIES_PREAMBLE = glossaries_preamble,
       PRERENDER_SINGKATAN = prerender_singkatan,

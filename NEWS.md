@@ -1,3 +1,50 @@
+# skripsistis 0.2.2
+
+## Perbaikan (tindak lanjut review pedoman)
+
+* **Font Times New Roman asli.** Template kini memakai berkas *Times New Roman*
+  yang sesungguhnya bila tersedia di sistem (Windows/macOS atau Linux dengan
+  msttcorefonts), dan hanya jatuh ke klon metrik *TeX Gyre Termes* bila tidak ada.
+  Berlaku untuk teks dokumen maupun font grafik (tikz/`gambar_skripsi`).
+* **Jarak judul deterministik.** Jarak judul bab/subbab tidak lagi "dikalibrasi
+  mendekati": kini eksak dalam satuan `\normalbaselineskip` (1 spasi tunggal) sesuai
+  pedoman hlm. 34-35 — **bab -> subbab = 4 spasi**, **bab/subbab -> teks = 3 spasi**,
+  judul level-4 (pokok bahasan) **4 spasi** di atasnya.
+* **Sistematika penulisan sesuai jenis skripsi.** Paragraf "Sistematika Penulisan"
+  pada Bab I kini otomatis menyebut **lima bab** (Analisis) atau **enam bab**
+  (Pengembangan Sistem) — sebelumnya "lima bab" ter-*hardcode* dan salah untuk
+  varian Sistem Informasi Statistik.
+* **Singkatan editor & halaman pada CSL** (mengikuti pedoman & APA 7 Indonesia):
+  - **Editor** disingkat **"Ed."** (tunggal) dan **"Eds."** (jamak) — sebelumnya
+    "ed." untuk keduanya.
+  - Penunjuk halaman memakai **"hal."** (sesuai contoh pedoman), menggantikan "hlm.".
+    Teks petunjuk pada template diselaraskan; locator `[@kunci, hal. 5]` dikenali.
+* **Posisi tabel di tengah halaman.** Tabel panjang (`tabel_skripsi_panjang()`) kini
+  **dipusatkan** (simetris di tengah lebar teks, sesuai pedoman) — bukan rata kiri —
+  sambil mempertahankan lebar minimal 80% serta batas kiri judul/Sumber yang tetap
+  berimpit dengan tepi kiri tabel.
+
+# skripsistis 0.2.1
+
+## Perbaikan
+
+* **Batas kiri & kanan + lebar minimal tabel panjang.** `tabel_skripsi_panjang()`
+  kini menjamin tepi tabel rapi dan seragam:
+  - Judul tabel (termasuk judul panjang yang membungkus ke beberapa baris) serta
+    baris Sumber/Keterangan **diikat ke lebar tabel** sehingga **batas kirinya
+    berimpit dengan tepi kiri tabel** — seragam dengan `tabel_skripsi()`
+    (sebelumnya judul membentang selebar teks).
+  - **Lebar tabel panjang kini minimal 80% lebar teks** (default 0,8; nilai `< 0,8`
+    dinaikkan otomatis ke 0,8; maksimum 1) dengan **batas kanan terkontrol** pada
+    lebar target — tepi kanan tidak lagi menggantung mengikuti isi. Kolom label
+    (perataan `"l"`) melebar mengisi ruang, kolom angka tetap ringkas.
+
+* **Dokumentasi (README).** Disinkronkan dengan implementasi: jarak baris (teks isi
+  **2 spasi**, bagian awal **1,5 spasi**) kini diterapkan otomatis tanpa penyuntingan
+  manual; catatan Daftar Isi "1 PENDAHULUAN" yang usang dihapus (entri bab sudah tampil
+  "BAB I"); klaim "meterai" pada halaman pernyataan diluruskan; struktur proyek dilengkapi
+  berkas terkelola/opsional; nomor versi pemasangan diperbaiki.
+
 # skripsistis 0.2.0
 
 ## Fitur baru

@@ -4,9 +4,15 @@
 %  Engine: XeLaTeX (fontspec)
 % ============================================================
 
-% --- Font: Times New Roman (klon metrik TeX Gyre Termes) ukuran 12 pt ---
+% --- Font: Times New Roman 12 pt ---
+%     Pakai berkas Times New Roman ASLI bila tersedia di sistem (mis. Windows,
+%     macOS, atau Linux dengan paket msttcorefonts). Bila tidak ada, jatuh ke
+%     TeX Gyre Termes (klon metrik Times yang identik dimensinya) agar dokumen
+%     tetap dapat dikompilasi di lingkungan mana pun (mis. TinyTeX bawaan).
 \usepackage{fontspec}
-\setmainfont{TeX Gyre Termes}
+\IfFontExistsTF{Times New Roman}
+  {\setmainfont{Times New Roman}}
+  {\setmainfont{TeX Gyre Termes}}
 
 % --- Margin: kiri/dalam 4 cm; atas, kanan/luar, bawah 3 cm.
 %     Karena dokumen dicetak bolak-balik (twoside), margin "kiri 4 cm"
@@ -72,6 +78,7 @@
 \usepackage{longtable}    % tabel lintas-halaman ("Tabel X (lanjutan)")
 \usepackage{array}
 \usepackage{tabularx}     % kolom 'X' yang otomatis pas ke \textwidth & membungkus teks (tabel lebar)
+\usepackage{xltabular}    % longtable + kolom 'X' (opsi lebar untuk tabel panjang)
 \usepackage{chngcntr}     % \counterwithout: nomor tabel/gambar/persamaan deret tunggal (tak reset per bab)
 \usepackage{ragged2e}
 \usepackage{enumitem}      % daftar bernomor/berbutir yang dapat disesuaikan (a., 1.)
@@ -105,21 +112,24 @@
   {\normalfont\bfseries\centering\singlespacing}
   {\MakeUppercase{\chaptername}\ \Roman{chapter}}{0pt}
   {\MakeUppercase}
-% Jarak judul bab ke teks/subbab di bawahnya ~3-4 spasi (lihat pedoman hlm. 34)
-\titlespacing*{\chapter}{0pt}{0pt}{0.3\baselineskip}
+% Jarak judul bab ke teks/subbab di bawahnya (pedoman hlm. 34). Unit "1 spasi" =
+% \normalbaselineskip (tinggi baris TUNGGAL, tidak terpengaruh \doublespacing teks
+% isi), sehingga nilainya deterministik. Jarak bab->teks = 3 spasi (afterskip bab).
+\titlespacing*{\chapter}{0pt}{0pt}{3\normalbaselineskip}
 \titleformat{\section}{\normalfont\bfseries\singlespacing}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\bfseries\singlespacing}{\thesubsection}{1em}{}
 % Judul level ke-4 (####) tidak bernomor (number-depth:3) -> cukup TEBAL (pedoman
 % hlm. 35), tanpa miring.
 \titleformat{\subsubsection}{\normalfont\bfseries\singlespacing}{\thesubsubsection}{1em}{}
-% Jarak judul sesuai pedoman hlm. 34 (relatif thd jarak baris teks = 2 spasi):
-%   bab->sub bab 4 spasi, bab/sub bab->teks 3 spasi. Nilai dikalibrasi via
-%   pengukuran piksel render (body baseline 50px@150dpi): hasil ~3,0-3,7 spasi,
-%   bab->sub bab terbesar. titlesec menjumlah afterskip bab + beforeskip sub bab
-%   sehingga bab->sub bab otomatis > transisi lain.
-\titlespacing*{\section}{0pt}{0.38\baselineskip}{0.42\baselineskip}
-\titlespacing*{\subsection}{0pt}{0.38\baselineskip}{0.42\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{0.38\baselineskip}{0.42\baselineskip}
+% Jarak judul DETERMINISTIK (unit = \normalbaselineskip = 1 spasi tunggal), sesuai
+% pedoman hlm. 34-35:
+%   - bab -> subbab    = afterskip bab (3) + beforeskip subbab (1) = 4 spasi
+%   - bab/subbab -> teks = 3 spasi (afterskip subbab; afterskip bab juga 3)
+%   - judul level-4 (pokok bahasan) -> 4 spasi di atasnya (beforeskip subsubsection)
+% titlesec menjumlahkan afterskip bab + beforeskip subbab pada transisi bab->subbab.
+\titlespacing*{\section}{0pt}{1\normalbaselineskip}{3\normalbaselineskip}
+\titlespacing*{\subsection}{0pt}{1\normalbaselineskip}{3\normalbaselineskip}
+\titlespacing*{\subsubsection}{0pt}{4\normalbaselineskip}{1\normalbaselineskip}
 
 % Judul bab TAK bernomor (DAFTAR ISI, DAFTAR TABEL, DAFTAR GAMBAR, PRAKATA,
 % ABSTRAK, DAFTAR PUSTAKA, dll.) dibuat seragam dengan judul bab bernomor:
@@ -128,7 +138,9 @@
   {\normalfont\bfseries\centering\singlespacing}
   {}{0pt}
   {\MakeUppercase}
-\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{0.3\baselineskip}
+% Jarak judul bab tak-bernomor ke isi di bawahnya = 3 spasi (deterministik),
+% seragam dengan bab bernomor.
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{3\normalbaselineskip}
 
 % Judul daftar (DAFTAR ISI/TABEL/GAMBAR/LAMPIRAN) diseragamkan dengan judul
 % bab — tebal, rata tengah, ukuran normal (12pt), jarak ~2 baris — melalui API
@@ -230,7 +242,12 @@
 \usepackage{tocloft}
 \newcommand{\listlampiranname}{DAFTAR LAMPIRAN}
 \newlistof{lampiran}{lmp}{\listlampiranname}
+% \lampiran{Judul}: daftarkan satu lampiran ke Daftar Lampiran. Setiap lampiran
+% BARU dimulai di halaman berikutnya (\clearpage); lampiran pertama mengikuti
+% judul "LAMPIRAN" tanpa halaman kosong (syarat \ifnum: hanya pindah halaman
+% jika sudah ada lampiran sebelumnya).
 \newcommand{\lampiran}[1]{%
+  \ifnum\value{lampiran}>0\relax\clearpage\fi
   \refstepcounter{lampiran}%
   \addcontentsline{lmp}{lampiran}{\protect\numberline{\thelampiran}#1}%
 }

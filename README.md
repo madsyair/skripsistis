@@ -24,17 +24,24 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
 
 ## Fitur
 
-- **Halaman muka otomatis**: sampul, halaman judul, pernyataan (dengan meterai),
-  pengesahan (tim penguji + pembimbing), dan lembar hak cipta — terisi dari
-  argumen fungsi.
-- **Format STIS**: kertas A4, margin 4-3-3-3 cm, font Times (TeX Gyre Termes),
-  spasi 1,5, judul bab "BAB I" rata tengah dan kapital (Romawi pada judul, subbab
+- **Halaman muka otomatis**: sampul, halaman judul, pernyataan, pengesahan
+  (tim penguji + pembimbing), dan lembar hak cipta — terisi dari argumen fungsi.
+  (Catatan: blok tanda tangan pada halaman pernyataan tidak menyertakan kotak
+  meterai; tambahkan sendiri bila Program Studi mensyaratkannya.)
+- **Format STIS**: kertas A4, margin *mirror* (dalam/binding 4 cm, luar/atas/bawah
+  3 cm) untuk cetak bolak-balik, font **Times New Roman** (memakai berkas asli bila
+  tersedia di sistem, jika tidak memakai klon metrik TeX Gyre Termes), **spasi 2 pada teks
+  isi** dan **1,5 pada bagian awal** (abstrak, daftar, dll.; daftar pustaka 1 spasi
+  per-entri), judul bab "BAB I" rata tengah dan kapital (Romawi pada judul, subbab
   bernomor Arab 1.1, 1.2, ...), nomor halaman bagian awal Romawi (tengah bawah) dan
   bagian isi Arab (kanan bawah).
 - **Tabel sesuai pedoman**: judul di atas tabel berawalan "Tabel" (bukan "Table"),
   baris nomor kolom (1), (2), (3), baris "Sumber" untuk data sekunder, serta dukungan
-  `longtable` (tabel lintas-halaman) dan `pdflscape` (tabel lebar landscape). Gambar
-  berjudul "Gambar" di bawah objek.
+  `longtable` (tabel lintas-halaman, judul "Tabel N (lanjutan)") dan `pdflscape`
+  (tabel lebar landscape). Pada tabel panjang, **batas kiri & kanan judul/tabel
+  terkontrol dan seragam** (judul yang membungkus beberapa baris pun berimpit dengan
+  tepi tabel) dengan **lebar minimal 80% lebar teks**. Gambar berjudul "Gambar" di
+  bawah objek.
 - **Daftar lengkap**: Daftar Isi (entri bab berawalan "BAB I", "BAB II", ...),
   Daftar Tabel, Daftar Gambar, dan **Daftar Lampiran**.
 - **Dua varian kerangka bab sesuai peminatan**:
@@ -50,7 +57,8 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
   Evaluasi) pada Bab III sesuai pedoman.
 - **Urutan halaman sesuai pedoman**: Sampul → Judul → Pernyataan → Pengesahan →
   Hak Cipta → Prakata → Abstrak → Daftar Isi → Daftar Tabel → Daftar Gambar →
-  Daftar Lampiran → Bab I–V → Daftar Pustaka → Lampiran → Riwayat Hidup. Halaman
+  Daftar Lampiran → Bab I–V (atau I–VI untuk Sistem Informasi Statistik) →
+  Daftar Pustaka → Lampiran → Riwayat Hidup. Halaman
   muka bernomor Romawi kecil mulai dari Prakata (i), isi bernomor Arab di kanan bawah.
 - **Sitasi APA 7 Indonesia** (`apa-stis-id.csl`): penghubung **dan**, tiga penulis
   atau lebih disingkat **dkk.**, tanpa tahun **t.t.**, edisi **ed. ke-2**,
@@ -81,7 +89,7 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
 
 ```r
 # dari sumber (folder paket)
-install.packages("skripsistis_0.4.0.tar.gz", repos = NULL, type = "source")
+install.packages("skripsistis_0.2.2.tar.gz", repos = NULL, type = "source")
 
 # atau dari GitHub
 # remotes::install_github("madsyair/skripsistis")
@@ -171,12 +179,17 @@ dipakai yang tampil; urutannya otomatis.
 
 ## Struktur proyek yang dihasilkan
 
+Contoh untuk peminatan **Sains Data** (varian Sistem Informasi Statistik memakai
+`bab3_metode_si.qmd`, `bab4_analisis.qmd`, `bab5_implementasi.qmd`, `bab5_kesimpulan.qmd`):
+
 ```
 skripsi-saya/
 ├── _quarto.yml              # konfigurasi (format, CSL, bibliografi)
+├── _skripsistis.yml         # konfigurasi paket (untuk pembaruan terkelola)
 ├── index.qmd                # Prakata, Abstrak, Daftar Isi/Tabel/Gambar, include bab
 ├── referensi.bib            # basis data referensi (BibTeX)
 ├── apa-stis-id.csl          # gaya sitasi APA 7 modifikasi Indonesia
+├── singkatan.csv            # isi Daftar Singkatan/Simbol (bila diaktifkan)
 ├── bab/
 │   ├── bab1_pendahuluan.qmd
 │   ├── bab2_tinjauan_pustaka.qmd
@@ -185,10 +198,17 @@ skripsi-saya/
 │   ├── bab5_kesimpulan.qmd
 │   └── lampiran.qmd
 ├── tex/
-│   ├── preamble.tex         # format (margin, font, spasi, judul bab)
-│   └── 00_frontmatter.tex   # sampul s.d. lembar hak cipta
+│   ├── preamble.tex            # format terkelola (margin, font, spasi, judul bab)
+│   ├── preamble-tambahan.tex   # kustomisasi LaTeX Anda (TIDAK ditimpa saat pembaruan)
+│   └── 00_frontmatter.tex      # sampul s.d. lembar hak cipta
 └── img/                     # logo_stis.png sudah disertakan (boleh diganti)
 ```
+
+Berkas infrastruktur format **dikelola paket** dan disegarkan otomatis dari paket
+terpasang setiap kali `render_skripsi()` dijalankan (atau manual via
+`perbarui_template()`), sehingga perbaikan format cukup dengan **memperbarui paket**
+lalu render ulang — tanpa membuat ulang proyek. Isi skripsi (`bab/`, `referensi.bib`,
+`singkatan.csv`, `img/`, `index.qmd`) tidak pernah disentuh.
 
 ## Menulis kutipan
 
@@ -291,13 +311,15 @@ Beberapa ketentuan format telah disesuaikan dengan Pedoman Skripsi KS Edisi Keen
 judul bab "BAB I" dengan subbab Arab, nomor halaman isi di kanan bawah, Daftar
 Lampiran, ukuran font institusi 14 pt, logo 5 cm, serta placeholder kerangka pikir.
 
-Mengenai jarak baris: template memakai **spasi 1,5** untuk seluruh dokumen. Teks
-pedoman pada hlm. 34 menyebut teks isi **2 spasi** (sementara abstrak dan subjudul
-1,5 spasi). Karena praktik di lapangan bervariasi, **konfirmasikan ke Program Studi**
-spasi yang berlaku. Bila diminta 2 spasi untuk teks isi, ubah `\onehalfspacing`
-menjadi `\doublespacing` pada `tex/preamble.tex` (abstrak/halaman muka dapat dibungkus
-`\begin{spacing}{1.5}...\end{spacing}` bila perlu).
+Mengenai jarak baris (sesuai pedoman hlm. 34, diterapkan **otomatis**): **teks isi
+(Bab I dst.) diketik 2 spasi**, sedangkan **halaman muka, abstrak, dan daftar-daftar
+1,5 spasi**; Daftar Pustaka 1 spasi di dalam entri dengan jarak ~1,5 spasi antar-entri.
+Tidak diperlukan penyuntingan manual: pengaturan ini sudah ditanam pada `index.qmd`
+dan `tex/preamble.tex`. Bila Program Studi meminta jarak berbeda, sesuaikan
+`\doublespacing`/`\onehalfspacing` pada bagian terkait di `tex/preamble.tex`
+(kustomisasi yang tidak ditimpa saat pembaruan paket ditulis di
+`tex/preamble-tambahan.tex`).
 
-> Catatan: pada Daftar Isi, entri bab dapat tampil sebagai "1 PENDAHULUAN" (bukan
-> "BAB I PENDAHULUAN"). Penyesuaian tampilan entri bab pada Daftar Isi bersifat opsional
-> dan dapat ditambahkan kemudian; penomoran pada badan dokumen sudah sesuai pedoman.
+Pada Daftar Isi, entri bab tampil dengan awalan "BAB I", "BAB II", ... (Romawi)
+diikuti judul bab, sedangkan subbab bernomor Arab (1.1, 1.2, ...) — sesuai contoh
+Daftar Isi pada pedoman (Lampiran 7).
