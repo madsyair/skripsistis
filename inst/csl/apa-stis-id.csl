@@ -455,8 +455,8 @@
     <multiple>nomor</multiple>
     </term>
     <term name="edition">
-    <single>edisi</single>
-    <multiple>edisi</multiple>
+    <single>Edisi</single>
+    <multiple>Edisi</multiple>
     </term>
     <term name="first-reference-note-number">
     <single>catatan</single>
@@ -894,7 +894,10 @@
       <if is-numeric="edition">
         <group delimiter=" ">
           <text term="edition" form="long" text-case="capitalize-first"/>
-          <number variable="edition" form="long-ordinal"/>
+          <group delimiter="">
+            <text value="ke-"/>
+            <number variable="edition" form="numeric"/>
+          </group>
         </group>
       </if>
       <else>

@@ -1,3 +1,12 @@
+# skripsistis 0.2.3
+
+## Perbaikan
+
+* **Pernyataan edisi pada Daftar Pustaka.** CSL kini menulis edisi sebagai
+  **"Edisi ke-N"** (mis. "Edisi ke-2") dan istilah `edition` dieja kapital
+  "Edisi", konsisten dengan template LaTeX Overleaf. Penyingkatan editor tetap
+  **"Ed."** (tunggal) dan **"Eds."** (jamak).
+
 # skripsistis 0.2.2
 
 ## Perbaikan (tindak lanjut review pedoman)
