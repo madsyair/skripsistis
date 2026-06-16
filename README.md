@@ -6,13 +6,13 @@ mengikuti *Pedoman Skripsi KS Edisi Keenam (2025)*. Paket ini membuat proyek
 skripsi siap pakai—lengkap dengan halaman muka, pengaturan format, dan gaya
 kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
 
-> 📌 **Khusus Prodi D-IV Komputasi Statistik.** Seluruh ketentuan (halaman muka,
+> **Khusus Prodi D-IV Komputasi Statistik.** Seluruh ketentuan (halaman muka,
 > peminatan Sains Data / Sistem Informasi Statistik, kerangka bab, gaya sitasi)
 > mengacu pada pedoman skripsi Prodi Komputasi Statistik. Template ini **tidak
 > ditujukan** untuk program studi lain (mis. D-IV Statistika) yang memiliki
 > pedoman dan format berbeda.
 
-> ⚠️ **Status: versi pengembangan (tidak resmi).**
+> ️ **Status: versi pengembangan (tidak resmi).**
 > Paket ini masih dalam tahap pengembangan dan **belum sepenuhnya mengikuti**
 > panduan penulisan skripsi Politeknik Statistika STIS. Format, tata letak, dan
 > ketentuan yang dihasilkan **dapat berubah** serta perlu diperiksa kembali
@@ -88,11 +88,7 @@ kutipan **APA edisi ke-7 dengan modifikasi bahasa Indonesia**.
 ## Pemasangan
 
 ```r
-# dari sumber (folder paket)
-install.packages("skripsistis_0.2.2.tar.gz", repos = NULL, type = "source")
-
-# atau dari GitHub
-# remotes::install_github("madsyair/skripsistis")
+remotes::install_github("madsyair/skripsistis")
 ```
 
 ## Penggunaan
