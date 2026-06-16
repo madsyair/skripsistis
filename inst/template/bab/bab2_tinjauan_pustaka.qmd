@@ -113,3 +113,40 @@ Ringkasan penulisan sitasi di naskah (sumber dikelola di `referensi.bib`):
 
 Pada sitasi langsung, tanda kutip `"..."` ditulis manual mengapit teks kutipan.
 :::
+
+### Sitasi Lembaga/Instansi Pemerintah
+
+Bila penulis berupa lembaga/instansi, pedoman (4.4) meminta **kemunculan pertama**
+ditulis nama lengkap diikuti akronim, dan **selanjutnya** cukup akronim; pada Daftar
+Pustaka nama lembaga **selalu lengkap**. Pada `referensi.bib`, isi penulis sebagai
+nama korporat dengan **kurung ganda** agar tidak dipenggal: `author = {{Badan Pusat Statistik}}`.
+
+Karena templat ini memakai **CSL** (bukan biblatex), pola pertama-penuh-lalu-akronim
+**diterapkan manual**: gunakan `[-@kunci]` (menghasilkan tahun saja) lalu ketik
+nama/akronim sendiri.
+
+- Kemunculan pertama (naratif): Badan Pusat Statistik [BPS, -@bps2024] menetapkan garis kemiskinan. -> "Badan Pusat Statistik (BPS, 2024)".
+- Kemunculan selanjutnya: BPS [-@bps2024] (-> "BPS (2024)"); atau dalam kurung [BPS, -@bps2024] (-> "(BPS, 2024)").
+
+> Pada templat **Overleaf (biblatex-apa)**, hal ini otomatis melalui medan
+> `shortauthor = {{BPS}}` (pertama: "Badan Pusat Statistik (BPS, 2024)", selanjutnya:
+> "BPS (2024)"). Di Quarto/CSL, lakukan manual seperti di atas.
+
+### Sitasi Direktorat di Bawah Kementerian
+
+Bila karya disusun oleh suatu **direktorat di bawah kementerian**, ikuti APA-7: unit
+**paling spesifik menjadi penulis**, sedangkan **kementerian induk menjadi penerbit**
+(jangan menggabung keduanya sebagai satu nama penulis). Pada `referensi.bib`:
+
+``` bibtex
+@report{ditjenpdp2023,
+  author      = {{Direktorat Jenderal Pembangunan Desa dan Perdesaan}},
+  title       = {Pedoman penggunaan dana desa untuk penanggulangan kemiskinan},
+  year        = {2023},
+  institution = {Kementerian Desa, Pembangunan Daerah Tertinggal, dan Transmigrasi}
+}
+```
+
+Di naskah (pertama): Direktorat Jenderal Pembangunan Desa dan Perdesaan [Ditjen PDP, -@ditjenpdp2023]
+menyusun pedoman; selanjutnya Ditjen PDP [-@ditjenpdp2023] atau [Ditjen PDP, -@ditjenpdp2023].
+Pada Daftar Pustaka, nama direktorat (penulis) diikuti judul, lalu kementerian sebagai penerbit.

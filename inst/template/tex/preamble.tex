@@ -25,6 +25,10 @@
 %     melalui \doublespacing di awal bagian isi (lihat index.qmd). ---
 \usepackage{setspace}
 \onehalfspacing
+% Unit "1 spasi" (tinggi baris TUNGGAL pada 12 pt) untuk jarak presisi di halaman
+% muka sesuai pedoman (mis. 5 spasi, 4,5 spasi, 1,5 spasi). Selaras dgn Overleaf.
+\newlength{\spasi}
+\AtBeginDocument{\begingroup\setstretch{1}\global\spasi=\baselineskip\endgroup}
 % Cegah perataan vertikal (flushbottom) meregang glue antar-elemen (teorema,
 % bukti, tabel, gambar) saat halaman tak penuh; pakai bawah ragged (konsisten).
 \raggedbottom
@@ -185,7 +189,7 @@
 % --- Caption tabel/gambar (Times); judul tabel di ATAS, judul gambar di BAWAH.
 %     Judul tabel/gambar yang lebih dari satu baris diketik 1 spasi (pedoman). ---
 \usepackage{caption}
-\captionsetup{font={normalsize,stretch=1.0},labelsep=period,justification=raggedright,singlelinecheck=false,format=hang}
+\captionsetup{font={normalsize,stretch=1.0},labelsep=period,justification=centering}
 \captionsetup[table]{position=top}
 \captionsetup[figure]{position=bottom}
 
@@ -259,16 +263,16 @@
 % dengan glue internal tocloft sehingga judul meleset ke kanan pada halaman
 % ganjil (tata letak bolak-balik).
 \renewcommand{\cfttoctitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftaftertoctitle}{\hfil\par\nobreak\vskip0.5\baselineskip\mbox{}\hfill{\normalfont Halaman}}
+\renewcommand{\cftaftertoctitle}{\hfil\par\nobreak\vskip2\spasi\mbox{}\hfill{\normalfont Halaman}}
 \renewcommand{\cftlottitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftafterlottitle}{\hfil\par\nobreak\vskip4\baselineskip{\normalfont No.~Tabel\hfill Judul Tabel\hfill Halaman}}
+\renewcommand{\cftafterlottitle}{\hfil\par\nobreak\vskip2\spasi{\normalfont No.~Tabel\hfill Judul Tabel\hfill Halaman}}
 \renewcommand{\cftloftitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftafterloftitle}{\hfil\par\nobreak\vskip4\baselineskip{\normalfont No.~Gambar\hfill Judul Gambar\hfill Halaman}}
+\renewcommand{\cftafterloftitle}{\hfil\par\nobreak\vskip2\spasi{\normalfont No.~Gambar\hfill Judul Gambar\hfill Halaman}}
 \renewcommand{\cftlmptitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
-\renewcommand{\cftafterlmptitle}{\hfil\par\nobreak\vskip4\baselineskip{\normalfont No.~Lampiran\hfill Judul Lampiran\hfill Halaman}}
-\setlength{\cftbeforetoctitleskip}{2\baselineskip}\setlength{\cftaftertoctitleskip}{2\baselineskip}
-\setlength{\cftbeforelottitleskip}{2\baselineskip}\setlength{\cftafterlottitleskip}{1.5\baselineskip}
-\setlength{\cftbeforeloftitleskip}{2\baselineskip}\setlength{\cftafterloftitleskip}{1.5\baselineskip}
+\renewcommand{\cftafterlmptitle}{\hfil\par\nobreak\vskip2\spasi{\normalfont No.~Lampiran\hfill Judul Lampiran\hfill Halaman}}
+\setlength{\cftbeforetoctitleskip}{2\baselineskip}\setlength{\cftaftertoctitleskip}{1.5\spasi}
+\setlength{\cftbeforelottitleskip}{2\baselineskip}\setlength{\cftafterlottitleskip}{\spasi}
+\setlength{\cftbeforeloftitleskip}{2\baselineskip}\setlength{\cftafterloftitleskip}{\spasi}
 \setlength{\cftbeforelmptitleskip}{2\baselineskip}\setlength{\cftafterlmptitleskip}{1.5\baselineskip}
 
 % --- Jarak entri Daftar Gambar & Daftar Tabel seragam (1 spasi) ---

@@ -186,11 +186,10 @@ tabel_skripsi <- function(df, judul, label, sumber = NULL, ket = NULL,
   }
   out <- c(out, "\\hline", env_close, "}%")
 
-  # Judul tabel DI ATAS, rata tepi kiri tabel (lebar = lebar tabel), hang.
-  # Jarak judul -> tabel ~1 spasi (mengikuti pedoman), seragam untuk semua tabel.
+  # Judul tabel DI ATAS, DIPUSATKAN (justification=centering; boleh melebihi tepi
+  # kiri-kanan tabel). Jarak judul -> tabel ~1 spasi (pedoman), seragam.
   out <- c(out,
-    sprintf(paste0("\\parbox[t]{\\wd\\skripsiblokbox}{\\raggedright",
-                   "\\captionof{table}{%s}\\label{%s}}\\par"), judul, label),
+    sprintf("\\captionof{table}{%s}\\label{%s}\\par", judul, label),
     "\\nopagebreak\\addvspace{0.85\\normalbaselineskip}",
     "\\usebox\\skripsiblokbox\\par")
 
@@ -295,12 +294,8 @@ tabel_skripsi_panjang <- function(df, judul, label, sumber = NULL, ket = NULL,
     # Judul -> tabel ~1 spasi, seragam dengan tabel biasa (pedoman).
     paste0("\\begingroup\\singlespacing\\setlength{\\abovecaptionskip}{0pt}",
            "\\setlength{\\belowcaptionskip}{0pt}"),
-    # Judul tabel: blok selebar tabel, DIPUSATKAN di halaman (seragam dengan
-    # tabel_skripsi yang juga rata tengah); teks judul rata kiri (hang) sehingga
-    # batas kirinya berimpit dengan tepi kiri tabel.
-    sprintf(paste0("\\centerline{\\parbox[t]{%s}{\\raggedright",
-                   "\\captionof{table}{%s}\\label{%s}}}"),
-            blok_w, judul, label),
+    # Judul tabel: DIPUSATKAN di halaman (boleh melebihi tepi kiri-kanan tabel).
+    sprintf("\\captionof{table}{%s}\\label{%s}\\par", judul, label),
     "\\nopagebreak\\addvspace{0.85\\normalbaselineskip}\\nopagebreak",
     # Tabel DIPUSATKAN di halaman (pedoman: tabel simetris di tengah). Lebar tabel
     # tetap (lebar_eff) sehingga blok judul/sumber yang juga dipusatkan berimpit

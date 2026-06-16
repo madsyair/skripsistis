@@ -136,9 +136,14 @@ Beri label berawalan jenis, lalu rujuk dengan `@`.
 |---|---|---|
 | `#fig-x` | `@fig-x` | Gambar N |
 | `#tbl-x` | `@tbl-x` | Tabel N |
-| `#eq-x` | `@eq-x` | Persamaan (N) |
+| `#eq-x` | `Persamaan @eq-x` | Persamaan (N) — kata "Persamaan" **ditulis manual** (`eq-prefix` kosong; `@eq-x` hanya menghasilkan **(N)**) |
 | `#def-x` | `@def-x` | Definisi N |
 | `#thm-x` | `@thm-x` | Teorema N |
+
+> Catatan persamaan: berbeda dari Gambar/Tabel yang prefiksnya otomatis, kata
+> **"Persamaan"/"persamaan" diketik MANUAL** sebelum `@eq-x`. Ini disengaja agar
+> penulis bebas memilih huruf besar (awal kalimat) atau kecil (di tengah kalimat),
+> sesuai tata bahasa Indonesia. `@eq-x` sendiri hanya menghasilkan nomor "(N)".
 
 > Catatan: rujukan silang `@...` bekerja untuk objek yang dibuat **oleh Quarto**.
 > Untuk objek yang dibuat dengan **raw LaTeX** (mis. `sidewaysfigure`, `longtable`,

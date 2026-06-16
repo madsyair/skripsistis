@@ -52,7 +52,7 @@
   } else {
     list(
       SUBJUDUL            = subjudul,
-      SUBJUDUL_BLOCK      = sprintf("\\vspace{0.3cm}{\\bfseries\\large (%s)\\par}", subjudul),
+      SUBJUDUL_BLOCK      = sprintf("\\par\\vspace{\\spasi}{\\bfseries\\fontsize{14}{21}\\selectfont (%s)\\par}", subjudul),
       SUBJUDUL_PERNYATAAN = sprintf("{\\bfseries (%s)\\par}", subjudul),
       SUBJUDUL_PENGESAHAN = sprintf("\\begin{center}{\\bfseries\\large (%s)}\\end{center}", subjudul)
     )

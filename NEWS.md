@@ -1,3 +1,51 @@
+# skripsistis 0.2.4
+
+## Sitasi lembaga & rujukan persamaan
+
+* **Sitasi lembaga/instansi & direktorat kementerian.** Ditambah contoh + panduan:
+  lembaga (pedoman 4.4) ditulis pertama nama lengkap+akronim lalu akronim saja
+  (`author = {{Badan Pusat Statistik}}`); direktorat di bawah kementerian (APA-7)
+  memakai direktorat sebagai **penulis** dan kementerian sebagai **penerbit**
+  (`institution = {Kementerian …}`). Pada CSL pola pertama-penuh-akronim ditulis
+  manual dengan `[BPS, -@kunci]`.
+* **Klarifikasi rujukan persamaan.** Kata "Persamaan"/"persamaan" **ditulis manual**;
+  `@eq-...` (dengan `eq-prefix` kosong) hanya menghasilkan nomor "(N)". Tabel panduan
+  pada `referensi-perintah.qmd` diperbaiki agar tidak menyiratkan otomatis.
+
+## Koreksi jarak judul daftar 
+
+* **Jarak judul daftar -> "Halaman"/header = 4 spasi.** Pedoman (Lampiran 7 & 8)
+  secara eksplisit menganotasi jarak **4 spasi** antara judul daftar
+  (DAFTAR ISI/TABEL/GAMBAR/LAMPIRAN) dengan baris "Halaman"/header kolom. Nilai
+  ini dipulihkan (`\vskip2\spasi`, terverifikasi rasio thd tinggi entri 2,58 vs
+  pedoman 2,60). Jarak "Halaman"/header -> entri pertama ~2 spasi. Selaras dengan
+  Overleaf.
+
+## Perbaikan halaman muka & daftar
+
+* **Sampul & halaman judul presisi pedoman.** Konstruksi disamakan dengan template
+  LaTeX Overleaf yang sudah diverifikasi terhadap pedoman (Lampiran 1 & 2):
+  judul kapital 14 pt jarak antar baris **2 spasi** mulai ~baris kedua
+  (terverifikasi **0,71 cm** di bawah margin atas), subjudul 1,5 spasi, blok
+  Program Studi/Peminatan **di tengah** (nilai membungkus), tiga baris penutup
+  (STIS/JAKARTA/tahun) 14 pt/1,5 spasi terkunci di bawah via `\vfill`. Jarak antar
+  bagian memakai satuan `\spasi` (5 spasi, 4,5 spasi, dst.).
+* **Jarak daftar lebih wajar.** Pada Daftar Isi/Tabel/Gambar/Lampiran: jarak
+  **judul daftar → header/"Halaman"** dipangkas (mis. judul→header tabel dari 4
+  menjadi **1,5 baris**) dan jarak **"Halaman"/header → entri** menjadi **1 baris**
+  (sebelumnya 2 / 1,5 baris). Selaras dengan Overleaf.
+
+## Perubahan tata letak tabel & gambar
+
+* **Judul tabel & gambar DIPUSATKAN.** `tabel_skripsi()`, `tabel_skripsi_panjang()`,
+  dan `gambar_skripsi()` kini menaruh judul (`\captionof`) **di tengah** (boleh
+  melebihi tepi kiri-kanan objek), bukan rata tepi kiri objek. Setelan caption
+  `justification=centering` pada `preamble.tex`.
+* **Sumber tetap di tepi kiri objek.** Baris *Sumber*/*Keterangan* tetap dirata-
+  kirikan pada tepi kiri tabel/gambar (via `\parbox` selebar objek). Untuk
+  **gambar**, urutan tetap **gambar → Sumber → judul**.
+* Selaras dengan template LaTeX Overleaf (`skripsistis-overleaf`).
+
 # skripsistis 0.2.3
 
 ## Perbaikan

@@ -9,29 +9,33 @@
 
 % ---------- HALAMAN SAMPUL ----------
 \begin{center}
-  \vspace*{1cm}
-  {\bfseries\fontsize{14}{17}\selectfont \MakeUppercase{{{JUDUL}}}\par}
+  \vspace*{-0.7\spasi}  % kompensasi leading; judul mulai ~baris kedua (pedoman)
+  % Judul: kapital, TNR 14 pt, jarak antar baris 2 spasi (pedoman).
+  {\bfseries\fontsize{14}{28}\selectfont \MakeUppercase{{{JUDUL}}}\par}
   {{SUBJUDUL_BLOCK}}
-  \vspace{2.5cm}
 
-  {\bfseries\fontsize{12}{15}\selectfont {{NAMA_KAPITAL}}\par}
-  {\bfseries\fontsize{12}{15}\selectfont {{NIM}}\par}
-  \vspace{2cm}
+  % Jarak Nama dengan baris terakhir judul/sub judul = 5 spasi (pedoman).
+  \vspace{5\spasi}
+  % Nama & NIM: kapital, TNR 12 pt, jarak Nama-NIM 1,5 spasi (pedoman).
+  {\bfseries\fontsize{12}{18}\selectfont {{NAMA_KAPITAL}}\\ {{NIM}}\par}
 
-  \begin{flushleft}
-  \begin{tabular}{@{}lcl@{}}
+  % Jarak Program Studi dengan NIM = 4,5 spasi (pedoman).
+  \vspace{4.5\spasi}
+  % Program Studi & Peminatan: TNR 12 pt, blok di TENGAH (nilai membungkus).
+  {\bfseries\fontsize{12}{12}\selectfont
+  \begin{tabular}{@{}l@{\hspace{0.6em}}c@{\hspace{0.6em}}>{\raggedright\arraybackslash}p{6.7cm}@{}}
   \textbf{PROGRAM STUDI} & : & \textbf{KOMPUTASI STATISTIK PROGRAM DIPLOMA IV} \\
-  \textbf{PEMINATAN}     & : & \textbf{{{PEMINATAN}}} \\
-  \end{tabular}
-  \end{flushleft}
+  \textbf{PEMINATAN}     & : & \textbf{\MakeUppercase{{{PEMINATAN}}}} \\
+  \end{tabular}\par}
 
   \vfill
+  % Logo 5 cm x 5 cm, simetris antara Program Studi dan tulisan STIS (pedoman).
   \IfFileExists{img/logo_stis.png}{\includegraphics[width=5cm,height=5cm,keepaspectratio]{img/logo_stis.png}\par}{\rule{0pt}{5cm}\par}
-  \vspace{0.8cm}
+  \vfill
 
-  {\bfseries\fontsize{14}{17}\selectfont POLITEKNIK STATISTIKA STIS\par}
-  {\bfseries\fontsize{14}{17}\selectfont JAKARTA\par}
-  {\bfseries\fontsize{14}{17}\selectfont {{TAHUN}}\par}
+  % Tiga baris terakhir: kapital, TNR 14 pt, jarak antar baris 1,5 spasi; baris
+  % terakhir (tahun) tepat di batas margin bawah (pedoman).
+  {\bfseries\fontsize{14}{21}\selectfont POLITEKNIK STATISTIKA STIS\\ JAKARTA\\ {{TAHUN}}\par}
 \end{center}
 \clearpage
 
@@ -40,28 +44,29 @@
 \setcounter{page}{1}
 \thispagestyle{empty}
 \begin{center}
-  \vspace*{1cm}
-  {\bfseries\fontsize{14}{17}\selectfont \MakeUppercase{{{JUDUL}}}\par}
+  \vspace*{-0.7\spasi}
+  % Judul: format sama dengan halaman sampul (14 pt, 2 spasi).
+  {\bfseries\fontsize{14}{28}\selectfont \MakeUppercase{{{JUDUL}}}\par}
   {{SUBJUDUL_BLOCK}}
-  \vspace{1.5cm}
 
-  {\bfseries SKRIPSI\par}
-  \vspace{0.5cm}
-  {\bfseries Diajukan sebagai Salah Satu Syarat untuk Memperoleh Sebutan\\
+  % Tulisan SKRIPSI berjarak 5 spasi setelah baris terakhir judul/sub judul.
+  \vspace{5\spasi}
+  {\bfseries\fontsize{12}{12}\selectfont SKRIPSI\par}
+  % "Diajukan sebagai ..." jarak antar baris 1,5 spasi (pedoman).
+  \vspace{\spasi}
+  {\bfseries\fontsize{12}{18}\selectfont Diajukan sebagai Salah Satu Syarat untuk Memperoleh Sebutan\\
   Sarjana Terapan Statistika pada Politeknik Statistika STIS\par}
-  \vspace{1.5cm}
 
-  {\bfseries Oleh:\par}
-  {\bfseries\fontsize{12}{15}\selectfont {{NAMA_KAPITAL}}\par}
-  {\bfseries {{NIM}}\par}
+  % "Oleh:" pada baris ketiga (3 spasi) setelah tulisan sebelumnya (pedoman).
+  \vspace{3\spasi}
+  {\bfseries\fontsize{12}{12}\selectfont Oleh:\par}
+  {\bfseries\fontsize{12}{18}\selectfont {{NAMA_KAPITAL}}\\ {{NIM}}\par}
 
   \vfill
   \IfFileExists{img/logo_stis.png}{\includegraphics[width=5cm,height=5cm,keepaspectratio]{img/logo_stis.png}\par}{\rule{0pt}{5cm}\par}
-  \vspace{0.8cm}
+  \vfill
 
-  {\bfseries\fontsize{14}{17}\selectfont POLITEKNIK STATISTIKA STIS\par}
-  {\bfseries\fontsize{14}{17}\selectfont JAKARTA\par}
-  {\bfseries\fontsize{14}{17}\selectfont {{TAHUN}}\par}
+  {\bfseries\fontsize{14}{21}\selectfont POLITEKNIK STATISTIKA STIS\\ JAKARTA\\ {{TAHUN}}\par}
 \end{center}
 \clearpage
 

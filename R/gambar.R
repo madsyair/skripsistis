@@ -54,20 +54,26 @@ gambar_skripsi <- function(path, judul, label, sumber = NULL, ket = NULL,
     "\\begin{center}",
     sprintf("\\sbox\\skripsiblokbox{\\includegraphics[width=%s]{%s}}%%", lebar, path),
     "\\usebox\\skripsiblokbox\\par",
-    "\\addvspace{0.15\\normalbaselineskip}",
-    "\\parbox[t]{\\wd\\skripsiblokbox}{\\raggedright\\setlength{\\parindent}{0pt}%"
+    "\\addvspace{0.15\\normalbaselineskip}"
   )
-  if (!is.null(sumber)) {
-    out <- c(out, sprintf("{\\small Sumber: %s}\\par",
-                          if (escape) .lx_escape(sumber) else sumber))
+  # Sumber & Keterangan: rata KIRI pada tepi kiri gambar (lebar = lebar gambar),
+  # diletakkan SEBELUM judul (pedoman). Judul gambar sendiri DIPUSATKAN.
+  if (!is.null(sumber) || !is.null(ket)) {
+    out <- c(out,
+      "\\parbox[t]{\\wd\\skripsiblokbox}{\\raggedright\\setlength{\\parindent}{0pt}%")
+    if (!is.null(sumber)) {
+      out <- c(out, sprintf("{\\small Sumber: %s}\\par",
+                            if (escape) .lx_escape(sumber) else sumber))
+    }
+    if (!is.null(ket)) {
+      out <- c(out, sprintf("{\\small Keterangan: %s}\\par",
+                            if (escape) .lx_escape(ket) else ket))
+    }
+    out <- c(out, "}\\par")
   }
-  if (!is.null(ket)) {
-    out <- c(out, sprintf("{\\small Keterangan: %s}\\par",
-                          if (escape) .lx_escape(ket) else ket))
-  }
+  # Judul gambar di TENGAH (justification=centering pada preamble).
   out <- c(out,
-           sprintf("\\captionof{figure}{%s}\\label{%s}", jud, label),
-           "}")
+           sprintf("\\captionof{figure}{%s}\\label{%s}", jud, label))
   out <- c(out, "\\end{center}\\endgroup", "\\par\\addvspace{0.5\\normalbaselineskip}")
   knitr::raw_latex(paste(out, collapse = "\n"))
 }
