@@ -1,16 +1,10 @@
 # METODE PENELITIAN
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Metode Penelitian" appearance="simple"}
-Bab Metode Penelitian menjelaskan bagaimana penelitian dilakukan: data, variabel, alur/tahapan, serta teknik analisis atau perancangan sistem. Harus cukup rinci agar penelitian dapat direplikasi. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
-:::
-
+*Cara menulis bab ini.* Bab Metode Penelitian menjelaskan bagaimana penelitian dilakukan: data, variabel, alur/tahapan, serta teknik analisis atau perancangan sistem. Harus cukup rinci agar penelitian dapat direplikasi.
 
 ## Tinjauan Umum
 
-::: {.callout-note title="Petunjuk: Tinjauan Umum" appearance="simple"}
-Gambarkan objek/lokus penelitian, sumber dan cakupan data (mis. Susenas/Sakernas/PODES), serta variabel yang digunakan beserta definisinya.
-:::
-
+*Cara menulis.* Gambarkan objek/lokus penelitian, sumber dan cakupan data (mis. Susenas/Sakernas/PODES), serta variabel yang digunakan beserta definisinya.
 
 Penelitian ini menggunakan kerangka *Cross-Industry Standard Process for Data Mining*
 (CRISP-DM) yang mencakup enam fase: *Business Understanding*, *Data Understanding*,
@@ -37,10 +31,7 @@ dibuat ulang sendiri (tidak menyalin langsung dari sumber lain) untuk menghindar
 
 ## Tahapan Penelitian
 
-::: {.callout-note title="Petunjuk: Tahapan Penelitian" appearance="simple"}
-Uraikan alur penelitian langkah demi langkah (boleh dengan diagram alir): praproses data, pemodelan, evaluasi. Jelaskan tiap tahap agar dapat direplikasi.
-:::
-
+*Cara menulis.* Uraikan alur penelitian langkah demi langkah (boleh dengan diagram alir): praproses data, pemodelan, evaluasi. Jelaskan tiap tahap agar dapat direplikasi.
 
 Data utama bersumber dari data mikro Survei Sosial Ekonomi Nasional (Susenas) yang
 diperoleh dari Badan Pusat Statistik (BPS). Variabel respons yang digunakan adalah
@@ -78,10 +69,7 @@ yang ditulis dalam dua baris.
 
 ## Prosedur Estimasi
 
-::: {.callout-note title="Petunjuk: Prosedur Estimasi" appearance="simple"}
-Jelaskan teknik estimasi/algoritma yang dipakai, asumsi, dan kriteria pemilihan model (mis. metrik evaluasi, validasi silang).
-:::
-
+*Cara menulis.* Jelaskan teknik estimasi/algoritma yang dipakai, asumsi, dan kriteria pemilihan model (mis. metrik evaluasi, validasi silang).
 
 Keseluruhan prosedur estimasi model PMT diringkas pada Algoritme \ref{alg-pmt}.
 

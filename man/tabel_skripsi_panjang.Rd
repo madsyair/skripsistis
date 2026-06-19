@@ -14,7 +14,9 @@ tabel_skripsi_panjang(
   nomor_kolom = TRUE,
   lebar = NULL,
   regang_baris = 1.15,
-  escape = TRUE
+  escape = TRUE,
+  simpan = NULL,
+  timpa = FALSE
 )
 }
 \arguments{
@@ -46,6 +48,14 @@ lebih besar (mis. \code{1.4}) membuat baris \strong{agak longgar}.}
 
 \item{escape}{Lolos-kan karakter khusus LaTeX (\verb{& \% # _}) pada judul kolom &
 data. Default \code{TRUE}. Set \code{FALSE} bila Anda sengaja menulis LaTeX/math.}
+
+\item{simpan}{Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
+kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
+(kode dikembalikan inline seperti biasa).}
+
+\item{timpa}{Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,
+berkas TIDAK ditimpa sehingga editan dipertahankan; \code{TRUE} membuat ulang.}
 }
 \value{
 Objek \code{knitr::raw_latex} (PDF) atau \code{knitr::kable} (non-LaTeX).

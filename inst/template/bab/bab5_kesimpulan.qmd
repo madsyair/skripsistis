@@ -1,16 +1,10 @@
 # KESIMPULAN DAN SARAN
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Kesimpulan Dan Saran" appearance="simple"}
-Bab Kesimpulan dan Saran berisi jawaban ringkas atas rumusan masalah (Kesimpulan) dan rekomendasi tindak lanjut (Saran). Kesimpulan tidak memuat angka/tabel baru. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
-:::
-
+*Cara menulis bab ini.* Bab Kesimpulan dan Saran berisi jawaban ringkas atas rumusan masalah (Kesimpulan) dan rekomendasi tindak lanjut (Saran). Kesimpulan tidak memuat angka/tabel baru.
 
 ## Kesimpulan
 
-::: {.callout-note title="Petunjuk: Kesimpulan" appearance="simple"}
-Tulis kesimpulan sebagai jawaban langsung dan ringkas atas tiap rumusan masalah, paralel dengan tujuan penelitian. Tanpa tabel/angka/kutipan baru.
-:::
-
+*Cara menulis.* Tulis kesimpulan sebagai jawaban langsung dan ringkas atas tiap rumusan masalah, paralel dengan tujuan penelitian. Tanpa tabel/angka/kutipan baru.
 
 Bagian ini memuat kesimpulan utama penelitian yang dirumuskan berdasarkan hasil dan
 pembahasan pada bab sebelumnya. Kesimpulan disusun secara ringkas dan menjawab tujuan
@@ -21,10 +15,7 @@ penelitian pada Bab 1, tanpa memuat data, tabel, atau gambar baru.
 
 ## Saran
 
-::: {.callout-note title="Petunjuk: Saran" appearance="simple"}
-Berikan saran yang konkret dan dapat ditindaklanjuti, baik untuk pengembangan keilmuan maupun penerapan praktis serta penelitian selanjutnya.
-:::
-
+*Cara menulis.* Berikan saran yang konkret dan dapat ditindaklanjuti, baik untuk pengembangan keilmuan maupun penerapan praktis serta penelitian selanjutnya.
 
 Bagian ini memuat saran yang disusun berdasarkan hasil penelitian dan keterbatasannya.
 

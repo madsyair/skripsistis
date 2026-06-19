@@ -216,3 +216,32 @@
   cat(paste(contoh, collapse = "\n"), file = bab1_qmd, append = TRUE)
   invisible()
 }
+
+# Keluaran LaTeX: inline (default) atau simpan ke berkas .tex agar dapat diedit.
+#
+# tex    : string kode LaTeX yang dihasilkan fungsi.
+# simpan : NULL (kembalikan inline) atau path berkas .tex tujuan.
+# timpa  : bila FALSE (default) dan berkas sudah ada, berkas TIDAK ditimpa
+#          (editan mahasiswa dipertahankan); bila TRUE, berkas dibuat ulang.
+# Saat 'simpan' diisi, fungsi menulis berkas lalu mengembalikan '\input{path}'
+# sehingga render memakai berkas tersebut (termasuk editan manual).
+.keluaran_latex <- function(tex, simpan = NULL, timpa = FALSE) {
+  if (is.null(simpan)) {
+    return(knitr::raw_latex(tex))
+  }
+  d <- dirname(simpan)
+  if (!identical(d, ".") && !dir.exists(d)) {
+    dir.create(d, showWarnings = FALSE, recursive = TRUE)
+  }
+  if (!file.exists(simpan) || isTRUE(timpa)) {
+    writeLines(tex, simpan, useBytes = TRUE)
+    if (interactive()) message(sprintf(
+      "skripsistis: kode LaTeX disimpan ke '%s'. Edit berkas itu bila perlu; berkas di-input otomatis.",
+      simpan))
+  } else {
+    if (interactive()) message(sprintf(
+      "skripsistis: '%s' sudah ada -> memakai versi tersebut (editan dipertahankan). Pakai timpa = TRUE untuk membuat ulang.",
+      simpan))
+  }
+  knitr::raw_latex(sprintf("\\input{%s}", simpan))
+}

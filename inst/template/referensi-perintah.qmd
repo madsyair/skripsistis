@@ -217,8 +217,9 @@ Isi catatan.
 ```
 
 Jenis: `callout-note` (biru), `callout-tip` (hijau), `callout-warning`,
-`callout-important`, `callout-caution`. Pada template dipakai sebagai **"Petunjuk
-Penulisan"** dan dihapus pada naskah final.
+`callout-important`, `callout-caution`. Fitur ini **opsional**; template skripsi
+tidak lagi memakai kotak callout pada badan teks — penjelasan cara menulis kini
+ditulis sebagai prosa run-in (*"Cara menulis. ..."*) agar menyerupai buku pedoman.
 
 ## Konten Khusus Format
 

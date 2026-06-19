@@ -1,4 +1,96 @@
-# skripsistis 0.2.4
+# skripsistis 0.3.4
+
+## Perbaikan jarak gambar–sumber sesuai pedoman
+
+* **Jarak vertikal gambar ke baris "Sumber"** dilebarkan dari ~0,15 spasi (terlalu
+  rapat) menjadi ~0,8 spasi, agar sesuai contoh pedoman (terukur 0,81 spasi pada
+  contoh Gambar 5). Jarak sumber ke judul tetap ~1 spasi. Diterapkan pada
+  `gambar_skripsi()` (`\addvspace{0.4\normalbaselineskip}`).
+
+# skripsistis 0.3.3
+
+## Opsi simpan kode LaTeX (dapat diedit mahasiswa)
+
+* **Argumen baru `simpan` dan `timpa`** pada `tabel_skripsi()`,
+  `tabel_skripsi_panjang()`, dan `gambar_skripsi()`. Dengan `simpan = "tex/nama.tex"`,
+  kode LaTeX hasil fungsi **ditulis ke berkas** lalu disisipkan otomatis via `\input`,
+  sehingga mahasiswa dapat **mengedit LaTeX-nya secara manual** untuk penyesuaian.
+* Saat render ulang, berkas yang sudah ada **tidak ditimpa** (editan dipertahankan);
+  `timpa = TRUE` membuat ulang dari data terbaru. Pesan informasi hanya tampil saat sesi
+  interaktif sehingga tidak mengotori PDF hasil render.
+
+# skripsistis 0.3.2
+
+## Grafik dengan simbol matematika di dalamnya
+
+* **Contoh baru di Bab IV**: "Contoh Grafik dengan Simbol Matematika (Regresi)" —
+  garis regresi dari data dengan **persamaan bersimbol di dalam grafik** ($\hat{y} =
+  \beta_0 + \beta_1 x$), bentuk terisi koefisien, dan $R^2$, semuanya dirender sebagai
+  matematika LaTeX (tikz) sehingga seragam dengan teks. Berhasil dirender Quarto+XeLaTeX.
+* `setup_tikz_skripsi()` kini turut memuat `amsmath` pada paket pengukuran tikz agar
+  simbol matematika kompleks aman. Template Overleaf disetarakan.
+
+# skripsistis 0.3.1
+
+## Grafik R sebagai LaTeX (font serasi) + contoh penomoran
+
+* **Fungsi baru `setup_tikz_skripsi()`** untuk mengatur \pkg{tikzDevice} (XeLaTeX +
+  font naskah) sekali di awal dokumen, sehingga grafik R yang dibuat dengan
+  `tikzDevice::tikz()` memakai **font yang sama persis dengan teks** (Times New
+  Roman/TeX Gyre Termes) pada label sumbu, angka, dan judul.
+* **`gambar_skripsi()` menerima `tikz = TRUE`**: `path` berupa berkas `.tex` hasil
+  `tikz()` disisipkan dengan `\input` (bukan `\includegraphics`), tetap dengan judul
+  "Gambar N." di tengah dan Sumber di tepi kiri sesuai pedoman.
+* **Contoh baru di Bab IV**: "Contoh Grafik R sebagai LaTeX (Font Serasi)" dan
+  "Contoh Penomoran dan Rujukan Silang" (persamaan, gambar, tabel, daftar bernomor),
+  semuanya berhasil dirender Quarto+XeLaTeX. Template Overleaf disetarakan
+  (kode R penghasil `.tex` + `\input`, serta contoh penomoran).
+
+# skripsistis 0.3.0
+
+## Template bergaya buku pedoman (kotak petunjuk dihapus)
+
+* **Seluruh kotak "Petunjuk Penulisan" (callout) dihapus.** Penjelasan cara menulis
+  tiap bab/elemen kini ditulis sebagai **prosa run-in** (*"Cara menulis. …"*) yang
+  langsung diikuti **contoh**, sehingga template terbaca seperti buku pedoman:
+  penjelasan + contoh pada setiap bagian (Pendahuluan, Tinjauan Pustaka, Metode,
+  Hasil/Analisis, Implementasi, Kesimpulan, Lampiran, Riwayat Hidup, Prakata, Abstrak).
+* **Referensi sintaks/teknis dipindah ke Lampiran.** Kotak sintaks (mis. cara menulis
+  kutipan) tidak lagi inline; sintaks lengkap dirangkum pada Lampiran "Daftar Perintah
+  R/Quarto/LaTeX", dengan penunjuk ringkas dari badan teks. Demo sintaks callout dihapus
+  karena callout tidak lagi dipakai di badan naskah.
+
+# skripsistis 0.2.10
+
+* Entri perangkat lunak (`@software`) memakai `type = {Perangkat lunak}` agar label
+  jenis tampil; string "Versi" dilokalkan. Bib disinkron Overleaf vs paket R.
+
+# skripsistis 0.2.9
+
+## Jenis sumber bidang kuantitatif & integritas sitasi
+
+* **Ditambah 3 jenis sumber** yang lazim pada skripsi statistika/matematika/ekonomi/
+  ilmu komputer/informatika/kependudukan: **pracetak (arXiv)**, **perangkat lunak/
+  paket statistik** (mis. R), dan **makalah kerja (working paper)**. Total kini
+  **15 entri / 9 tipe**, mencakup pula buku, bab buku, jurnal (ber-DOI), prosiding,
+  skripsi, koran, lembaga, direktorat, daring, dan dataset.
+* **Semua referensi berasal dari sitasi.** Demonstrasi jenis sumber kini dirujuk
+  lewat **sitasi nyata** di Bab II (subbab "Contoh Perujukan Berbagai Jenis Sumber");
+  mekanisme `\nocite` dihapus sehingga tidak ada entri Daftar Pustaka yang tidak
+  dikutip di dalam naskah.
+
+# skripsistis 0.2.8
+
+## Kelengkapan jenis sumber referensi
+
+* **`referensi.bib` kini mencakup semua jenis sumber** yang dicontohkan pedoman
+  (Lampiran 11) dan lazim di statistik resmi: buku, buku terjemahan, artikel
+  jurnal, artikel ber-DOI, bab dalam buku, publikasi lembaga, laporan direktorat
+  kementerian, **skripsi/tugas akhir**, **artikel koran**, **sumber daring/website**,
+  **prosiding**, dan **dataset**. Pada CSL seluruh jenis tampil dengan istilah
+  Indonesia (Dalam, Penerj., Edisi ke-, hal., dan).
+
+# skripsistis 0.2.7
 
 ## Sitasi lembaga & rujukan persamaan
 
@@ -12,7 +104,9 @@
   `@eq-...` (dengan `eq-prefix` kosong) hanya menghasilkan nomor "(N)". Tabel panduan
   pada `referensi-perintah.qmd` diperbaiki agar tidak menyiratkan otomatis.
 
-## Koreksi jarak judul daftar 
+# skripsistis 0.2.6
+
+## Koreksi jarak judul daftar (sesuai contoh pedoman)
 
 * **Jarak judul daftar -> "Halaman"/header = 4 spasi.** Pedoman (Lampiran 7 & 8)
   secara eksplisit menganotasi jarak **4 spasi** antara judul daftar
@@ -20,6 +114,8 @@
   ini dipulihkan (`\vskip2\spasi`, terverifikasi rasio thd tinggi entri 2,58 vs
   pedoman 2,60). Jarak "Halaman"/header -> entri pertama ~2 spasi. Selaras dengan
   Overleaf.
+
+# skripsistis 0.2.5
 
 ## Perbaikan halaman muka & daftar
 
@@ -34,6 +130,8 @@
   **judul daftar → header/"Halaman"** dipangkas (mis. judul→header tabel dari 4
   menjadi **1,5 baris**) dan jarak **"Halaman"/header → entri** menjadi **1 baris**
   (sebelumnya 2 / 1,5 baris). Selaras dengan Overleaf.
+
+# skripsistis 0.2.4
 
 ## Perubahan tata letak tabel & gambar
 

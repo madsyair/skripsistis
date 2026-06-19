@@ -1,16 +1,10 @@
 # TINJAUAN PUSTAKA
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Tinjauan Pustaka" appearance="simple"}
-Bab Tinjauan Pustaka memuat Landasan Teori (konsep, definisi, teori yang mendukung) dan Penelitian Terkait (state of the art). Sintesis, bukan sekadar kumpulan kutipan: tunjukkan keterkaitan antar-teori dan posisi penelitian Anda. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
-:::
-
+*Cara menulis bab ini.* Bab Tinjauan Pustaka memuat Landasan Teori (konsep, definisi, teori yang mendukung) dan Penelitian Terkait (state of the art). Sintesis, bukan sekadar kumpulan kutipan: tunjukkan keterkaitan antar-teori dan posisi penelitian Anda.
 
 ## Landasan Teori
 
-::: {.callout-note title="Petunjuk: Landasan Teori" appearance="simple"}
-Sajikan konsep dan teori utama yang menjadi dasar penelitian secara terstruktur (dari umum ke khusus). Setiap teori wajib bersumber dan relevan dengan masalah.
-:::
-
+*Cara menulis.* Sajikan konsep dan teori utama yang menjadi dasar penelitian secara terstruktur (dari umum ke khusus). Setiap teori wajib bersumber dan relevan dengan masalah.
 
 ### Pengukuran Kesejahteraan
 
@@ -52,10 +46,7 @@ $\mathrm{E}(\hat{\boldsymbol{\beta}}\mid\mathbf{X}) = \boldsymbol{\beta}$. $\qed
 
 ## Penelitian Terkait
 
-::: {.callout-note title="Petunjuk: Penelitian Terkait" appearance="simple"}
-Tinjau penelitian terdahulu yang relevan: metode, data, dan temuannya. Tunjukkan kesenjangan yang belum terjawab dan bagaimana penelitian Anda mengisinya (boleh berupa tabel sintesis).
-:::
-
+*Cara menulis.* Tinjau penelitian terdahulu yang relevan: metode, data, dan temuannya. Tunjukkan kesenjangan yang belum terjawab dan bagaimana penelitian Anda mengisinya (boleh berupa tabel sintesis).
 
 Beberapa penelitian terdahulu mengembangkan PMT dengan pendekatan *machine learning*.
 @pratama2025 membandingkan beberapa algoritma di Jawa Tengah, sedangkan @martinez2025
@@ -64,10 +55,7 @@ yang umum digunakan disajikan pada penelitian-penelitian tersebut.
 
 ## Terkait Penulisan Kutipan
 
-::: {.callout-note title="Petunjuk: Terkait Penulisan Kutipan" appearance="simple"}
-Bagian ini hanya contoh teknis pengutipan; pada skripsi nyata, gabungkan kaidah pengutipan ke dalam Landasan Teori/Penelitian Terkait dan hapus subbab ini.
-:::
-
+*Cara menulis.* Bagian ini hanya contoh teknis pengutipan; pada skripsi nyata, gabungkan kaidah pengutipan ke dalam Landasan Teori/Penelitian Terkait dan hapus subbab ini.
 
 Penulisan kutipan dan daftar pustaka pada templat ini mengikuti gaya **APA edisi ke-7
 dengan modifikasi bahasa Indonesia**, yaitu penghubung antarpenulis menggunakan kata
@@ -101,18 +89,7 @@ karakteristik yang mudah diamati". Nomor halaman juga dapat diletakkan bersama s
 dalam kurung, misalnya kesejahteraan dapat diprediksi dari karakteristik teramati
 "tanpa memerlukan pendataan pendapatan secara langsung" [@etang2022, hal. 5].
 
-::: {.callout-note title="Sintaks sitasi pada Quarto" appearance="simple"}
-Ringkasan penulisan sitasi di naskah (sumber dikelola di `referensi.bib`):
-
-| Sintaks | Hasil | Jenis |
-|---|---|---|
-| `@kunci` | Nama (tahun) | tidak langsung, naratif |
-| `[@kunci]` | (Nama, tahun) | tidak langsung, dalam kurung |
-| `@kunci [hal. 5]` | Nama (tahun, hal. 5) | langsung, naratif |
-| `[@kunci, hal. 5]` | (Nama, tahun, hal. 5) | langsung, dalam kurung |
-
-Pada sitasi langsung, tanda kutip `"..."` ditulis manual mengapit teks kutipan.
-:::
+*(Sintaks penulisan kutipan & rujukan selengkapnya dirangkum pada Lampiran “Daftar Perintah Quarto/Markdown yang Digunakan”.)*
 
 ### Sitasi Lembaga/Instansi Pemerintah
 
@@ -150,3 +127,17 @@ Bila karya disusun oleh suatu **direktorat di bawah kementerian**, ikuti APA-7: 
 Di naskah (pertama): Direktorat Jenderal Pembangunan Desa dan Perdesaan [Ditjen PDP, -@ditjenpdp2023]
 menyusun pedoman; selanjutnya Ditjen PDP [-@ditjenpdp2023] atau [Ditjen PDP, -@ditjenpdp2023].
 Pada Daftar Pustaka, nama direktorat (penulis) diikuti judul, lalu kementerian sebagai penerbit.
+
+### Contoh Perujukan Berbagai Jenis Sumber
+
+Setiap entri pada Daftar Pustaka **harus** berasal dari sitasi di dalam naskah
+(tidak boleh ada entri yang tidak dirujuk). Pada Quarto, hanya sumber yang disitasi
+yang muncul di Daftar Pustaka. Berikut contoh perujukan jenis sumber yang lazim pada
+skripsi bidang kuantitatif (statistika, matematika, ekonomi, ilmu komputer,
+informatika, kependudukan): buku teks [@cochran1991]; artikel jurnal
+[@megawati2021; @taufiq2021]; artikel jurnal ber-DOI [@etang2022]; bab dalam buku
+[@satu2023]; prosiding seminar [@santoso2022]; skripsi terdahulu [@nugraha2024];
+artikel surat kabar [@karyadi2009]; publikasi lembaga [@bps2024]; laporan direktorat
+kementerian [@ditjenpdp2023]; sumber daring/situs web [@worldbank2023]; dataset
+[@bpssusenas2023]; pracetak (*preprint*/arXiv) [@wang2023]; perangkat lunak/paket
+statistik [@rcore2024]; serta makalah kerja (*working paper*) [@ferreira2022].

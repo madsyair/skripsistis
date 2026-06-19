@@ -1,20 +1,15 @@
 # PENDAHULUAN
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Pendahuluan" appearance="simple"}
-Bab Pendahuluan memuat: Latar Belakang, Identifikasi dan Batasan Masalah, Tujuan
+*Cara menulis bab ini.* Bab Pendahuluan memuat: Latar Belakang, Identifikasi dan Batasan Masalah, Tujuan
 Penelitian, Manfaat Penelitian, dan Sistematika Penulisan. Tulis dengan alur yang
-runtut dari masalah umum menuju fokus penelitian. **Hapus seluruh kotak "Petunjuk
-Penulisan" ini pada naskah final.**
-:::
+runtut dari masalah umum menuju fokus penelitian.
 
 ## Latar Belakang
 
-::: {.callout-note title="Petunjuk: Latar Belakang" appearance="simple"}
-Uraikan konteks dan urgensi masalah (dari fenomena umum ke khusus), kesenjangan
+*Cara menulis.* Uraikan konteks dan urgensi masalah (dari fenomena umum ke khusus), kesenjangan
 (*gap*) antara kondisi ideal dan kenyataan/penelitian terdahulu, serta posisi
 penelitian Anda dalam mengisi kesenjangan tersebut. Dukung dengan data dan rujukan
 mutakhir. Akhiri dengan kalimat yang mengarah pada rumusan masalah.
-:::
 
 Kemiskinan merupakan fakta sosial global yang selalu menjadi perhatian serius dari
 tahun ke tahun [@megawati2021]. Di Indonesia, pengentasan kemiskinan menjadi prioritas
@@ -28,20 +23,13 @@ diverifikasi [@etang2022]. Sebagai pembanding, @pratama2025 menunjukkan bahwa al
 *eXtreme Gradient Boosting* (XGBoost) memiliki kinerja yang baik dibandingkan dengan
 regresi linear standar.
 
-::: {.callout-note title="Cara menulis kutipan (APA 7 modifikasi Indonesia)" appearance="simple"}
-Kutipan dalam tanda kurung ditulis `[@kunci]` → menghasilkan (Nama dkk., tahun).
-Kutipan naratif ditulis `@kunci` → menghasilkan Nama dkk. (tahun). Untuk dua penulis,
-penghubungnya "dan"; tiga penulis atau lebih disingkat "dkk." Daftar pustaka terisi
-otomatis dari berkas `referensi.bib`.
-:::
+*(Sintaks penulisan kutipan & rujukan selengkapnya dirangkum pada Lampiran “Daftar Perintah Quarto/Markdown yang Digunakan”.)*
 
 ## Identifikasi dan Batasan Masalah
 
-::: {.callout-note title="Petunjuk: Identifikasi dan Batasan Masalah" appearance="simple"}
-Rumuskan masalah dalam bentuk pertanyaan penelitian yang spesifik dan terukur, lalu
+*Cara menulis.* Rumuskan masalah dalam bentuk pertanyaan penelitian yang spesifik dan terukur, lalu
 batasi ruang lingkup (data, variabel, periode, metode) agar penelitian terfokus dan
 dapat diselesaikan.
-:::
 
 Berdasarkan uraian latar belakang, rumusan masalah penelitian ini adalah:
 
@@ -52,10 +40,8 @@ Berdasarkan uraian latar belakang, rumusan masalah penelitian ini adalah:
 
 ## Tujuan Penelitian
 
-::: {.callout-note title="Petunjuk: Tujuan Penelitian" appearance="simple"}
-Tujuan harus menjawab setiap rumusan masalah secara satu-satu (paralel), diawali kata
+*Cara menulis.* Tujuan harus menjawab setiap rumusan masalah secara satu-satu (paralel), diawali kata
 kerja operasional (mis. mengembangkan, mengevaluasi, membandingkan).
-:::
 
 1. Mengembangkan model PMT berbasis algoritma GPBoost dan membandingkan kinerja
    prediksinya dengan metode ML standar.
@@ -64,10 +50,8 @@ kerja operasional (mis. mengembangkan, mengevaluasi, membandingkan).
 
 ## Manfaat Penelitian
 
-::: {.callout-note title="Petunjuk: Manfaat Penelitian" appearance="simple"}
-Jelaskan manfaat **teoretis/akademis** (kontribusi keilmuan) dan **praktis** (bagi
+*Cara menulis.* Jelaskan manfaat **teoretis/akademis** (kontribusi keilmuan) dan **praktis** (bagi
 instansi, pengguna, atau masyarakat). Hubungkan dengan tujuan penelitian.
-:::
 
 Penelitian ini diharapkan memberikan kontribusi akademis bagi pengembangan *data science*
 dan *machine learning*, serta manfaat praktis bagi BPS dan instansi terkait dalam
@@ -75,9 +59,7 @@ penyusunan data kemiskinan yang lebih akurat.
 
 ## Sistematika Penulisan
 
-::: {.callout-note title="Petunjuk: Sistematika Penulisan" appearance="simple"}
-Uraikan secara ringkas isi tiap bab (Bab I s.d. Bab V) dalam bentuk paragraf naratif,
+*Cara menulis.* Uraikan secara ringkas isi tiap bab (Bab I s.d. Bab V) dalam bentuk paragraf naratif,
 bukan daftar, sehingga pembaca memperoleh gambaran alur skripsi.
-:::
 
 {{SISTEMATIKA_PENULISAN}}

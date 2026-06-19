@@ -1,18 +1,13 @@
 # HASIL DAN PEMBAHASAN
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Hasil Dan Pembahasan" appearance="simple"}
-Bab Hasil dan Pembahasan menyajikan temuan penelitian (tabel/gambar dihitung langsung
+*Cara menulis bab ini.* Bab Hasil dan Pembahasan menyajikan temuan penelitian (tabel/gambar dihitung langsung
 dari data) lalu membahasnya: makna, perbandingan dengan teori/penelitian terdahulu, dan
-implikasinya. Hindari sekadar mendeskripsikan angka. **Hapus seluruh kotak "Petunjuk
-Penulisan" pada naskah final.**
-:::
+implikasinya. Hindari sekadar mendeskripsikan angka.
 
 ## Gambaran Umum Data
 
-::: {.callout-note title="Petunjuk: Gambaran Umum Data" appearance="simple"}
-Deskripsikan data yang digunakan: sumber, jumlah observasi/variabel, dan statistik
+*Cara menulis.* Deskripsikan data yang digunakan: sumber, jumlah observasi/variabel, dan statistik
 ringkas. Dasari setiap angka dengan komputasi langsung dari kode agar konsisten.
-:::
 
 Bagian ini menyajikan contoh penyajian tabel dan gambar yang dihitung **langsung dari
 kode R** sehingga angka pada naskah selalu konsisten dengan hasil komputasi. Seluruh
@@ -71,6 +66,12 @@ Catatan penyajian tabel:
 - **Kerapatan baris** diatur lewat `regang_baris=` (default `1.15`). Pakai nilai lebih
   kecil (mis. `1.0`) untuk baris **agak rapat**, atau lebih besar (mis. `1.4`) untuk
   baris **agak longgar**. Berlaku pada tabel biasa maupun tabel panjang.
+- **Simpan kode LaTeX untuk diedit manual.** Tambahkan argumen `simpan = "tex/nama.tex"`
+  pada `tabel_skripsi()`, `tabel_skripsi_panjang()`, atau `gambar_skripsi()`: kode LaTeX
+  ditulis ke berkas itu lalu disisipkan otomatis dengan `\input`, sehingga Anda dapat
+  menyesuaikan LaTeX-nya secara manual bila perlu. Saat render ulang, berkas yang sudah
+  ada **tidak ditimpa** (editan dipertahankan); gunakan `timpa = TRUE` untuk membuat
+  ulang dari data terbaru.
 - **Jarak judul → tabel** sudah seragam (~1 spasi, sesuai pedoman) untuk semua tabel
   (biasa, panjang/lanjutan, dengan atau tanpa sumber)  -  diatur otomatis oleh fungsi.
 - **Posisi** tabel selalu **rata tengah** dan berjarak **±3 spasi** dari teks, serta
@@ -81,13 +82,11 @@ Catatan penyajian tabel:
 
 ### Contoh Tabel Panjang (Lintas-Halaman)
 
-::: {.callout-note title="Petunjuk: tabel panjang lintas-halaman" appearance="simple"}
-Bila tabel terlalu panjang untuk satu halaman, gunakan `longtable`. Judul kolom dan
+*Cara menulis.* Bila tabel terlalu panjang untuk satu halaman, gunakan `longtable`. Judul kolom dan
 baris **nomor kolom** **terulang otomatis** di setiap halaman lanjutan, disertai
 keterangan **"Tabel N (lanjutan)"** di atasnya  -  tanpa menuliskan ulang judul tabel.
 Bentuk tabel tetap **grid** (bergaris kolom) sesuai pedoman dan ukuran huruf di dalam
 tabel **tidak kurang dari 8 pt**. Contoh pada Tabel \ref{tab:panjang}.
-:::
 
 Tabel \ref{tab:panjang} mencontohkan tabel panjang yang otomatis berlanjut ke halaman berikutnya
 dengan judul kolom berulang dan keterangan "(lanjutan)".
@@ -154,10 +153,130 @@ Berdasarkan Gambar \ref{fig:bar}, persentase kemiskinan di perdesaan hampir dua 
 dibandingkan perkotaan. Pembahasan dapat dikaitkan kembali dengan metrik $F_1$ yang
 dirumuskan pada Bab 3.
 
+## Contoh Grafik R sebagai LaTeX (Font Serasi)
+
+*Cara menulis.* Agar **font di dalam grafik sama persis dengan font naskah** (Times New
+Roman/TeX Gyre Termes), render grafik dengan paket `tikzDevice`: keluarannya berupa
+berkas `.tex` (kode Ti*k*Z) yang dikompilasi XeLaTeX bersama naskah, bukan gambar
+raster. Atur sekali dengan `skripsistis::setup_tikz_skripsi()`, buat grafik dengan
+`tikzDevice::tikz("img/....tex", ...)` memakai `family = "serif"`, lalu sisipkan dengan
+`skripsistis::gambar_skripsi(..., tikz = TRUE)` agar judul "Gambar N." dan sumber tetap
+sesuai pedoman.
+
+Gambar \ref{fig:tikz} dibuat dengan cara ini; bandingkan font label sumbu dan angkanya
+dengan teks paragraf ini — keduanya identik. Karena grafik berupa kode (vektor), ia
+tidak pecah saat diperbesar; ukuran diatur lewat `width`/`height` (inci) pada `tikz()`,
+bukan lewat `lebar`.
+
+```{r}
+#| label: setup-tikz
+#| include: false
+# Panggil sekali: XeLaTeX + font naskah (TeX Gyre Termes).
+# Bila Times New Roman terpasang: skripsistis::setup_tikz_skripsi("Times New Roman").
+skripsistis::setup_tikz_skripsi()
+```
+
+```{r}
+#| label: bangun-grafik-tikz
+#| include: false
+dir.create("img", showWarnings = FALSE)
+tikzDevice::tikz("img/plot-pmt.tex", width = 4.6, height = 3.0, standAlone = FALSE)
+op <- par(mar = c(4, 4, 1, 1), family = "serif")   # 'serif' -> font naskah
+plot(seq_len(nrow(dat)), dat$Persentase, type = "b", pch = 19,
+     xlab = "Daerah (indeks)", ylab = "Persentase (\\%)")
+par(op)
+invisible(grDevices::dev.off())
+```
+
+```{r}
+#| echo: false
+skripsistis::gambar_skripsi(
+  "img/plot-pmt.tex",
+  judul  = "Grafik R yang dirender sebagai LaTeX (font serasi dengan teks)",
+  label  = "fig:tikz",
+  sumber = "data ilustrasi (olahan sendiri)",
+  tikz   = TRUE
+)
+```
+
+## Contoh Grafik dengan Simbol Matematika (Regresi)
+
+*Cara menulis.* Karena grafik tikz berupa kode LaTeX, **anotasi di dalam grafik dapat
+memuat simbol matematika** (mis. $\beta_0$, $\beta_1$, $\hat{y}$, $R^2$) yang identik
+dengan simbol pada teks. Tulis anotasi sebagai matematika LaTeX di dalam `$...$` pada
+argumen `labels`/`xlab`/`ylab`. Gambar \ref{fig:reg} menyajikan garis regresi beserta
+persamaannya dalam bentuk simbol dan bentuk terisi (koefisien hasil taksiran).
+
+```{r}
+#| label: bangun-grafik-regresi
+#| include: false
+# setup_tikz_skripsi() sudah dipanggil pada chunk 'setup-tikz' di atas.
+set.seed(7)
+xr <- runif(40, 1, 10)
+yr <- 2.3 + 1.8 * xr + rnorm(40, sd = 2.2)
+fit <- lm(yr ~ xr); b <- coef(fit); r2 <- summary(fit)$r.squared
+
+tikzDevice::tikz("img/plot-regresi.tex", width = 5.0, height = 3.4,
+                 standAlone = FALSE)
+op <- par(mar = c(4, 4, 1, 1), family = "serif")
+plot(xr, yr, pch = 19, col = "grey30",
+     xlab = "Pengeluaran per kapita ($x$, juta Rp)",
+     ylab = "Skor kesejahteraan ($y$)")
+abline(fit, col = "red", lwd = 2)
+# Persamaan regresi: bentuk SIMBOL, bentuk TERISI, dan R^2 (semua math LaTeX).
+ya <- max(yr)
+text(2.2, ya - 0.5, adj = 0, labels = "$\\hat{y} = \\beta_0 + \\beta_1 x$")
+text(2.2, ya - 3.0, adj = 0,
+     labels = sprintf("$\\hat{y} = %.2f + %.2f\\,x$", b[1], b[2]))
+text(2.2, ya - 5.5, adj = 0, labels = sprintf("$R^2 = %.3f$", r2))
+par(op)
+invisible(grDevices::dev.off())
+```
+
+```{r}
+#| echo: false
+skripsistis::gambar_skripsi(
+  "img/plot-regresi.tex",
+  judul  = "Garis regresi dengan persamaan bersimbol di dalam grafik",
+  label  = "fig:reg",
+  sumber = "data ilustrasi (olahan sendiri)",
+  tikz   = TRUE
+)
+```
+
+Perhatikan bahwa $\beta_0$, $\beta_1$, $\hat{y}$, dan $R^2$ pada grafik dan pada paragraf
+ini dirender oleh mesin yang sama sehingga tampak seragam. Pendekatan ini berlaku untuk
+simbol apa pun (mis. $\sum$, $\bar{x}$, $\sigma^2$, $\hat{\beta}$).
+
+## Contoh Penomoran dan Rujukan Silang
+
+*Cara menulis.* Penomoran objek dilakukan **otomatis** oleh Quarto; cukup beri label
+berawalan jenisnya lalu rujuk dengan `@`. Pada template ini berlaku ketentuan pedoman:
+rujukan **gambar/tabel** memuat kata jenisnya (mis. "Gambar 1", "Tabel 1"), sedangkan
+rujukan **persamaan** `@eq-...` hanya menghasilkan **nomor dalam kurung** (mis. "(1)")
+sehingga kata "persamaan" ditulis manual di depannya. Untuk objek raw-LaTeX (mis.
+keluaran `tabel_skripsi()`/`gambar_skripsi()`), gunakan `\label{...}` dan `\ref{...}`.
+
+Sebagai contoh **persamaan bernomor**, koefisien Gini dirumuskan sebagai
+$$ G = \frac{\sum_{i=1}^{n}\sum_{j=1}^{n} |x_i - x_j|}{2 n^2 \bar{x}} $$ {#eq-gini}
+sehingga ketimpangan pada persamaan @eq-gini dapat dihitung dari data pengeluaran.
+Penomoran mengikuti urutan kemunculan: persamaan ini bernomor (1) bila ia yang pertama
+pada naskah.
+
+Rujukan antarobjek bersifat dinamis: Tabel \ref{tbl:miskin} dan Gambar \ref{fig:bar}
+pada subbab sebelumnya, serta Gambar \ref{fig:tikz} di atas, akan ikut berubah nomornya
+bila urutan berubah. **Daftar bernomor** ditulis dengan angka diikuti titik:
+
+1. Tahap pertama: praproses dan pembersihan data.
+2. Tahap kedua: pemodelan dan validasi.
+   a. subbutir dengan huruf;
+   b. subbutir berikutnya.
+3. Tahap ketiga: evaluasi dan interpretasi.
+
+
 ## Contoh Gambar Melebar (Landscape)
 
-::: {.callout-note title="Petunjuk: Gambar/tabel melebar (landscape)" appearance="simple"}
-Untuk gambar atau tabel yang terlalu lebar untuk orientasi potret (mis. diagram alur
+*Cara menulis.* Untuk gambar atau tabel yang terlalu lebar untuk orientasi potret (mis. diagram alur
 panjang, peta, atau tabel banyak kolom), putar 90° menjadi **landscape**. Tersedia dua
 cara:
 
@@ -171,7 +290,6 @@ cara:
 
 Contoh di bawah memakai `sidewaysfigure`. Gambar dibuat lebar (rasio ~16:5) agar manfaat
 orientasi landscape terlihat. Rujuk dengan `\ref{fig-landscape}`.
-:::
 
 Gambar \ref{fig-landscape} menyajikan contoh diagram melebar yang diputar 90°. Karena
 dokumen ini dicetak bolak-balik, jalankan render lalu amati: pada halaman ganjil dan
@@ -250,9 +368,8 @@ nilai = np.array([70, 85, 90, 65, 78])
 print(nilai.mean())
 ```
 
-::: {.callout-note}
-Untuk mengaktifkan Python: jalankan `install.packages("reticulate")` lalu arahkan ke
+*Catatan.* Untuk mengaktifkan Python: jalankan `install.packages("reticulate")` lalu arahkan ke
 interpreter Python (mis. `reticulate::use_python(...)` atau Miniconda via
 `reticulate::install_miniconda()`), kemudian ubah blok di atas menjadi chunk eksekusi
 `{python}`.
-:::
+

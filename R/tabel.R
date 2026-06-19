@@ -104,6 +104,12 @@
 #' @param escape Lolos-kan karakter khusus LaTeX (`& % # _`) pada judul kolom &
 #'   data. Default `TRUE`. Set `FALSE` bila Anda sengaja menulis LaTeX/math.
 #'
+#' @param simpan Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
+#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+#'   dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
+#'   (kode dikembalikan inline seperti biasa).
+#' @param timpa Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,
+#'   berkas TIDAK ditimpa sehingga editan dipertahankan; \code{TRUE} membuat ulang.
 #' @return Objek `knitr::raw_latex` siap dicetak dalam chunk R (PDF). Untuk
 #'   keluaran non-LaTeX dikembalikan `knitr::kable` biasa.
 #' @examples
@@ -122,7 +128,8 @@
 tabel_skripsi <- function(df, judul, label, sumber = NULL, ket = NULL,
                           align = NULL, nomor_kolom = TRUE,
                           garis_total = FALSE, lebar = NULL,
-                          regang_baris = 1.15, escape = TRUE) {
+                          regang_baris = 1.15, escape = TRUE,
+                          simpan = NULL, timpa = FALSE) {
   lebar <- .norm_lebar(lebar)
   df <- as.data.frame(df, stringsAsFactors = FALSE)
   ncol <- ncol(df)
@@ -210,7 +217,7 @@ tabel_skripsi <- function(df, judul, label, sumber = NULL, ket = NULL,
                      paste(bawah, collapse = "\\par ")))
   }
   out <- c(out, "\\end{center}\\endgroup", "\\par\\addvspace{0.5\\normalbaselineskip}")
-  knitr::raw_latex(paste(out, collapse = "\n"))
+  .keluaran_latex(paste(out, collapse = "\n"), simpan, timpa)
 }
 
 #' Tabel panjang lintas-halaman sesuai pedoman
@@ -229,12 +236,18 @@ tabel_skripsi <- function(df, judul, label, sumber = NULL, ket = NULL,
 #' @param lebar Lebar tabel sebagai pecahan/persen dari lebar teks. `NULL`
 #'   (default) memakai **0,8 (80%)**. Nilai `< 0,8` dinaikkan otomatis ke 0,8
 #'   (minimum); nilai `> 1` dianggap persen; maksimum 1 (lebar penuh).
+#' @param simpan Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
+#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+#'   dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
+#'   (kode dikembalikan inline seperti biasa).
+#' @param timpa Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,
+#'   berkas TIDAK ditimpa sehingga editan dipertahankan; \code{TRUE} membuat ulang.
 #' @return Objek `knitr::raw_latex` (PDF) atau `knitr::kable` (non-LaTeX).
 #' @export
 tabel_skripsi_panjang <- function(df, judul, label, sumber = NULL, ket = NULL,
                                   align = NULL, nomor_kolom = TRUE,
                                   lebar = NULL, regang_baris = 1.15,
-                                  escape = TRUE) {
+                                  escape = TRUE, simpan = NULL, timpa = FALSE) {
   lebar <- .norm_lebar(lebar)
   df <- as.data.frame(df, stringsAsFactors = FALSE)
   ncol <- ncol(df)
@@ -333,5 +346,5 @@ tabel_skripsi_panjang <- function(df, judul, label, sumber = NULL, ket = NULL,
                      blok_w, paste(bawah, collapse = "\\par ")))
   }
   out <- c(out, "\\par\\addvspace{0.5\\normalbaselineskip}")
-  knitr::raw_latex(paste(out[!vapply(out, is.null, logical(1))], collapse = "\n"))
+  .keluaran_latex(paste(out[!vapply(out, is.null, logical(1))], collapse = "\n"), simpan, timpa)
 }

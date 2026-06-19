@@ -44,12 +44,9 @@ if (knitr::is_latex_output()) {
 
 # PRAKATA {.unnumbered}
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Prakata" appearance="simple"}
-Prakata berisi ucapan syukur dan terima kasih kepada pihak yang membantu penyusunan
+*Cara menulis bagian ini.* Prakata berisi ucapan syukur dan terima kasih kepada pihak yang membantu penyusunan
 skripsi, disusun menurut tingkat kontribusi/kelembagaan. Tulis dengan bahasa formal,
-ringkas (umumnya ≤ 1 halaman), diakhiri tempat/tanggal dan nama penulis. **Hapus kotak
-"Petunjuk Penulisan" pada naskah final.**
-:::
+ringkas (umumnya ≤ 1 halaman), diakhiri tempat/tanggal dan nama penulis.
 
 Puji syukur penulis ucapkan kepada Allah SWT, karena atas izin-Nya penulis dapat
 menyelesaikan skripsi yang berjudul "{{JUDUL}}". Penulis juga mengucapkan terima
@@ -76,12 +73,9 @@ Jakarta, tanggal bulan {{TAHUN}} \\[1.4cm]
 
 # ABSTRAK {.unnumbered}
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Abstrak" appearance="simple"}
-Abstrak (1,5 spasi, maksimum ~200 kata, satu/dua paragraf) memuat: masalah/tujuan, data
+*Cara menulis bagian ini.* Abstrak (1,5 spasi, maksimum ~200 kata, satu/dua paragraf) memuat: masalah/tujuan, data
 dan metode, hasil utama, serta kesimpulan. Diawali baris nama penulis dan judul,
-diakhiri 3-6 kata kunci. Hindari sitasi dan singkatan tak baku. **Hapus kotak "Petunjuk
-Penulisan" pada naskah final.**
-:::
+diakhiri 3-6 kata kunci. Hindari sitasi dan singkatan tak baku.
 
 ```{=latex}
 \vspace{\baselineskip}
@@ -179,12 +173,10 @@ deskripsi sistem/aplikasi yang dikembangkan, hasil evaluasi, kesimpulan, dan sar
 
 # DAFTAR PUSTAKA {.unnumbered}
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Daftar Pustaka" appearance="simple"}
-Daftar Pustaka terisi otomatis dari berkas `referensi.bib` dan hanya memuat sumber yang
+*Cara menulis bagian ini.* Daftar Pustaka terisi otomatis dari berkas `referensi.bib` dan hanya memuat sumber yang
 benar-benar dikutip dalam naskah. Format mengikuti gaya APA 7 (modifikasi Indonesia)
 melalui berkas CSL `apa-stis-id.csl`. Cukup kelola entri di `referensi.bib`; jangan
-menulis daftar secara manual. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
-:::
+menulis daftar secara manual.
 
 ::: {#refs}
 :::

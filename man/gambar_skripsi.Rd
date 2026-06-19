@@ -11,7 +11,10 @@ gambar_skripsi(
   sumber = NULL,
   ket = NULL,
   lebar = "0.8\\\\linewidth",
-  escape = TRUE
+  tikz = FALSE,
+  escape = TRUE,
+  simpan = NULL,
+  timpa = FALSE
 )
 }
 \arguments{
@@ -28,9 +31,23 @@ ada / olahan sendiri.}
 
 \item{ket}{Keterangan tambahan (menempel di bawah gambar, sebelum judul).}
 
-\item{lebar}{Lebar gambar sebagai panjang LaTeX. Default \code{"0.8\\\\linewidth"}.}
+\item{lebar}{Lebar gambar sebagai panjang LaTeX. Default \code{"0.8\\\\linewidth"}.
+Diabaikan bila \code{tikz = TRUE} (ukuran diatur saat membuat berkas \code{tikz()}).}
+
+\item{tikz}{Jika \code{TRUE}, \code{path} adalah berkas \code{.tex} hasil
+\code{tikzDevice::tikz()} dan disisipkan dengan \verb{\\\\input} (bukan
+\verb{\\\\includegraphics}), sehingga \strong{font teks di dalam grafik sama persis}
+dengan font naskah. Default \code{FALSE}.}
 
 \item{escape}{Lolos-kan karakter khusus pada judul/sumber. Default \code{TRUE}.}
+
+\item{simpan}{Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
+kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
+(kode dikembalikan inline seperti biasa).}
+
+\item{timpa}{Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,
+berkas TIDAK ditimpa sehingga editan dipertahankan; \code{TRUE} membuat ulang.}
 }
 \value{
 Objek \code{knitr::raw_latex} (PDF) atau \code{knitr::include_graphics}

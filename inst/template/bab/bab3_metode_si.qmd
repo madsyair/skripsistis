@@ -1,9 +1,6 @@
 # METODE PENELITIAN
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Metode Penelitian" appearance="simple"}
-Bab Metode Penelitian menjelaskan bagaimana penelitian dilakukan: data, variabel, alur/tahapan, serta teknik analisis atau perancangan sistem. Harus cukup rinci agar penelitian dapat direplikasi. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
-:::
-
+*Cara menulis bab ini.* Bab Metode Penelitian menjelaskan bagaimana penelitian dilakukan: data, variabel, alur/tahapan, serta teknik analisis atau perancangan sistem. Harus cukup rinci agar penelitian dapat direplikasi.
 
 Bab ini menjelaskan pendekatan dan tahapan penelitian yang digunakan untuk mencapai
 tujuan penelitian. Untuk topik **sistem informasi**, metode penelitian berupa metode
@@ -11,10 +8,7 @@ rekayasa perangkat lunak yang bertujuan menghasilkan suatu *artifact* (sistem/ap
 
 ## Tinjauan Umum
 
-::: {.callout-note title="Petunjuk: Tinjauan Umum" appearance="simple"}
-Gambarkan objek/lokus penelitian, sumber dan cakupan data (mis. Susenas/Sakernas/PODES), serta variabel yang digunakan beserta definisinya.
-:::
-
+*Cara menulis.* Gambarkan objek/lokus penelitian, sumber dan cakupan data (mis. Susenas/Sakernas/PODES), serta variabel yang digunakan beserta definisinya.
 
 Penelitian ini menggunakan metode pengembangan perangkat lunak *Modified Waterfall*
 (alternatif: *Prototyping* atau *Agile*), yang dipilih karena kebutuhan sistem relatif
@@ -47,10 +41,7 @@ digunakan, bukan menyalin langsung dari sumber pustaka.
 
 ## Tahapan Penelitian
 
-::: {.callout-note title="Petunjuk: Tahapan Penelitian" appearance="simple"}
-Uraikan alur penelitian langkah demi langkah (boleh dengan diagram alir): praproses data, pemodelan, evaluasi. Jelaskan tiap tahap agar dapat direplikasi.
-:::
-
+*Cara menulis.* Uraikan alur penelitian langkah demi langkah (boleh dengan diagram alir): praproses data, pemodelan, evaluasi. Jelaskan tiap tahap agar dapat direplikasi.
 
 Setiap tahapan penelitian sekurang-kurangnya memuat tujuan tahapan, aktivitas/proses,
 data/alat/teknik yang digunakan, serta luaran (*output*) yang dihasilkan. Untuk metode

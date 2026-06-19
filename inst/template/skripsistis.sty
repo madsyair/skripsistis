@@ -1,0 +1,378 @@
+% ============================================================
+%  skripsistis.sty
+%  Format Skripsi Politeknik Statistika STIS (Prodi D-IV Komputasi Statistik)
+%  Disesuaikan dengan Pedoman Skripsi KS Edisi Keenam (2025).
+%
+%  Versi LaTeX murni (Overleaf) dari paket R 'skripsistis'.
+%  Mesin kompilasi: XeLaTeX (wajib, untuk fontspec / Times New Roman).
+%  Bibliografi   : biblatex (style=apa) + Biber.
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{skripsistis}[2026/06/13 Format skripsi STIS (D-IV KS)]
+
+% ------------------------------------------------------------
+%  1. Bahasa & font
+% ------------------------------------------------------------
+\RequirePackage[main=bahasa]{babel}   % bahasa utama: Indonesia (hyphenation)
+% Font Times New Roman 12 pt. Pakai berkas Times New Roman ASLI bila tersedia di
+% sistem; jika tidak (mis. Overleaf), pakai klon metrik TeX Gyre Termes yang
+% identik dimensinya sehingga tata letak tetap sama.
+\RequirePackage{fontspec}
+\IfFontExistsTF{Times New Roman}
+  {\setmainfont{Times New Roman}}
+  {\setmainfont{TeX Gyre Termes}}
+
+% ------------------------------------------------------------
+%  2. Geometri halaman & spasi
+% ------------------------------------------------------------
+% Margin: dalam/binding 4 cm; atas, luar, bawah 3 cm. twoside -> pada halaman
+% genap posisi margin dicerminkan otomatis (cetak bolak-balik).
+\RequirePackage[a4paper,inner=4cm,top=3cm,outer=3cm,bottom=3cm]{geometry}
+\RequirePackage{setspace}
+\onehalfspacing            % default 1,5 spasi (halaman muka, daftar, pustaka)
+\raggedbottom
+\newsavebox{\skripsiblokbox}
+% Unit "1 spasi" (tinggi baris TUNGGAL pada 12 pt), untuk jarak presisi di
+% halaman muka sesuai pedoman (mis. 5 spasi, 4,5 spasi, 1,5 spasi).
+\newlength{\spasi}
+\AtBeginDocument{\begingroup\setstretch{1}\global\spasi=\baselineskip\endgroup}
+% Unit jarak judul/float = ukuran huruf (12 pt), KONSISTEN dengan jarak baris teks
+% "2 spasi" (= 24 pt). Panjang TETAP agar tidak ikut menggembung oleh \doublespacing.
+\newlength{\sjudul}\setlength{\sjudul}{12pt}
+
+% ------------------------------------------------------------
+%  3. Paket dasar (matematika, grafik, warna, tautan)
+% ------------------------------------------------------------
+\RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{etoolbox}
+\RequirePackage{indentfirst}
+% Tautan hitam tanpa kotak (gaya skripsi cetak), tetap dapat diklik.
+\RequirePackage{hyperref}
+\AtBeginDocument{\hypersetup{hidelinks}}
+
+% Indentasi paragraf 1,27 cm; tanpa spasi ekstra antar paragraf (pedoman hlm. 34).
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt plus 0.5pt}
+
+% ------------------------------------------------------------
+%  4. Persamaan (fleqn 1 tab; nomor (n) rata kanan; jarak rapat)
+% ------------------------------------------------------------
+% Catatan: opsi 'fleqn' diberikan pada \documentclass di main.tex.
+\setlength{\mathindent}{1.27cm}   % persamaan menjorok 1 tab dari batas kiri
+\makeatletter
+\newcommand{\skripsi@dispskip}{%
+  \setlength{\abovedisplayskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+  \setlength{\belowdisplayskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+  \setlength{\abovedisplayshortskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+  \setlength{\belowdisplayshortskip}{4\p@ \@plus2\p@ \@minus1\p@}%
+}
+\AtBeginEnvironment{equation}{\skripsi@dispskip}
+\AtBeginEnvironment{align}{\skripsi@dispskip}
+\AtBeginEnvironment{gather}{\skripsi@dispskip}
+\AtBeginEnvironment{multline}{\skripsi@dispskip}
+% Nomor & rujukan persamaan ber-kurung tunggal: (1), (2), ...
+\AtBeginDocument{%
+  \renewcommand{\theequation}{(\arabic{equation})}%
+  \renewcommand{\tagform@}[1]{\maketag@@@{#1}}%
+}
+\makeatother
+
+% ------------------------------------------------------------
+%  5. Tabel, gambar, dan float
+% ------------------------------------------------------------
+\RequirePackage{float}
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{xltabular}
+\RequirePackage{chngcntr}
+\RequirePackage{ragged2e}
+\RequirePackage{enumitem}
+\RequirePackage{pdflscape}
+\RequirePackage{rotating}
+\setlength{\emergencystretch}{3em}
+\RequirePackage{lastpage}
+\RequirePackage{refcount}
+
+% Nama caption Indonesia + judul tabel di atas, gambar di bawah, 1 spasi, hang.
+\RequirePackage{caption}
+\renewcommand{\tablename}{Tabel}
+\renewcommand{\figurename}{Gambar}
+\captionsetup{font={normalsize,stretch=1.0},labelsep=period,%
+  justification=centering}
+\captionsetup[table]{position=top}
+\captionsetup[figure]{position=bottom}
+
+% Float selalu rata tengah; jarak ~3 spasi dari teks.
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+\setlength{\intextsep}{2\sjudul}     % jarak ke teks ~3 spasi (termasuk overhead caption)
+\setlength{\textfloatsep}{2\sjudul} % jarak ke teks ~3 spasi
+\setlength{\floatsep}{2\sjudul}        % antar float 2 spasi
+\setlength{\abovecaptionskip}{0.5\baselineskip}
+\setlength{\belowcaptionskip}{0.5\baselineskip}
+
+% Nomor tabel/gambar/persamaan: deret TUNGGAL seluruh skripsi (Tabel 1, 2, ...).
+\AtBeginDocument{%
+  \counterwithout{table}{chapter}%
+  \counterwithout{figure}{chapter}%
+  \counterwithout{equation}{chapter}%
+  \renewcommand{\theequation}{(\arabic{equation})}% terapkan ULANG: counterwithout mereset format
+}
+
+% --- Helper baris "Sumber:" / "Keterangan:" di bawah tabel/gambar ---
+% Selalu RATA KIRI pada batas kiri teks (pedoman), walau di dalam \centering.
+% (\raggedright mengembalikan \leftskip=0 sehingga rata ke margin kiri.)
+\newcommand{\sumber}[1]{\par\vspace{2pt}{\raggedright\small\noindent Sumber: #1\par}}
+\newcommand{\keterangan}[1]{\par\vspace{2pt}{\raggedright\small\noindent Keterangan: #1\par}}
+% --- Baris nomor kolom (1)(2)(3): tulis manual di tabel (lihat contoh bab/bab4). ---
+% Contoh untuk 3 kolom:
+%   \multicolumn{1}{|c|}{(1)} & \multicolumn{1}{c|}{(2)} & \multicolumn{1}{c|}{(3)} \\ \hline
+
+% ------------------------------------------------------------
+%  6. Judul bab & subbab (Times tebal; "BAB I"; subbab Arab 1.1)
+% ------------------------------------------------------------
+\RequirePackage{titlesec}
+\renewcommand{\chaptername}{BAB}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering\singlespacing}
+  {\MakeUppercase{\chaptername}\ \Roman{chapter}}{0pt}
+  {\MakeUppercase}
+% Jarak judul DETERMINISTIK. Unit "1 spasi" = ukuran huruf (12 pt), KONSISTEN
+% dengan jarak baris teks "2 spasi" (= 24 pt). Memakai panjang TETAP \sjudul agar
+% TIDAK ikut menggembung oleh \doublespacing (yang menggandakan \normalbaselineskip).
+% Target (jarak antar-baris, sesuai pedoman hlm. 34-35):
+%   bab -> subbab    = 4 spasi (48 pt);  bab/subbab -> teks = 3 spasi (36 pt);
+%   judul level-4 (pokok bahasan) -> 4 spasi di atasnya.
+\titlespacing*{\chapter}{0pt}{0pt}{1.5\sjudul}
+\titleformat{\section}{\normalfont\bfseries\singlespacing}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\bfseries\singlespacing}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\bfseries\singlespacing}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{2.25\sjudul}{1\sjudul}
+\titlespacing*{\subsection}{0pt}{2.25\sjudul}{1\sjudul}
+\titlespacing*{\subsubsection}{0pt}{2\sjudul}{0.5\sjudul}
+% Judul bab TAK bernomor (Prakata, Abstrak, Daftar Pustaka, dll.): seragam.
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\bfseries\centering\singlespacing}{}{0pt}{\MakeUppercase}
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{1\sjudul}
+
+% Penomoran: bab Romawi (judul/Daftar Isi), subbab Arab (1.1, 1.1.1).
+\AtBeginDocument{%
+  \renewcommand{\thechapter}{\Roman{chapter}}%
+  \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}%
+  \renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}%
+  \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}%
+}
+% Hanya bab & subbab (2 level: 1.1) yang diberi nomor; level lebih dalam tanpa nomor.
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% ------------------------------------------------------------
+%  7. Nomor halaman (awal: romawi tengah; isi: arab kanan bawah)
+% ------------------------------------------------------------
+\RequirePackage{fancyhdr}
+\fancypagestyle{isistis}{%
+  \fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[R]{\thepage}%
+}
+\newcommand{\aktifkanNomorIsi}{%
+  \fancypagestyle{plain}{%
+    \fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[R]{\thepage}%
+  }%
+  \pagestyle{isistis}%
+}
+\pagestyle{plain}
+
+% ------------------------------------------------------------
+%  8. Judul daftar KAPITAL + Daftar Lampiran (tocloft)
+% ------------------------------------------------------------
+\AtBeginDocument{%
+  \renewcommand{\contentsname}{DAFTAR ISI}%
+  \renewcommand{\listfigurename}{DAFTAR GAMBAR}%
+  \renewcommand{\listtablename}{DAFTAR TABEL}%
+  \renewcommand{\bibname}{DAFTAR PUSTAKA}%
+  \renewcommand{\refname}{DAFTAR PUSTAKA}%
+}
+\RequirePackage{tocloft}
+\newcommand{\listlampiranname}{DAFTAR LAMPIRAN}
+\newlistof{lampiran}{lmp}{\listlampiranname}
+% \lampiran{Judul}: daftarkan satu lampiran ke Daftar Lampiran (pindah halaman
+% untuk lampiran ke-2 dst.).
+\newcommand{\lampiran}[1]{%
+  \ifnum\value{lampiran}>0\relax\clearpage\fi
+  \refstepcounter{lampiran}%
+  \addcontentsline{lmp}{lampiran}{\protect\numberline{\thelampiran}#1}%
+}
+% Judul daftar diseragamkan (tebal, tengah, kapital) + label kolom.
+\renewcommand{\cfttoctitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
+\renewcommand{\cftaftertoctitle}{\hfil\par\nobreak\vskip2\spasi\mbox{}\hfill{\normalfont Halaman}}
+\renewcommand{\cftlottitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
+\renewcommand{\cftafterlottitle}{\hfil\par\nobreak\vskip2\spasi{\normalfont No.~Tabel\hfill Judul Tabel\hfill Halaman}}
+\renewcommand{\cftloftitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
+\renewcommand{\cftafterloftitle}{\hfil\par\nobreak\vskip2\spasi{\normalfont No.~Gambar\hfill Judul Gambar\hfill Halaman}}
+\renewcommand{\cftlmptitlefont}{\hfil\normalfont\bfseries\MakeUppercase}
+\renewcommand{\cftafterlmptitle}{\hfil\par\nobreak\vskip2\spasi{\normalfont No.~Lampiran\hfill Judul Lampiran\hfill Halaman}}
+\setlength{\cftbeforetoctitleskip}{2\baselineskip}\setlength{\cftaftertoctitleskip}{1.5\spasi}
+\setlength{\cftbeforelottitleskip}{2\baselineskip}\setlength{\cftafterlottitleskip}{\spasi}
+\setlength{\cftbeforeloftitleskip}{2\baselineskip}\setlength{\cftafterloftitleskip}{\spasi}
+\setlength{\cftbeforelmptitleskip}{2\baselineskip}\setlength{\cftafterlmptitleskip}{1.5\baselineskip}
+% Entri daftar gambar/tabel 1 spasi (hapus addvspace antar-bab).
+\makeatletter
+\patchcmd{\@chapter}{\addtocontents{lof}{\protect\addvspace{10\p@}}}{}{}{}
+\patchcmd{\@chapter}{\addtocontents{lot}{\protect\addvspace{10\p@}}}{}{}{}
+\makeatother
+% Daftar Isi: entri bab "BAB I  JUDUL ....... hlm" (Romawi), subbab Arab.
+% Jarak antar entri seragam mengikuti spasi bagian awal (1,5 spasi) -> hapus
+% skip ekstra sebelum bab/subbab agar bab<->subbab = 1,5 spasi (pedoman).
+\setlength{\cftbeforechapskip}{0pt}
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{BAB\space}
+\renewcommand{\cftchapaftersnum}{\hspace{0.5em}}
+\setlength{\cftchapnumwidth}{5.2em}
+
+% Judul front-matter non-tocloft (Daftar Singkatan/Simbol): seragam + masuk TOC.
+\newcommand{\judulfrontmatter}[2]{%
+  \clearpage\phantomsection
+  \addcontentsline{toc}{chapter}{#2}%
+  \vspace*{2\baselineskip}%
+  {\centering\normalfont\bfseries\MakeUppercase{#1}\par}%
+  \vspace{2\baselineskip}%
+}
+
+% Halaman genap tersisip: "Halaman ini sengaja dikosongkan".
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  \ifodd\value{page}\else
+    \thispagestyle{empty}\vspace*{\fill}%
+    \begin{center}\itshape Halaman ini sengaja dikosongkan\end{center}%
+    \vspace*{\fill}\clearpage
+  \fi
+}
+
+% ------------------------------------------------------------
+%  9. Lingkungan teorema (bahasa Indonesia) + algoritme
+% ------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+\newtheorem{lema}{Lema}
+\newtheorem{akibat}{Akibat}
+\newtheorem{proposisi}{Proposisi}
+% "Bukti" sebagai pengganti \proof berbahasa Indonesia.
+\renewcommand{\proofname}{Bukti}
+
+\RequirePackage[ruled,vlined,linesnumbered]{algorithm2e}
+\SetAlgorithmName{Algoritme}{Algoritme}{Daftar Algoritme}
+\SetKwInput{KwIn}{Masukan}
+\SetKwInput{KwOut}{Keluaran}
+\SetKwInput{KwData}{Data}
+\SetKwInput{KwResult}{Hasil}
+\SetKwFor{For}{untuk}{lakukan}{akhir untuk}
+\SetKwFor{ForEach}{untuk setiap}{lakukan}{akhir untuk}
+\SetKwFor{While}{selama}{lakukan}{akhir selama}
+\SetKwIF{If}{ElseIf}{Else}{jika}{maka}{jika lain}{lainnya}{akhir jika}
+\SetKwBlock{Begin}{mulai}{akhir}
+\SetKw{KwTo}{sampai}
+\SetKw{KwRet}{kembalikan}
+\renewcommand{\thealgocf}{\arabic{algocf}}
+
+% ------------------------------------------------------------
+% 10. Diagram alir & use case (TikZ)
+% ------------------------------------------------------------
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.symbols,shapes.misc,arrows.meta,positioning,calc,fit,backgrounds,chains}
+\tikzset{
+  fc-mulai/.style   = {rounded rectangle, draw, thick, minimum width=2.6cm, minimum height=0.9cm, align=center, font=\normalsize},
+  fc-proses/.style  = {rectangle, draw, thick, minimum width=3cm, minimum height=1cm, align=center, font=\normalsize},
+  fc-io/.style      = {trapezium, trapezium left angle=70, trapezium right angle=110, draw, thick, minimum width=2.6cm, minimum height=0.9cm, align=center, font=\normalsize},
+  fc-putusan/.style = {diamond, draw, thick, aspect=2, inner sep=2pt, minimum width=2.8cm, align=center, font=\normalsize},
+  fc-panah/.style   = {-{Stealth[length=2.5mm]}, thick},
+}
+\tikzset{
+  uc-aktor/.pic = {
+    \draw[thick] (0,0) circle (0.18);
+    \draw[thick] (0,-0.18) -- (0,-0.75);
+    \draw[thick] (-0.35,-0.40) -- (0.35,-0.40);
+    \draw[thick] (0,-0.75) -- (-0.28,-1.15);
+    \draw[thick] (0,-0.75) -- (0.28,-1.15);
+  },
+  uc-case/.style     = {ellipse, draw, thick, align=center, minimum width=2.8cm, minimum height=1cm, font=\small},
+  uc-asosiasi/.style = {thick},
+  uc-relasi/.style   = {-{Stealth[length=2.5mm]}, thick, dashed, font=\footnotesize},
+  uc-sistem/.style   = {rectangle, draw, thick, rounded corners=2pt, inner sep=0.6cm},
+}
+
+% ------------------------------------------------------------
+% 11. Bibliografi: biblatex (APA 7) + penyesuaian Indonesia (pedoman)
+% ------------------------------------------------------------
+\RequirePackage{csquotes}
+% Listing kode dengan lipat baris otomatis (analog 'fvextra'/code-overflow:wrap
+% pada paket R). Untuk menyajikan potongan kode R/Python pada metode/lampiran.
+\RequirePackage{listings}
+\lstset{%
+  basicstyle=\ttfamily\footnotesize,%
+  breaklines=true,%            % lipat baris kode yang melebihi lebar teks
+  breakatwhitespace=false,%
+  columns=fullflexible,%
+  keepspaces=true,%
+  showstringspaces=false,%
+  frame=single,%
+  framesep=4pt,%
+  language=R%
+}
+% Kutipan langsung panjang (>40 kata): paragraf tersendiri, menjorok 1 tab
+% (1,27 cm) dari batas kiri teks, tanpa tanda kutip (pedoman 4.4).
+\newenvironment{kutipanpanjang}%
+  {\par\addvspace{0.5\baselineskip}\begingroup\setlength{\leftskip}{1.27cm}\noindent\ignorespaces}%
+  {\par\endgroup\addvspace{0.5\baselineskip}\noindent}
+\RequirePackage[style=apa,backend=biber,sorting=nyt]{biblatex}
+% Tanggal akses daring memakai urutan Indonesia (Hari Bulan Tahun) & tak disingkat.
+\ExecuteBibliographyOptions{urldate=long,dateabbrev=false}
+\DeclareFieldFormat{urldate}{\bibstring{retrieved}\space\mkbibdatelong{urlyear}{urlmonth}{urlday}\urldatecomma\bibstring{from}}
+% Lokalisasi APA bahasa Indonesia (dkk., Dalam, hal., Ed./Eds., Penerj., Edisi)
+% dimuat dari berkas terpisah indonesian-apa.lbx (mewarisi american-apa).
+\DeclareLanguageMapping{bahasa}{indonesian-apa}
+% Ganti ampersand '&' APA menjadi 'dan' (pertahankan koma seri APA utk >2 penulis).
+\DeclareDelimFormat[bib,biblist]{finalnamedelim}{\ifnum\value{liststop}>2 \finalandcomma\fi\addspace dan\space}
+\DeclareDelimFormat[parencite]{finalnamedelim}{\ifnum\value{liststop}>2 \finalandcomma\fi\addspace dan\space}
+\DeclareDelimFormat[fullcite,fullcitebib]{finalnamedelim}{\ifnum\value{liststop}>2 \finalandcomma\fi\addspace dan\space}
+% Pernyataan edisi: "Edisi ke-N" (bila angka) atau apa adanya (bila teks).
+\DeclareFieldFormat{edition}{\ifinteger{#1}{Edisi ke-#1}{#1}}
+
+% ------------------------------------------------------------
+% 12. Metadata skripsi (diisi mahasiswa di main.tex)
+% ------------------------------------------------------------
+% Penanda peminatan: \peminatansitrue -> Sistem Informasi Statistik (enam bab);
+% default (false) -> Sains Data / Analisis (lima bab). Memengaruhi paragraf
+% Sistematika Penulisan (bab1) dan pemilihan berkas bab di main.tex.
+\newif\ifpeminatansi
+\peminatansifalse
+% Nilai disimpan pada perintah TANPA '@' agar dapat dipakai di semua berkas
+% (frontmatter, prakata, abstrak) tanpa perlu \makeatletter.
+\newcommand{\skJudul}{}        \newcommand{\judulskripsi}[1]{\renewcommand{\skJudul}{#1}}
+\newcommand{\skSubjudul}{}      \newcommand{\subjudulskripsi}[1]{\renewcommand{\skSubjudul}{#1}}
+\newcommand{\skNama}{}          \newcommand{\namamhs}[1]{\renewcommand{\skNama}{#1}}
+\newcommand{\skNIM}{}           \newcommand{\nimmhs}[1]{\renewcommand{\skNIM}{#1}}
+\newcommand{\skPeminatan}{}     \newcommand{\peminatan}[1]{\renewcommand{\skPeminatan}{#1}}
+\newcommand{\skTahun}{}         \newcommand{\tahunskripsi}[1]{\renewcommand{\skTahun}{#1}}
+\newcommand{\skTglSidang}{[tanggal sidang]}\newcommand{\tglsidang}[1]{\renewcommand{\skTglSidang}{#1}}
+\newcommand{\skPengujiI}{}      \newcommand{\pengujiI}[1]{\renewcommand{\skPengujiI}{#1}}
+\newcommand{\skNIPpengujiI}{}   \newcommand{\nipPengujiI}[1]{\renewcommand{\skNIPpengujiI}{#1}}
+\newcommand{\skPengujiII}{}     \newcommand{\pengujiII}[1]{\renewcommand{\skPengujiII}{#1}}
+\newcommand{\skNIPpengujiII}{}  \newcommand{\nipPengujiII}[1]{\renewcommand{\skNIPpengujiII}{#1}}
+\newcommand{\skKaprodi}{}       \newcommand{\ketuaprodi}[1]{\renewcommand{\skKaprodi}{#1}}
+\newcommand{\skNIPkaprodi}{}    \newcommand{\nipKetuaprodi}[1]{\renewcommand{\skNIPkaprodi}{#1}}
+\newcommand{\skPembimbing}{}    \newcommand{\pembimbing}[1]{\renewcommand{\skPembimbing}{#1}}
+\newcommand{\skNIPpembimbing}{} \newcommand{\nipPembimbing}[1]{\renewcommand{\skNIPpembimbing}{#1}}
+
+\endinput

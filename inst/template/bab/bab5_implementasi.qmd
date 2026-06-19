@@ -1,19 +1,13 @@
 # IMPLEMENTASI DAN EVALUASI
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Bab Implementasi Dan Evaluasi" appearance="simple"}
-Bab Implementasi dan Evaluasi memaparkan realisasi rancangan (arsitektur, antarmuka) dan hasil pengujian (fungsional, kinerja, kegunaan, keamanan) beserta analisisnya. **Hapus seluruh kotak "Petunjuk Penulisan" pada naskah final.**
-:::
-
+*Cara menulis bab ini.* Bab Implementasi dan Evaluasi memaparkan realisasi rancangan (arsitektur, antarmuka) dan hasil pengujian (fungsional, kinerja, kegunaan, keamanan) beserta analisisnya.
 
 Bab ini membahas hasil implementasi sistem berdasarkan rancangan pada Bab IV serta
 evaluasi terhadap sistem yang dikembangkan.
 
 ## Implementasi
 
-::: {.callout-note title="Petunjuk: Implementasi" appearance="simple"}
-Paparkan realisasi rancangan menjadi sistem nyata: arsitektur, teknologi yang dipakai, dan tampilan antarmuka beserta penjelasan alur penggunaannya.
-:::
-
+*Cara menulis.* Paparkan realisasi rancangan menjadi sistem nyata: arsitektur, teknologi yang dipakai, dan tampilan antarmuka beserta penjelasan alur penggunaannya.
 
 Bagian ini membahas proses dan hasil implementasi sistem.
 
@@ -117,10 +111,7 @@ pengguna.
 
 ## Evaluasi
 
-::: {.callout-note title="Petunjuk: Evaluasi" appearance="simple"}
-Sajikan hasil pengujian sistem/model (fungsional, kinerja, kegunaan, keamanan) dan analisis apakah tujuan penelitian tercapai.
-:::
-
+*Cara menulis.* Sajikan hasil pengujian sistem/model (fungsional, kinerja, kegunaan, keamanan) dan analisis apakah tujuan penelitian tercapai.
 
 Evaluasi dilakukan untuk menilai apakah sistem telah memenuhi kebutuhan dan tujuan
 penelitian. Evaluasi dapat mencakup pengujian fungsional (*Blackbox Testing*), pengujian

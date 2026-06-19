@@ -1,7 +1,7 @@
 Package: skripsistis
 Title: Template Quarto Skripsi Prodi D-IV Komputasi Statistik
         (Politeknik Statistika STIS)
-Version: 0.2.4
+Version: 0.3.4
 Authors@R: c(
     person("Achmad Syahrul", "Choir", role = c("aut", "cre"),
            email = "madsyair@stis.ac.id"),
@@ -10,7 +10,17 @@ Authors@R: c(
 Description: Menyediakan kerangka (template) proyek Quarto untuk penyusunan
     skripsi yang dikhususkan bagi mahasiswa Program Studi D-IV Komputasi
     Statistik, Politeknik Statistika STIS, sesuai Pedoman Skripsi KS Edisi
-    Keenam (2025).
+    Keenam (2025). Template ini bukan untuk program studi lain. Mencakup
+    halaman muka (sampul, judul, pernyataan, pengesahan, lembar hak cipta),
+    pengaturan format (margin, font Times, spasi 1,5 pada bagian awal dan 2
+    spasi pada teks isi, judul "BAB I" dan entri
+    Daftar Isi berawalan "BAB"), penyajian tabel sesuai pedoman, dua varian
+    kerangka bab sesuai peminatan (Sains Data: Bab I-V; Sistem Informasi
+    Statistik: Bab I-VI dengan Analisis dan Perancangan serta Implementasi
+    dan Evaluasi), templat proyek RStudio, contoh chunk R dan Python, serta
+    gaya kutipan dan daftar pustaka APA edisi ke-7 dengan modifikasi bahasa
+    Indonesia (penghubung "dan", singkatan "dkk.", "t.t.", format edisi
+    "Edisi keempat", "Penerj.").
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: id
@@ -26,7 +36,7 @@ URL: https://github.com/madsyair/skripsistis
 BugReports: https://github.com/madsyair/skripsistis/issues
 NeedsCompilation: no
 Config/roxygen2/version: 8.0.0
-Packaged: 2026-06-16 13:29:12 UTC; root
+Packaged: 2026-06-19 04:08:51 UTC; root
 Author: Achmad Syahrul Choir [aut, cre],
   Politeknik Statistika STIS [cph] (pemegang hak cipta logo institusi
     pada inst/template/img/logo_stis.png, disertakan atas izin)

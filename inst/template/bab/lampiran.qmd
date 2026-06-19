@@ -5,15 +5,13 @@
 
 # LAMPIRAN {.unnumbered}
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Lampiran" appearance="simple"}
-Lampiran memuat materi pendukung yang terlalu panjang untuk badan teks: kuesioner,
+*Cara menulis bagian ini.* Lampiran memuat materi pendukung yang terlalu panjang untuk badan teks: kuesioner,
 sintaks/kode lengkap, tabel besar, keluaran, atau surat izin. Setiap lampiran
 didaftarkan otomatis ke **Daftar Lampiran** melalui perintah `\lampiran{...}`, dan
 setiap lampiran baru otomatis dimulai pada halaman berikutnya.
 Tiga lampiran di bawah merangkum perintah **R**, **Quarto/Markdown**, dan **LaTeX**
 yang dipakai untuk menulis skripsi dengan template ini; simpan sebagai rujukan atau
-ganti dengan lampiran penelitian Anda. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
-:::
+ganti dengan lampiran penelitian Anda.
 
 ```{=latex}
 \lampiran{Daftar Perintah R yang Digunakan}
@@ -157,15 +155,6 @@ Daftar Pustaka terisi otomatis dari sumber yang dikutip melalui blok berikut
 :::
 ```
 
-*Kotak petunjuk (callout)* — jenis: `callout-note`, `callout-tip`, `callout-warning`,
-`callout-important`, `callout-caution`:
-
-```markdown
-::: {.callout-note title="Judul" appearance="simple"}
-Isi catatan.
-:::
-```
-
 ```{=latex}
 \lampiran{Daftar Perintah LaTeX yang Digunakan}
 ```
@@ -226,11 +215,9 @@ kbl(df, format = "latex", longtable = TRUE, booktabs = TRUE,
 
 # RIWAYAT HIDUP {.unnumbered}
 
-::: {.callout-tip title="Petunjuk Penulisan  -  Riwayat Hidup" appearance="simple"}
-Tuliskan riwayat hidup singkat penulis dalam bentuk naratif (tempat/tanggal lahir,
+*Cara menulis bagian ini.* Tuliskan riwayat hidup singkat penulis dalam bentuk naratif (tempat/tanggal lahir,
 riwayat pendidikan, dan pengalaman relevan bila ada). Boleh disertai pasfoto sesuai
-ketentuan. **Hapus kotak "Petunjuk Penulisan" pada naskah final.**
-:::
+ketentuan.
 
 Penulis dilahirkan di xxxxxxxx pada tanggal xx bulan 20xx dari pasangan xxxxxxxx dan
 xxxxxxxx, dan merupakan anak ke-x dari x bersaudara.
