@@ -60,12 +60,10 @@
   R/Quarto/LaTeX", dengan penunjuk ringkas dari badan teks. Demo sintaks callout dihapus
   karena callout tidak lagi dipakai di badan naskah.
 
-# skripsistis 0.2.10
+# skripsistis 0.2.5
 
 * Entri perangkat lunak (`@software`) memakai `type = {Perangkat lunak}` agar label
   jenis tampil; string "Versi" dilokalkan. Bib disinkron Overleaf vs paket R.
-
-# skripsistis 0.2.9
 
 ## Jenis sumber bidang kuantitatif & integritas sitasi
 
@@ -79,7 +77,6 @@
   mekanisme `\nocite` dihapus sehingga tidak ada entri Daftar Pustaka yang tidak
   dikutip di dalam naskah.
 
-# skripsistis 0.2.8
 
 ## Kelengkapan jenis sumber referensi
 
@@ -90,7 +87,6 @@
   **prosiding**, dan **dataset**. Pada CSL seluruh jenis tampil dengan istilah
   Indonesia (Dalam, Penerj., Edisi ke-, hal., dan).
 
-# skripsistis 0.2.7
 
 ## Sitasi lembaga & rujukan persamaan
 
@@ -104,7 +100,6 @@
   `@eq-...` (dengan `eq-prefix` kosong) hanya menghasilkan nomor "(N)". Tabel panduan
   pada `referensi-perintah.qmd` diperbaiki agar tidak menyiratkan otomatis.
 
-# skripsistis 0.2.6
 
 ## Koreksi jarak judul daftar (sesuai contoh pedoman)
 
@@ -114,8 +109,6 @@
   ini dipulihkan (`\vskip2\spasi`, terverifikasi rasio thd tinggi entri 2,58 vs
   pedoman 2,60). Jarak "Halaman"/header -> entri pertama ~2 spasi. Selaras dengan
   Overleaf.
-
-# skripsistis 0.2.5
 
 ## Perbaikan halaman muka & daftar
 
