@@ -105,7 +105,7 @@
 #'   data. Default `TRUE`. Set `FALSE` bila Anda sengaja menulis LaTeX/math.
 #'
 #' @param simpan Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
-#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\\input}; mahasiswa
 #'   dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
 #'   (kode dikembalikan inline seperti biasa).
 #' @param timpa Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,
@@ -211,7 +211,7 @@ tabel_skripsi <- function(df, judul, label, sumber = NULL, ket = NULL,
                               if (escape) .lx_escape(ket) else ket))
   }
   if (length(bawah)) {
-    out <- c(out, "\\addvspace{0.25\\normalbaselineskip}",
+    out <- c(out, "\\addvspace{0.4\\normalbaselineskip}",
              sprintf(paste0("\\parbox[t]{\\wd\\skripsiblokbox}{\\raggedright",
                             "\\setlength{\\parindent}{0pt}%s}"),
                      paste(bawah, collapse = "\\par ")))
@@ -237,7 +237,7 @@ tabel_skripsi <- function(df, judul, label, sumber = NULL, ket = NULL,
 #'   (default) memakai **0,8 (80%)**. Nilai `< 0,8` dinaikkan otomatis ke 0,8
 #'   (minimum); nilai `> 1` dianggap persen; maksimum 1 (lebar penuh).
 #' @param simpan Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
-#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\\input}; mahasiswa
 #'   dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
 #'   (kode dikembalikan inline seperti biasa).
 #' @param timpa Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,
@@ -340,7 +340,7 @@ tabel_skripsi_panjang <- function(df, judul, label, sumber = NULL, ket = NULL,
                               if (escape) .lx_escape(ket) else ket))
   }
   if (length(bawah)) {
-    out <- c(out, "\\addvspace{0.25\\normalbaselineskip}",
+    out <- c(out, "\\addvspace{0.4\\normalbaselineskip}",
              sprintf(paste0("\\centerline{\\parbox[t]{%s}{\\raggedright",
                             "\\setlength{\\parindent}{0pt}%s}}"),
                      blok_w, paste(bawah, collapse = "\\par ")))

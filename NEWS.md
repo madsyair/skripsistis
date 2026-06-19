@@ -1,3 +1,23 @@
+# skripsistis 0.3.6
+
+## Perbaikan R CMD check
+
+* Memperbaiki macro `\input` yang tidak dikenal pada dokumentasi (Rd) parameter
+  `simpan` di `gambar_skripsi()`, `tabel_skripsi()`, dan `tabel_skripsi_panjang()`.
+  Sebelumnya memicu 3 peringatan saat `R CMD check` (pemeriksaan instalasi, berkas
+  Rd, dan pembuatan manual PDF). Kini `R CMD check` bersih (selain pesan locale
+  yang bersifat lingkungan, bukan cacat paket).
+
+# skripsistis 0.3.5
+
+## Perbaikan jarak tabel–sumber sesuai pedoman
+
+* **Jarak vertikal tabel ke baris "Sumber"** disesuaikan dari ~0,4 spasi menjadi
+  ~0,55 spasi agar cocok dengan contoh pedoman (terukur 0,56 spasi pada contoh
+  Tabel 1). Diterapkan pada `tabel_skripsi()` dan `tabel_skripsi_panjang()`
+  (`\addvspace{0.4\normalbaselineskip}`). Sumber tabel tetap lebih rapat ke objek
+  dibanding sumber gambar, sesuai pedoman.
+
 # skripsistis 0.3.4
 
 ## Perbaikan jarak gambar–sumber sesuai pedoman
@@ -60,10 +80,12 @@
   R/Quarto/LaTeX", dengan penunjuk ringkas dari badan teks. Demo sintaks callout dihapus
   karena callout tidak lagi dipakai di badan naskah.
 
-# skripsistis 0.2.5
+# skripsistis 0.2.10
 
 * Entri perangkat lunak (`@software`) memakai `type = {Perangkat lunak}` agar label
   jenis tampil; string "Versi" dilokalkan. Bib disinkron Overleaf vs paket R.
+
+# skripsistis 0.2.9
 
 ## Jenis sumber bidang kuantitatif & integritas sitasi
 
@@ -77,6 +99,7 @@
   mekanisme `\nocite` dihapus sehingga tidak ada entri Daftar Pustaka yang tidak
   dikutip di dalam naskah.
 
+# skripsistis 0.2.8
 
 ## Kelengkapan jenis sumber referensi
 
@@ -87,6 +110,7 @@
   **prosiding**, dan **dataset**. Pada CSL seluruh jenis tampil dengan istilah
   Indonesia (Dalam, Penerj., Edisi ke-, hal., dan).
 
+# skripsistis 0.2.7
 
 ## Sitasi lembaga & rujukan persamaan
 
@@ -100,6 +124,7 @@
   `@eq-...` (dengan `eq-prefix` kosong) hanya menghasilkan nomor "(N)". Tabel panduan
   pada `referensi-perintah.qmd` diperbaiki agar tidak menyiratkan otomatis.
 
+# skripsistis 0.2.6
 
 ## Koreksi jarak judul daftar (sesuai contoh pedoman)
 
@@ -109,6 +134,8 @@
   ini dipulihkan (`\vskip2\spasi`, terverifikasi rasio thd tinggi entri 2,58 vs
   pedoman 2,60). Jarak "Halaman"/header -> entri pertama ~2 spasi. Selaras dengan
   Overleaf.
+
+# skripsistis 0.2.5
 
 ## Perbaikan halaman muka & daftar
 

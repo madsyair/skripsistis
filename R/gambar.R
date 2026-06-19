@@ -28,12 +28,12 @@
 #' @param lebar Lebar gambar sebagai panjang LaTeX. Default `"0.8\\linewidth"`.
 #'   Diabaikan bila `tikz = TRUE` (ukuran diatur saat membuat berkas `tikz()`).
 #' @param tikz Jika `TRUE`, `path` adalah berkas `.tex` hasil
-#'   `tikzDevice::tikz()` dan disisipkan dengan `\\input` (bukan
+#'   `tikzDevice::tikz()` dan disisipkan dengan \code{\\input} (bukan
 #'   `\\includegraphics`), sehingga **font teks di dalam grafik sama persis**
 #'   dengan font naskah. Default `FALSE`.
 #' @param escape Lolos-kan karakter khusus pada judul/sumber. Default `TRUE`.
 #' @param simpan Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
-#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+#'   kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\\input}; mahasiswa
 #'   dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
 #'   (kode dikembalikan inline seperti biasa).
 #' @param timpa Bila \code{FALSE} (default) dan berkas \code{simpan} sudah ada,

@@ -56,7 +56,7 @@ lebih besar (mis. \code{1.4}) membuat baris \strong{agak longgar}.}
 data. Default \code{TRUE}. Set \code{FALSE} bila Anda sengaja menulis LaTeX/math.}
 
 \item{simpan}{Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
-kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\\input}; mahasiswa
 dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
 (kode dikembalikan inline seperti biasa).}
 

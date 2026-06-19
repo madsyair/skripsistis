@@ -35,14 +35,14 @@ ada / olahan sendiri.}
 Diabaikan bila \code{tikz = TRUE} (ukuran diatur saat membuat berkas \code{tikz()}).}
 
 \item{tikz}{Jika \code{TRUE}, \code{path} adalah berkas \code{.tex} hasil
-\code{tikzDevice::tikz()} dan disisipkan dengan \verb{\\\\input} (bukan
+\code{tikzDevice::tikz()} dan disisipkan dengan \code{\\input} (bukan
 \verb{\\\\includegraphics}), sehingga \strong{font teks di dalam grafik sama persis}
 dengan font naskah. Default \code{FALSE}.}
 
 \item{escape}{Lolos-kan karakter khusus pada judul/sumber. Default \code{TRUE}.}
 
 \item{simpan}{Bila diisi path berkas (mis. \code{"tex/tabel-miskin.tex"}),
-kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\input}; mahasiswa
+kode LaTeX ditulis ke berkas itu dan disisipkan via \code{\\input}; mahasiswa
 dapat mengedit berkas tersebut untuk penyesuaian manual. Default \code{NULL}
 (kode dikembalikan inline seperti biasa).}
 
